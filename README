@@ -1,0 +1,127 @@
+Stop Combination Analysis
+
+Goal of this analysis to take the results from the single lepton stop analysis (SUS-13-011) and the razor all hadronic analysis (SUS-13-004) in order to increase the senstivity to exclude the production of stop pairs.
+
+This REAMDE gives basic instructions on how to use this code.
+
+1. Checkout and Compile
+2. Create "Interpretation" histogram 
+3. Create the Single Stop Cards
+4. Create the Combined Stop Cards
+5. Run the cards interactively
+6. Run the cards on the grid
+7. Extracting the limits from the grid output
+8. Creating exlusion plots
+
+--------------------------------------------------------------------------------
+1. Checkout and compile:
+--------------------------------------------------------------------------------
+
+scramv1 p -n CMSSW_6_1_2_stopcombo CMSSW CMSSW_6_1_2
+cd CMSSW_6_1_2_stopcombo/src
+cmsenv
+
+Checkout the analysis tools:
+
+git clone https://github.com/kelleyrw/AnalysisTools.git
+
+Checkout the stop combination code
+
+git clone https://github.com/kelleyrw/StopCombination.git Analysis/StopCombination
+
+Checkout the fork of Higg's Combine limit setting tool:
+
+git clone https://github.com/RazorCMS/HiggsAnalysis-CombinedLimit.git HiggsAnalysis/CombinedLimit
+pushd HiggsAnalysis/CombinedLimit/
+git checkout onelepcomb_032614
+pop
+
+Checkout CMS2's CORE (TODO: refactor AnalysisTools so that this is not dependent)
+git clone https://github.com/cmstas/Dictionaries.git CMS2/Dictionaries
+git clone https://github.com/cmstas/CORE.git CMS2/NtupleMacrosCore
+cd CMS2/NtupleMacrosCore
+git pull
+git checkout scram_compliant
+./setup/setupCoreForSCRAM.sh setup/cms2_ntuple_postprocess_05.03.23.root 
+cd $CMSSW_BASE/src
+scram b -j20
+
+Compile:
+
+scram b -j20
+
+--------------------------------------------------------------------------------
+2. Create "Interpretation" histogram 
+--------------------------------------------------------------------------------
+
+The "interpretation" histograms are all the histograms that contain the information needed to generate the limit cards.  This uses the baby ntuples produced by Ben to create the efficiency and up/dn efficiencies used for the systematic uncertainties.  You must run this at least one time before you can create cards.  To run, use the "stop_interp_plots" executable that is generated from the bin/stop_interp_plots.cc fully executable program which accepts a pyton parameter set file.  Unless you need to modify these parameters, the default pset should be fine:
+
+[rwk7t@tensor StopCombination]$  stop_interp_plots pset/stop_t2tt.py 
+
+The output should look like:
+
+[stop_interp_plots] running with the following inputs:
+max_events                = -1
+lumi                      = 19.5
+sample_name               = t2tt
+xsec_file_path            = /Users/rwk7t/Development/CMSSW_6_1_2_Analysis2/src/Analysis/StopCombination/data/stop_xsec.root
+xsec_hist_name            = h_stop_xsec
+verbose                   = 0
+suffix                    = 
+mass_stop                 = -1
+mass_lsp                  = -1
+unc_lumi                  = 0.044
+unc_trig                  = 0.030
+unc_lept                  = 0.050
+SR(s)                     = 0, 1, 2, 3, 4, 5, 6
+[rt::PrintFilesFromTChain]:
+t	# entries:  3903602
+  /nfs-7/userdata/rwkelley/babies/stop/cms2V05-03-26_stoplooperV00-02-24/T2tt_mad/minibaby_V00-03-06/Skim_4jets_MET100_MT120/merged_T2tt_mStop-150to350_mLSP-0to250.root
+  /nfs-7/userdata/rwkelley/babies/stop/cms2V05-03-26_stoplooperV00-02-24/T2tt_mad/minibaby_V00-03-06/Skim_4jets_MET100_MT120/merged_T2tt_mStop-150to475_mLSP-1.root
+  /nfs-7/userdata/rwkelley/babies/stop/cms2V05-03-26_stoplooperV00-02-24/T2tt_mad/minibaby_V00-03-06/Skim_4jets_MET100_MT120/merged_T2tt_mStop-375to475_mLSP-0to375.root
+  /nfs-7/userdata/rwkelley/babies/stop/cms2V05-03-26_stoplooperV00-02-24/T2tt_mad/minibaby_V00-03-06/Skim_4jets_MET100_MT120/merged_T2tt_mStop-500to650_mLSP-0to225.root
+  /nfs-7/userdata/rwkelley/babies/stop/cms2V05-03-26_stoplooperV00-02-24/T2tt_mad/minibaby_V00-03-06/Skim_4jets_MET100_MT120/merged_T2tt_mStop-500to650_mLSP-250to550.root
+  /nfs-7/userdata/rwkelley/babies/stop/cms2V05-03-26_stoplooperV00-02-24/T2tt_mad/minibaby_V00-03-06/Skim_4jets_MET100_MT120/merged_T2tt_mStop-500to800_mLSP-1.root
+  /nfs-7/userdata/rwkelley/babies/stop/cms2V05-03-26_stoplooperV00-02-24/T2tt_mad/minibaby_V00-03-06/Skim_4jets_MET100_MT120/merged_T2tt_mStop-675to800_mLSP-0to275.root
+  /nfs-7/userdata/rwkelley/babies/stop/cms2V05-03-26_stoplooperV00-02-24/T2tt_mad/minibaby_V00-03-06/Skim_4jets_MET100_MT120/merged_T2tt_mStop-675to800_mLSP-300to700.root
+  /nfs-7/userdata/rwkelley/babies/stop/cms2V05-03-26_stoplooperV00-02-25/T2tt_mad/minibabies_V00-03-12/Skim_4jets_MET100_MT120/merged_T2tt_mStop-100to200_mLSP-1to100_LeptonFilt.root
+  /nfs-7/userdata/rwkelley/babies/stop/cms2V05-03-26_stoplooperV00-02-25/T2tt_mad/minibabies_V00-03-12/Skim_4jets_MET100_MT120/merged_T2tt_mStop-225to350_mLSP-25to250_lepFilter.root
+ ---> 100.0% <---
+[InterpLooper::ScanChain] 3903602 Events Processed
+------------------------------
+CPU  Time: 54.4
+Real Time: 54.4
+
+The file generated contains the following histograms:
+
+  KEY: TH2F    h_den        # Generated with scale1fb*lumi
+  KEY: TH2F    h_scale1fb   Scale1fb Histogram
+  KEY: TH1F    h_xsec       Cross Section #tilde{t} Pair Production
+ 
+and for each signal region:
+
+  KEY: TH2F    h_eff_<sr>           Efficiency with scale1fb*lumi 
+  KEY: TH2F    h_eff_perc_<sr>      Efficiency Percentage with scale1fb*lumi 
+  KEY: TH2F    h_err_btag_<sr>      Uncertainy with scale1fb*lumi, BTAG+/- 
+  KEY: TH2F    h_err_btagdn_<sr>    Uncertainy with scale1fb*lumi, BTAG- 
+  KEY: TH2F    h_err_btagup_<sr>    Uncertainy with scale1fb*lumi, BTAG+ 
+  KEY: TH2F    h_err_trig_<sr>      Uncertainy with scale1fb*lumi, TrigEff+/- 
+  KEY: TH2F    h_err_jes_<sr>       Uncertainy with scale1fb*lumi, JES+/- 
+  KEY: TH2F    h_err_jesdn_<sr>     Uncertainy with scale1fb*lumi, JES- 
+  KEY: TH2F    h_err_jesup_<sr>     Uncertainy with scale1fb*lumi, JES+ 
+  KEY: TH2F    h_err_lept_<sr>      Uncertainy with scale1fb*lumi, LepEff+/- 
+  KEY: TH2F    h_err_leptdn_<sr>    Uncertainy with scale1fb*lumi, LepEff- 
+  KEY: TH2F    h_err_leptup_<sr>    Uncertainy with scale1fb*lumi, LepEff+ 
+  KEY: TH2F    h_err_lumi_<sr>      Uncertainy with scale1fb*lumi, Lumi+/- 
+  KEY: TH2F    h_err_noisr_<sr>     Uncertainy with scale1fb*lumi, ISR 
+  KEY: TH2F    h_err_stats_<sr>     Uncertainy with scale1fb*lumi, Statistical 
+  KEY: TH2F    h_err_total_<sr>     Uncertainy with scale1fb*lumi, Total 
+  KEY: TH2F    h_nevt_<sr>          # Raw Count Passing 
+  KEY: TH2F    h_num_noisr_<sr>     # Passing with scale1fb*lumi, ISR 
+  KEY: TH2F    h_num_leptup_<sr>    # Passing with scale1fb*lumi, LepEff+ 
+  KEY: TH2F    h_num_leptdn_<sr>    # Passing with scale1fb*lumi, LepEff- 
+  KEY: TH2F    h_num_<sr>           # Passing with scale1fb*lumi 
+  KEY: TH2F    h_num_btagdn_<sr>    # Passing with scale1fb*lumi, BTAG- 
+  KEY: TH2F    h_num_btagup_<sr>    # Passing with scale1fb*lumi, BTAG+ 
+  KEY: TH2F    h_num_jesdn_<sr>     # Passing with scale1fb*lumi, JES- 
+  KEY: TH2F    h_num_jesup_<sr>     # Passing with scale1fb*lumi, JES+ 
