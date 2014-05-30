@@ -1,0 +1,10 @@
+<use name="root"/>
+<use name="boost"/>
+<use name="boost_program_options"/>
+<use name="FWCore/FWLite"/>
+<use name="FWCore/PythonParameterSet"/>
+<use name="Analysis/StopCombination"/>
+<environment>
+  <bin file="stop_interp_plots.cc"/>
+</environment>
+
