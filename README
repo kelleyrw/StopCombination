@@ -54,7 +54,7 @@ scram b -j20
 2. Create "Interpretation" histogram 
 --------------------------------------------------------------------------------
 
-The "interpretation" histograms are all the histograms that contain the information needed to generate the limit cards.  This uses the baby ntuples produced by Ben to create the efficiency and up/dn efficiencies used for the systematic uncertainties.  You must run this at least one time before you can create cards.  To run, use the "stop_interp_plots" executable that is generated from the bin/stop_interp_plots.cc fully executable program which accepts a pyton parameter set file.  Unless you need to modify these parameters, the default pset should be fine:
+The "interpretation" histograms are all the histograms that contain the information needed to generate the limit cards.  This uses the baby ntuples produced by Ben to create the efficiency and up/dn efficiencies used for the systematic uncertainties.  You must run this at least one time before you can create cards.  To run, use the "stop_interp_plots" executable that is generated from bin/stop_interp_plots.cc which accepts a python parameter set file.  Unless you need to modify these parameters, the default pset should be fine:
 
 [rwk7t@tensor StopCombination]$  stop_interp_plots pset/stop_t2tt.py 
 
@@ -125,3 +125,69 @@ and for each signal region:
   KEY: TH2F    h_num_btagup_<sr>    # Passing with scale1fb*lumi, BTAG+ 
   KEY: TH2F    h_num_jesdn_<sr>     # Passing with scale1fb*lumi, JES- 
   KEY: TH2F    h_num_jesup_<sr>     # Passing with scale1fb*lumi, JES+ 
+
+--------------------------------------------------------------------------------
+3. Create the Single Stop Cards
+--------------------------------------------------------------------------------
+
+Once you have the "interpretation" histograms created (previous step), you can generate an individual card using the exectuable "stop_create_card".  See the following example:
+
+[rwk7t@tensor StopCombination]$  stop_create_card --sample t2tt --interp plots/interp/v0/t2tt_hists.root --mass_stop 600 --mass_lsp 150 --method 4 --sr 5
+imax 1 number of search regions
+jmax 4  number of backgrounds ('*' = automatic)
+kmax 10 number of nuisance parameters (sources of systematical uncertainties)
+------------
+shapes * bdt4 FAKE
+------------
+       bin      bdt4
+observation     2
+------------
+bin                     bdt4        bdt4        bdt4        bdt4        bdt4        
+process                 signal      ttdil       ttslo       wjets       rare  
+process                 0           1           2           3           4     
+rate                    5.1539e+00  0.3         0.8         0.8         1.0   
+### Error Matrix
+------------
+ttdil_1lep       lnN    -           2.000       -           -           -     
+ttslo_1lep       lnN    -           -           2.125       -           -     
+wjets_1lep       lnN    -           -           -           1.375       -     
+rare_1lep        lnN    -           -           -           -           1.500 
+trig_1lep        lnN    1.030       -           -           -           -     
+lep              lnN    0.950/1.050 -           -           -           -     
+Isr              lnN    1.064       -           -           -           -     
+Btag             lnN    0.974/1.007 -           -           -           -     
+Jes              lnN    0.930/1.059 -           -           -           -     
+lumi             lnN    1.044       -           -           -           -     
+
+The available options are:
+
+[rwk7t@tensor StopCombination]$  stop_create_card --help
+Allowed options:
+  --help                print this menu
+  --interp arg          REQUIRED: file to get the signal yields and systematics
+  --sample arg          REQUIRED: sample to run on
+  --mass_stop arg       REQUIRED: mass stop value
+  --mass_lsp arg        REQUIRED: mass lsp value
+  --sr arg              REQUIRED: SRs to run on
+  --method arg          Method:
+                        1: the background and signal systematics are fully 
+                        factorized into componenents.
+                        2: the background systematic is combined into one 
+                        number and signal systematics are factorized into 
+                        componenents.
+                        3: the background systematic and signal systematics are
+                        combined into one number (what was originally used).
+                        4: the background and signal systematics are fully 
+                        factorized into componenents and the card is formatted 
+                        for Higg's Combine.
+  --output arg          name of output file (blank = stdout)
+  --lumi arg            luminosity in fb^-1, default=19.5
+  --verbose arg         verbosity, default=false
+
+Some comments:
+
+1.  The interpretation hists don't change with different samples.  You can use the "plots/interp/v0/t2tt_hists.root" from the previous section for all samples since the difference between samples is merely a branching ratio which is stored in the Sample::Info (in src/Samples.cc).
+
+2.  There are 4 methods to create cards since there was some study of the different ways to factorize the uncertainties.  The available methods are in the description from using the "--help" option.
+
+
