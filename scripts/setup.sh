@@ -1,7 +1,9 @@
 #!/bin/bash
 
+[ -z "$CMSSW_BASE" ] && echo "Need to set CMSSW_BASE" && exit 1;
+
 pushd $CMSSW_BASE/src
-cmsenv
+eval `scramv1 runtime -sh`
 
 #Checkout the analysis tools:
 git clone https://github.com/kelleyrw/AnalysisTools.git
@@ -18,7 +20,7 @@ git clone https://github.com/cmstas/CORE.git CMS2/NtupleMacrosCore
 pushd CMS2/NtupleMacrosCore
 git pull
 git checkout scram_compliant
-./setup/setupCoreForSCRAM.sh setup/cms2_ntuple_postprocess_05.03.23.root 
+./setup/setupCoreForSCRAM.sh setup/cms2_ntuple_postprocess_05.03.23.root
 popd
 
 # Compile:
