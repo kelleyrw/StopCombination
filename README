@@ -7,6 +7,7 @@ increase the senstivity to exclude the production of stop pairs.
 This REAMDE gives basic instructions on how to use this code.
 
 1. Checkout and Compile
+1a. Generating the stop baby class files.
 2. Create "Interpretation" histogram 
 3. Create the Single Stop Cards
 4. Create the Combined Stop Cards
@@ -29,6 +30,25 @@ git clone https://github.com/kelleyrw/StopCombination.git Analysis/StopCombinati
 
 Run the setup scripts:
 bash Analysis/StopCombination/scripts/setup.sh
+
+--------------------------------------------------------------------------------
+1a. Generating the stop baby class files.
+--------------------------------------------------------------------------------
+
+This analysis uses the baby ntuples produced by Ben to create the efficencies
+and up/dn efficiences used for the signal efficiency and systematic
+uncertainties. For the looper over this baby to work, CMS2.h style class files
+are genarted and stored in STOP_BABY.h/cc. If you wish to use updated baby
+ntuples, you will need to regenerate these files. A wrapper script is supplied
+in the scripts directory called "stop_make_baby_class_files.sh".
+
+To run:
+
+./scripts/stop_make_baby_class_files.sh <stop baby ntuple> 
+
+Then compile again:
+
+scram b -j20
 
 --------------------------------------------------------------------------------
 2. Create "Interpretation" histogram 
