@@ -31,7 +31,7 @@ echo -e "\n[setup.sh] compiling"
 scram b -j20
 
 # done
-if [ $? -eq 0]; then
+if [ $? -eq 0 ]; then
 	echo -e "\n[setup.sh] setup successful"
 else
 	echo -e "\n[setup.sh] setup failed"
