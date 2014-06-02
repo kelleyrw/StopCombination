@@ -1,6 +1,8 @@
 Stop Combination Analysis
 
-Goal of this analysis to take the results from the single lepton stop analysis (SUS-13-011) and the razor all hadronic analysis (SUS-13-004) in order to increase the senstivity to exclude the production of stop pairs.
+Goal of this analysis to take the results from the single lepton stop analysis
+(SUS-13-011) and the razor all hadronic analysis (SUS-13-004) in order to
+increase the senstivity to exclude the production of stop pairs.
 
 This REAMDE gives basic instructions on how to use this code.
 
@@ -32,7 +34,13 @@ bash Analysis/StopCombination/scripts/setup.sh
 2. Create "Interpretation" histogram 
 --------------------------------------------------------------------------------
 
-The "interpretation" histograms are all the histograms that contain the information needed to generate the limit cards.  This uses the baby ntuples produced by Ben to create the efficiency and up/dn efficiencies used for the systematic uncertainties.  You must run this at least one time before you can create cards.  To run, use the "stop_interp_plots" executable that is generated from bin/stop_interp_plots.cc which accepts a python parameter set file.  Unless you need to modify these parameters, the default pset should be fine:
+The "interpretation" histograms are all the histograms that contain the
+information needed to generate the limit cards. This uses the baby ntuples
+produced by Ben to create the efficiency and up/dn efficiencies used for the
+systematic uncertainties. You must run this at least one time before you can
+create cards. To run, use the "stop_interp_plots" executable that is generated
+from bin/stop_interp_plots.cc which accepts a python parameter set file. Unless
+you need to modify these parameters, the default pset should be fine:
 
 [rwk7t@tensor StopCombination]$  stop_interp_plots pset/stop_t2tt.py 
 
@@ -108,7 +116,34 @@ and for each signal region:
 3. Create the Single Stop Cards
 --------------------------------------------------------------------------------
 
-Once you have the "interpretation" histograms created (previous step), you can generate an individual card using the exectuable "stop_create_card".  See the following example:
+Once you have the "interpretation" histograms created (previous step), you
+can generate an individual card using the exectuable "stop_create_card". The
+available options are:
+
+[rwk7t@tensor StopCombination]$  stop_create_card --help
+Allowed options:
+  --help                print this menu
+  --interp arg          REQUIRED: file to get the signal yields and systematics
+  --sample arg          REQUIRED: sample to run on
+  --mass_stop arg       REQUIRED: mass stop value
+  --mass_lsp arg        REQUIRED: mass lsp value
+  --sr arg              REQUIRED: SRs to run on
+  --method arg          Method:
+                        1: the background and signal systematics are fully 
+                        factorized into componenents.
+                        2: the background systematic is combined into one 
+                        number and signal systematics are factorized into 
+                        componenents.
+                        3: the background systematic and signal systematics are
+                        combined into one number (what was originally used).
+                        4: the background and signal systematics are fully 
+                        factorized into componenents and the card is formatted 
+                        for Higg's Combine.
+  --output arg          name of output file (blank = stdout)
+  --lumi arg            luminosity in fb^-1, default=19.5
+  --verbose arg         verbosity, default=false
+
+See the following example:
 
 [rwk7t@tensor StopCombination]$  stop_create_card --sample t2tt --interp plots/interp/v0/t2tt_hists.root --mass_stop 600 --mass_lsp 150 --method 4 --sr 5
 imax 1 number of search regions
@@ -137,36 +172,16 @@ Btag             lnN    0.974/1.007 -           -           -           -
 Jes              lnN    0.930/1.059 -           -           -           -     
 lumi             lnN    1.044       -           -           -           -     
 
-The available options are:
-
-[rwk7t@tensor StopCombination]$  stop_create_card --help
-Allowed options:
-  --help                print this menu
-  --interp arg          REQUIRED: file to get the signal yields and systematics
-  --sample arg          REQUIRED: sample to run on
-  --mass_stop arg       REQUIRED: mass stop value
-  --mass_lsp arg        REQUIRED: mass lsp value
-  --sr arg              REQUIRED: SRs to run on
-  --method arg          Method:
-                        1: the background and signal systematics are fully 
-                        factorized into componenents.
-                        2: the background systematic is combined into one 
-                        number and signal systematics are factorized into 
-                        componenents.
-                        3: the background systematic and signal systematics are
-                        combined into one number (what was originally used).
-                        4: the background and signal systematics are fully 
-                        factorized into componenents and the card is formatted 
-                        for Higg's Combine.
-  --output arg          name of output file (blank = stdout)
-  --lumi arg            luminosity in fb^-1, default=19.5
-  --verbose arg         verbosity, default=false
-
 Some comments:
 
-1.  The interpretation hists don't change with different samples.  You can use the "plots/interp/v0/t2tt_hists.root" from the previous section for all samples since the difference between samples is merely a branching ratio which is stored in the Sample::Info (in src/Samples.cc).
+1. The interpretation hists don't change with different samples. You can use
+the "plots/interp/v0/t2tt_hists.root" from the previous section for all samples
+since the difference between samples is merely a branching ratio which is
+stored in the Sample::Info (in src/Samples.cc).
 
-2.  There are 4 methods to create cards since there was some study of the different ways to factorize the uncertainties.  The available methods are in the description from using the "--help" option.
+2. There are 4 methods to create cards since there was some study of the
+different ways to factorize the uncertainties. The available methods are in the
+description from using the "--help" option.
 
 --------------------------------------------------------------------------------
 4. Create the Combined Stop Cards
