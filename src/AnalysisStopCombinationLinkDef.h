@@ -1,7 +1,7 @@
-#ifdef __MAKECINT__ 
 #include "Analysis/StopCombination/interface/Sample.h"
 #include "Analysis/StopCombination/interface/SignalRegion.h"
 #include "Analysis/StopCombination/interface/StopYields.h"
+#ifdef __MAKECINT__ 
 
 #pragma link off all globals;
 #pragma link off all classes;
