@@ -2,19 +2,20 @@ Stop Combination Analysis
 
 Goal of this analysis to take the results from the single lepton stop analysis
 (SUS-13-011) and the razor all hadronic analysis (SUS-13-004) in order to
-increase the senstivity to exclude the production of stop pairs.
+increase the sensitivity to exclude the production of stop pairs.
 
-This REAMDE gives basic instructions on how to use this code.
+This README gives basic instructions on how to use this code.
 
-1. Checkout and Compile
-1a. Generating the stop baby class files.
-2. Create "Interpretation" histogram 
-3. Create the Single Stop Cards
-4. Create the Combined Stop Cards
-5. Run the cards interactively
-6. Run the cards on the grid
-7. Extracting the limits from the grid output
-8. Creating exlusion plots
+1. checkout and compile
+2. generating the stop baby class files.
+3. create "interpretation" histogram 
+4. create the single lepton card
+5. create all the single lepton cards
+5. create the combined stop cards
+6. run the cards interactively
+7. run the cards on the grid
+8. extracting the limits from the grid output
+8. creating exclusion plots
 
 --------------------------------------------------------------------------------
 1. Checkout and compile:
@@ -35,10 +36,10 @@ bash Analysis/StopCombination/scripts/setup.sh
 1a. Generating the stop baby class files.
 --------------------------------------------------------------------------------
 
-This analysis uses the baby ntuples produced by Ben to create the efficencies
-and up/dn efficiences used for the signal efficiency and systematic
+This analysis uses the baby ntuples produced by Ben to create the efficiencies
+and up/dn efficiencies used for the signal efficiency and systematic
 uncertainties. For the looper over this baby to work, CMS2.h style class files
-are genarted and stored in STOP_BABY.h/cc. If you wish to use updated baby
+are generated and stored in STOP_BABY.h/cc. If you wish to use updated baby
 ntuples, you will need to regenerate these files. A wrapper script is supplied
 in the scripts directory called "stop_make_baby_class_files.sh".
 
@@ -133,7 +134,7 @@ and for each signal region:
   KEY: TH2F    h_num_jesup_<sr>     # Passing with scale1fb*lumi, JES+ 
 
 --------------------------------------------------------------------------------
-3. Create the Single Stop Cards
+3. Create the Single Lepton Cards
 --------------------------------------------------------------------------------
 
 Once you have the "interpretation" histograms created (previous step), you
@@ -203,6 +204,113 @@ stored in the Sample::Info (in src/Samples.cc).
 different ways to factorize the uncertainties. The available methods are in the
 description from using the "--help" option.
 
+In order to mass produce the 
+
 --------------------------------------------------------------------------------
-4. Create the Combined Stop Cards
+4. Create all the Single Lepton Cards
+--------------------------------------------------------------------------------
+
+A wrapper python script can be used to generate the leptons cards over the
+whole plane and for each signal region: scripts/stop_create_onelep_cards.py
+
+python scripts/stop_create_onlep_cards.py 
+
+The defaults are the values needed for higg's combine.
+
+[rwk7t@tensor StopCombination]$  ./scripts/stop_create_onlep_cards.py --help
+Usage: stop_create_onlep_cards.py [options]
+
+Options:
+  -h, --help            show this help message and exit
+  --onelep_cards=ONELEP_PATH
+                        path to the single lepton cards
+  --sample=SAMPLE       sample (default t2tt)
+  --mass_stop=MASS_STOP
+                        mass stop (-1 means full plane)
+  --mass_lsp=MASS_LSP   mass LSP (-1 means full plane)
+  --interp_file=INTERP_FILE
+                        file containing eff and systematics
+  --method=METHOD       method to use (default is 4)
+
+--------------------------------------------------------------------------------
+5. Create the Combined Stop Cards
+--------------------------------------------------------------------------------
+
+To combine with razor cards, the original razor cards and associated ROOT
+files have been checked into the repository under cards/t2tt/razor/. You can
+combine them with combineCards.py that ships with Higg's combine. I have
+written a wrapper script to add up all the cards need for the combination:
+scripts/stop_create_combined_cards.py
+
+Available options are:
+
+rwk7t@tensor StopCombination]$  ./scripts/stop_create_combined_cards.py --help
+Usage: stop_create_combined_cards.py [options]
+
+Options:
+  -h, --help            show this help message and exit
+  --onelep_cards=ONELEP_PATH
+                        path to the single lepton cards
+  --razor_cards=RAZOR_PATH
+                        path to the razor cards
+  --combine_cards=COMBINED_PATH
+                        path to the combined lepton cards
+  --sr_filename=SR_FILENAME
+                        path to the onelep best SR histogram
+  --sr_histname=SR_HISTNAME
+                        name of the onelep best SR histogram
+  --sample=SAMPLE       sample (default t2tt)
+  --mass_stop=MASS_STOP
+                        mass stop (-1 means full plane)
+  --mass_lsp=MASS_LSP   mass LSP (-1 means full plane)
+
+The sr_filename and sr_histname options are used to specify a ROOT file and
+histogram that designates the "best" signal region for that mass point. Only
+the combined card for this point is created.
+
+Presumably at this point, you have all the cards you need for all 3 possibilities
+
+	1. single lepton
+	2. razor
+	3. combination
+
+all in the same folder given by the combine_cards option.
+
+--------------------------------------------------------------------------------
+6. run the cards interactively
+--------------------------------------------------------------------------------
+
+You run the cards individually using the higg's combine on the command line. In
+order to keep track of the options and do the "hybrid new" which takes multiple
+steps, a wrapper python script can be used: scripts/stop_produce_limit.py
+
+Available options are:
+
+[rwk7t@tensor StopCombination]$  ./scripts/stop_produce_limit.py --help
+Usage: stop_produce_limit.py [options]
+
+Options:
+  -h, --help       show this help message and exit
+  --card=CARD      card to run on
+  --method=METHOD  method -- 1: asymptotic, 2: hybrid no grid, 3: hybrid with
+                   grid
+  --ngrid=NGRID    number of points on the grid (method 3 only)
+  --seed=SEED      seed for the combine job
+
+NOTE: this is the same script that is run on the grid in then next setp.
+
+Example:
+
+
+
+--------------------------------------------------------------------------------
+7. run the cards on the grid
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+8. extracting the limits from the grid output
+--------------------------------------------------------------------------------
+
+--------------------------------------------------------------------------------
+8. creating exclusion plots
 --------------------------------------------------------------------------------
