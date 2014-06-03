@@ -8,25 +8,25 @@ shapes *             had_MultiJet  razor_combine_MultiJet_T2tt_MG_475.000000_MCH
 shapes *             onelep        FAKE
 ----------------------------------------------------------------------------------------------------------------------------------
 bin          had_MultiJet  had_Jet2b     onelep      
-observation  2589.0        728.0         56.0        
+observation  2589.0        728.0         8.0         
 ----------------------------------------------------------------------------------------------------------------------------------
 bin                                had_MultiJet    had_MultiJet    had_MultiJet    had_MultiJet    had_Jet2b       had_Jet2b       had_Jet2b       onelep          onelep          onelep          onelep          onelep        
 process                            MultiJet_T2tt   MultiJet_TTj3b  MultiJet_TTj1b  MultiJet_TTj2b  Jet2b_T2tt      Jet2b_TTj2b     Jet2b_TTj3b     signal          rare            wjets           ttslo           ttdil         
 process                            -2              1               2               3               -1              4               5               0               6               7               8               9             
-rate                               104.9860        85.0150         1754.9450       748.9590        7.5120          701.8940        24.8270         39.0690         9.8000          6.2000          22.2000         46.4000       
+rate                               104.9860        85.0150         1754.9450       748.9590        7.5120          701.8940        24.8270         15.6420         2.6000          2.2000          3.6000          4.6000        
 ----------------------------------------------------------------------------------------------------------------------------------
-Btag                    shape?     1.0             -               -               -               1.0             -               -               0.989/1.011     -               -               -               -             
-Isr                     shape?     1.0             -               -               -               1.0             -               -               1.064           -               -               -               -             
-Jes                     shape?     1.0             -               -               -               1.0             -               -               0.956/1.041     -               -               -               -             
+Btag                    shape?     1.0             -               -               -               1.0             -               -               0.984/1.016     -               -               -               -             
+Isr                     shape?     1.0             -               -               -               1.0             -               -               1.066           -               -               -               -             
+Jes                     shape?     1.0             -               -               -               1.0             -               -               0.922/1.052     -               -               -               -             
 Pdf                     shape      1.0             -               -               -               1.0             -               -               -               -               -               -               -             
 lep                     lnN        -               -               -               -               -               -               -               0.950/1.050     -               -               -               -             
 lumi                    lnN        1.026           1.0             1.0             1.0             1.026           1.0             1.0             1.044           -               -               -               -             
 rare_1lep               lnN        -               -               -               -               -               -               -               -               1.5             -               -               -             
 trig_1lep               lnN        -               -               -               -               -               -               -               1.03            -               -               -               -             
 trigger                 lnN        1.05            1.0             1.0             1.0             1.05            1.0             1.0             -               -               -               -               -             
-ttdil_1lep              lnN        -               -               -               -               -               -               -               -               -               -               -               1.218         
-ttslo_1lep              lnN        -               -               -               -               -               -               -               -               -               -               1.545           -             
-wjets_1lep              lnN        -               -               -               -               -               -               -               -               -               1.274           -               -             
+ttdil_1lep              lnN        -               -               -               -               -               -               -               -               -               -               -               1.413         
+ttslo_1lep              lnN        -               -               -               -               -               -               -               -               -               -               1.778           -             
+wjets_1lep              lnN        -               -               -               -               -               -               -               -               -               1.318           -               -             
 n_TTj1b_MultiJet  flatParam
 MR0_TTj1b_MultiJet  flatParam
 b_TTj2b_MultiJet  flatParam

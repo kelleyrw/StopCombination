@@ -2,24 +2,24 @@ imax 1 number of search regions
 jmax 4  number of backgrounds ('*' = automatic)
 kmax 10 number of nuisance parameters (sources of systematical uncertainties)
 ------------
-shapes * bdt2 FAKE
+shapes * bdt3 FAKE
 ------------
-       bin      bdt2
-observation     56
+       bin      bdt3
+observation     8
 ------------
-bin                     bdt2        bdt2        bdt2        bdt2        bdt2        
+bin                     bdt3        bdt3        bdt3        bdt3        bdt3        
 process                 signal      ttdil       ttslo       wjets       rare  
 process                 0           1           2           3           4     
-rate                    3.2989e+01  46.4        22.2        6.2         9.8   
+rate                    3.2999e+00  4.6         3.6         2.2         2.6   
 ### Error Matrix
 ------------
-ttdil_1lep       lnN    -           1.218       -           -           -     
-ttslo_1lep       lnN    -           -           1.545       -           -     
-wjets_1lep       lnN    -           -           -           1.274       -     
+ttdil_1lep       lnN    -           1.413       -           -           -     
+ttslo_1lep       lnN    -           -           1.778       -           -     
+wjets_1lep       lnN    -           -           -           1.318       -     
 rare_1lep        lnN    -           -           -           -           1.500 
 trig_1lep        lnN    1.030       -           -           -           -     
 lep              lnN    0.950/1.050 -           -           -           -     
-Isr              lnN    1.166       -           -           -           -     
-Btag             lnN    0.993/1.006 -           -           -           -     
-Jes              lnN    0.962/1.123 -           -           -           -     
+Isr              lnN    1.161       -           -           -           -     
+Btag             lnN    1.000/1.000 -           -           -           -     
+Jes              lnN    0.859/1.138 -           -           -           -     
 lumi             lnN    1.044       -           -           -           -     

@@ -58,12 +58,13 @@ def GetLSPMasses():
 
 def GetSRName(sr):
     bdt_label = [
+        "pres",
         "bdt1l",
         "bdt1t",
         "bdt2",
         "bdt3",
         "bdt4",
-        "bdt5"
+        "bdt5",
     ]
     return bdt_label[sr]
 
@@ -74,34 +75,34 @@ def GetSRName(sr):
 def main():
     
     try:
-          # check the validity of the options
-          CheckOptions()
+        # check the validity of the options
+        CheckOptions()
     
-          # sample
-          sample = options.sample.lower()
+        # sample
+        sample = options.sample.lower()
     
-          # make combined dir if doens't exist
-          if (not os.path.exists(options.onelep_path)):
-              os.makedirs(options.onelep_path)
+        # make combined dir if doens't exist
+        if (not os.path.exists(options.onelep_path)):
+            os.makedirs(options.onelep_path)
     
-          # loop over the selected masses create the card
-          stop_masses = GetStopMasses()
-          lsp_masses  = GetLSPMasses()
-          mass_stop_offset = 100
-          for sr in range(0,6,1):
-              for mass_stop in stop_masses:
-                  for mass_lsp in lsp_masses:
+        # loop over the selected masses create the card
+        stop_masses = GetStopMasses()
+        lsp_masses  = GetLSPMasses()
+        mass_stop_offset = 100
+        for sr in range(1,7,1):
+            for mass_stop in stop_masses:
+                for mass_lsp in lsp_masses:
     
-                      if (mass_stop < mass_lsp + mass_stop_offset):
-                          continue
-                  
-                      sr_name     = GetSRName(sr)
-                      output_file = "%s/%s_%d_%d_%s.txt" % (options.onelep_path, sample, mass_stop, mass_lsp, sr_name)
-                      cmd = "stop_create_card --sample %s --interp %s --method %s --mass_stop %d --mass_lsp %d --sr %d --output %s" % \
-                          (sample, options.interp_file, options.method, mass_stop, mass_lsp, sr, output_file) 
+                    if (mass_stop < mass_lsp + mass_stop_offset):
+                        continue
+                
+                    sr_name     = GetSRName(sr)
+                    output_file = "%s/%s_%d_%d_%s.txt" % (options.onelep_path, sample, mass_stop, mass_lsp, sr_name)
+                    cmd = "stop_create_card --sample %s --interp %s --method %s --mass_stop %d --mass_lsp %d --sr %d --output %s" % \
+                        (sample, options.interp_file, options.method, mass_stop, mass_lsp, sr, output_file) 
     
-                      print cmd
-                      os.system(cmd)
+                    print cmd
+                    os.system(cmd)
     
     except Exception, e:
         print "[stop_create_combined_card.pys] ERROR:", e

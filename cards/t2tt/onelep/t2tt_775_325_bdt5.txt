@@ -2,24 +2,24 @@ imax 1 number of search regions
 jmax 4  number of backgrounds ('*' = automatic)
 kmax 10 number of nuisance parameters (sources of systematical uncertainties)
 ------------
-shapes * bdt4 FAKE
+shapes * bdt5 FAKE
 ------------
-       bin      bdt4
-observation     2
+       bin      bdt5
+observation     76
 ------------
-bin                     bdt4        bdt4        bdt4        bdt4        bdt4        
+bin                     bdt5        bdt5        bdt5        bdt5        bdt5        
 process                 signal      ttdil       ttslo       wjets       rare  
 process                 0           1           2           3           4     
-rate                    1.1563e+00  0.3         0.8         0.8         1.0   
+rate                    7.0211e-01  48.1        29.6        5.1         4.1   
 ### Error Matrix
 ------------
-ttdil_1lep       lnN    -           2.000       -           -           -     
-ttslo_1lep       lnN    -           -           2.125       -           -     
-wjets_1lep       lnN    -           -           -           1.375       -     
-rare_1lep        lnN    -           -           -           -           1.500 
+ttdil_1lep       lnN    -           1.264       -           -           -     
+ttslo_1lep       lnN    -           -           1.399       -           -     
+wjets_1lep       lnN    -           -           -           1.353       -     
+rare_1lep        lnN    -           -           -           -           1.488 
 trig_1lep        lnN    1.030       -           -           -           -     
 lep              lnN    0.950/1.050 -           -           -           -     
-Isr              lnN    1.067       -           -           -           -     
-Btag             lnN    0.982/1.018 -           -           -           -     
-Jes              lnN    0.945/1.042 -           -           -           -     
+Isr              lnN    1.081       -           -           -           -     
+Btag             lnN    1.012/0.999 -           -           -           -     
+Jes              lnN    0.978/1.011 -           -           -           -     
 lumi             lnN    1.044       -           -           -           -     
