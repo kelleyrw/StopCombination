@@ -136,7 +136,7 @@ def main():
 
 				# get the single lepton best SR's card name
 				best_sr = GetBestSR(hist_best_sr, mass_stop, mass_lsp)
-				onelep_card = "%s_%1.0f_%1.0f_%s.txt" % (sample, mass_stop, mass_lsp, best_sr)
+				onelep_card = "onelep_%s_%1.0f_%1.0f_%s.txt" % (sample, mass_stop, mass_lsp, best_sr)
 				onelep_full = "%s/%s" % (options.onelep_path, onelep_card)
 				if (not os.path.isfile(onelep_full)):
 					print ("single lepton card %s does not exist -- skipping" % onelep_full)
@@ -146,8 +146,9 @@ def main():
 					os.system(cmd)
 
 				# get the razor card name
-				razor_card = "razor_combine_Had_%s_MG_%1.0f.000000_MCHI_%1.0f.000000.txt" % (sample_upper, mass_stop, mass_lsp)
-				razor_full = "%s/%s" % (options.razor_path, razor_card)
+				razor_card     = "razor_combine_Had_%s_MG_%1.0f.000000_MCHI_%1.0f.000000.txt" % (sample_upper, mass_stop, mass_lsp)
+				razor_card_new = "razor_%s_%1.0f_%1.0f.txt" % (sample, mass_stop, mass_lsp)
+				razor_full     = "%s/%s" % (options.razor_path, razor_card)
 				if (not os.path.isfile(razor_full)):
 					print ("razor card %s does not exist -- skipping" % razor_full)
 					continue
@@ -162,12 +163,12 @@ def main():
 
 				# combine command:
 				combined_card = "combined_%s_%1.0f_%1.0f_%s.txt" % (sample, mass_stop, mass_lsp, best_sr)
-				cmd =  "cp %s %s/."        % (razor_full         , options.combined_path)
-				cmd += "; \\\n cp %s %s/." % (onelep_full        , options.combined_path)
-				cmd += "; \\\n cp %s %s/." % (razor_multijet_root, options.combined_path)
-				cmd += "; \\\n cp %s %s/." % (razor_jet2b_root   , options.combined_path)
-				cmd += "; \\\n pushd %s"   % options.combined_path
-				cmd += "; \\\n combineCards.py had=%s onelep=%s > %s" % (razor_card, onelep_card, combined_card)
+				cmd =  "cp %s %s/%s"        % (razor_full         , options.combined_path, razor_card_new)
+				cmd += "; \\\n cp %s %s/."  % (onelep_full        , options.combined_path)
+				cmd += "; \\\n cp %s %s/."  % (razor_multijet_root, options.combined_path)
+				cmd += "; \\\n cp %s %s/."  % (razor_jet2b_root   , options.combined_path)
+				cmd += "; \\\n pushd %s"    % options.combined_path
+				cmd += "; \\\n combineCards.py razor=%s onelep=%s > %s" % (razor_card_new, onelep_card, combined_card)
 				cmd += "; \\\n popd"
 
 				# make combined dir if doens't exist

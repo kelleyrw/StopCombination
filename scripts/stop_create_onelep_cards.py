@@ -97,7 +97,7 @@ def main():
                         continue
                 
                     sr_name     = GetSRName(sr)
-                    output_file = "%s/%s_%d_%d_%s.txt" % (options.onelep_path, sample, mass_stop, mass_lsp, sr_name)
+                    output_file = "%s/onelep_%s_%d_%d_%s.txt" % (options.onelep_path, sample, mass_stop, mass_lsp, sr_name)
                     cmd = "stop_create_card --sample %s --interp %s --method %s --mass_stop %d --mass_lsp %d --sr %d --output %s" % \
                         (sample, options.interp_file, options.method, mass_stop, mass_lsp, sr, output_file) 
     
