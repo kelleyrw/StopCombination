@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # remove old cards
-rm -r t2tt
+if [ -d t2tt ]; then rm -r t2tt; fi
 
 # copy relevant files
 cp -r $CMSSW_BASE/src/Analysis/StopCombination/scripts/stop_produce_limit.py . 

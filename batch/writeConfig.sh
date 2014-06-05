@@ -47,6 +47,7 @@ when_to_transfer_output = ON_EXIT
 #In fact, some sites may do weird things like renaming it and such.
 transfer_input_files=${INPUT}
 +DESIRED_Sites=\"${SITE}\"
++METHOD=\"method${METHOD}\"
 +Owner = undefined
 log=${LOG}
 output=${OUT}
