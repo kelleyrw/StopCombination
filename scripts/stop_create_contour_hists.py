@@ -274,14 +274,20 @@ def CombineTGraphs(g1, g2, name, title):
     else:
         g_x  = array('d')
         g_y  = array('d')
-        for i in xrange(g1.GetN()): 
+        for i in reversed(xrange(g1.GetN())):
             g_x.append(g1.GetX()[i])
             g_y.append(g1.GetY()[i])
-        for i in xrange(g2.GetN()):
+        # append bogus value to join the other contour "off the screen"
+        g_x.append(150)
+        g_y.append(-12.5)
+        g_x.append(175)
+        g_y.append(-12.5)
+        g_x.append(200)
+        g_y.append(-12.5)
+        for i in reversed(xrange(g2.GetN())):
             g_x.append(g2.GetX()[i])
             g_y.append(g2.GetY()[i])
-        n = g1.GetN()+g2.GetN()
-        print type(n), n, type(g_x), g_x, type(g_y), g_y
+        n = g1.GetN()+g2.GetN()+3
         g = root.TGraph(n, g_x, g_y)
     g.SetName(name)
     g.SetTitle(title)
@@ -305,7 +311,6 @@ def ExtractContour(hist_name, hist_title, mi, h_ul, h_xsec):
     # contours
     g1 = GetContourTGraph(h_excl_1)
     g2 = GetContourTGraph(h_excl_2)
-    #g = CombineTGraphs(g1, g2, hist_name.replace("h_", "g_"), hist_title) 
 
     return (g1, g2) 
 
@@ -402,8 +407,8 @@ def main():
         hist_title_stem    = "%s Exclusion on #sigma #times Branching Fraction (%s);%s;%s;%s"%(analysis, model, mi.xtitle, mi.ytitle, mi.ztitle)
         (g_excl_xsec_obs_1   , g_excl_xsec_obs_2   ) = ExtractContour("h_excl_xsec_obs"   , "Observed %s"              % hist_title_stem, mi, h_ul_xsec_obs_smooth   , h_xsec      )
         (g_excl_xsec_obs_p1_1, g_excl_xsec_obs_p1_2) = ExtractContour("h_excl_xsec_obs_p1", "Observed+1#sigma_{th} %s" % hist_title_stem, mi, h_ul_xsec_obs_smooth   , h_xsec_plus )
-        (g_excl_xsec_exp_1   , g_excl_xsec_exp_2   ) = ExtractContour("h_excl_xsec_exp"   , "Expected %s"              % hist_title_stem, mi, h_ul_xsec_exp_smooth   , h_xsec      )
         (g_excl_xsec_obs_m1_1, g_excl_xsec_obs_m1_2) = ExtractContour("h_excl_xsec_obs_m1", "Observed-1#sigma_{th} %s" % hist_title_stem, mi, h_ul_xsec_obs_smooth   , h_xsec_minus)
+        (g_excl_xsec_exp_1   , g_excl_xsec_exp_2   ) = ExtractContour("h_excl_xsec_exp"   , "Expected %s"              % hist_title_stem, mi, h_ul_xsec_exp_smooth   , h_xsec      )
         (g_excl_xsec_exp_p1_1, g_excl_xsec_exp_p1_2) = ExtractContour("h_excl_xsec_exp_p1", "Expected+1#sigma_{exp} %s"% hist_title_stem, mi, h_ul_xsec_exp_p1_smooth, h_xsec      )
         (g_excl_xsec_exp_m1_1, g_excl_xsec_exp_m1_2) = ExtractContour("h_excl_xsec_exp_m1", "Expected-1#sigma_{exp} %s"% hist_title_stem, mi, h_ul_xsec_exp_m1_smooth, h_xsec      )
     
@@ -423,6 +428,13 @@ def main():
             g_excl_xsec_exp_p1_1 .SetName("g_excl_xsec_exp_p1_1")
             g_excl_xsec_exp_m1_1 .SetName("g_excl_xsec_exp_m1_1")
         
+        g_excl_xsec_obs    = CombineTGraphs(g_excl_xsec_obs_1   , g_excl_xsec_obs_2   , "g_excl_xsec_obs"   , "g_excl_xsec_obs"   )
+        g_excl_xsec_obs_p1 = CombineTGraphs(g_excl_xsec_obs_p1_1, g_excl_xsec_obs_p1_2, "g_excl_xsec_obs_p1", "g_excl_xsec_obs_p1")
+        g_excl_xsec_obs_m1 = CombineTGraphs(g_excl_xsec_obs_m1_1, g_excl_xsec_obs_m1_2, "g_excl_xsec_obs_m1", "g_excl_xsec_obs_m1")
+        g_excl_xsec_exp    = CombineTGraphs(g_excl_xsec_exp_1   , g_excl_xsec_exp_2   , "g_excl_xsec_exp"   , "g_excl_xsec_exp"   )
+        g_excl_xsec_exp_p1 = CombineTGraphs(g_excl_xsec_exp_p1_1, g_excl_xsec_exp_p1_2, "g_excl_xsec_exp_p1", "g_excl_xsec_exp_p1")
+        g_excl_xsec_exp_m1 = CombineTGraphs(g_excl_xsec_exp_m1_1, g_excl_xsec_exp_m1_2, "g_excl_xsec_exp_m1", "g_excl_xsec_exp_m1")
+
         # write the output
         # -------------------------------------------------------------------- #
 
@@ -439,6 +451,12 @@ def main():
         h_ul_xsec_exp_p1_smooth.Write()
         h_ul_xsec_exp_m1_smooth.Write()
         h_ul_xsec_obs_smooth.Write()
+        g_excl_xsec_obs.Write()
+        g_excl_xsec_obs_p1.Write()
+        g_excl_xsec_exp.Write()
+        g_excl_xsec_obs_m1.Write()
+        g_excl_xsec_exp_p1.Write()
+        g_excl_xsec_exp_m1.Write()
         g_excl_xsec_obs_1.Write()
         g_excl_xsec_obs_p1_1.Write()
         g_excl_xsec_exp_1.Write()
@@ -464,6 +482,12 @@ def main():
         PrintXsecHist(h_ul_xsec_obs_smooth   , mi, output_path, "pdf")
 
         # print exclusion hists
+        PrintExclCurve(g_excl_xsec_obs     , h_ul_xsec_exp_smooth, mi, output_path, "pdf")
+        PrintExclCurve(g_excl_xsec_obs_p1  , h_ul_xsec_exp_smooth, mi, output_path, "pdf")
+        PrintExclCurve(g_excl_xsec_obs_m1  , h_ul_xsec_exp_smooth, mi, output_path, "pdf")
+        PrintExclCurve(g_excl_xsec_exp     , h_ul_xsec_exp_smooth, mi, output_path, "pdf")
+        PrintExclCurve(g_excl_xsec_exp_p1  , h_ul_xsec_exp_smooth, mi, output_path, "pdf")
+        PrintExclCurve(g_excl_xsec_exp_m1  , h_ul_xsec_exp_smooth, mi, output_path, "pdf")
         PrintExclCurve(g_excl_xsec_obs_1   , h_ul_xsec_exp_smooth, mi, output_path, "pdf")
         PrintExclCurve(g_excl_xsec_obs_p1_1, h_ul_xsec_exp_smooth, mi, output_path, "pdf")
         PrintExclCurve(g_excl_xsec_obs_m1_1, h_ul_xsec_exp_smooth, mi, output_path, "pdf")
@@ -481,18 +505,12 @@ def main():
         canvas = root.TCanvas("canvas", "canvas", 600, 600)
         canvas.SetLogz(True)
         h_ul_xsec_exp_smooth.Draw("colz")
-        g_excl_xsec_exp_1   .SetLineColor(root.kRed  ); g_excl_xsec_exp_1   .SetLineWidth(3); g_excl_xsec_exp_1   .SetLineStyle(1); g_excl_xsec_exp_1   .Draw("lsame")
-        g_excl_xsec_exp_p1_1.SetLineColor(root.kRed  ); g_excl_xsec_exp_p1_1.SetLineWidth(2); g_excl_xsec_exp_p1_1.SetLineStyle(4); g_excl_xsec_exp_p1_1.Draw("lsame")
-        g_excl_xsec_exp_m1_1.SetLineColor(root.kRed  ); g_excl_xsec_exp_m1_1.SetLineWidth(2); g_excl_xsec_exp_m1_1.SetLineStyle(4); g_excl_xsec_exp_m1_1.Draw("lsame")
-        g_excl_xsec_obs_1   .SetLineColor(root.kBlack); g_excl_xsec_obs_1   .SetLineWidth(3); g_excl_xsec_obs_1   .SetLineStyle(1); g_excl_xsec_obs_1   .Draw("lsame")
-        g_excl_xsec_obs_p1_1.SetLineColor(root.kBlack); g_excl_xsec_obs_p1_1.SetLineWidth(2); g_excl_xsec_obs_p1_1.SetLineStyle(4); g_excl_xsec_obs_p1_1.Draw("lsame")
-        g_excl_xsec_obs_m1_1.SetLineColor(root.kBlack); g_excl_xsec_obs_m1_1.SetLineWidth(2); g_excl_xsec_obs_m1_1.SetLineStyle(4); g_excl_xsec_obs_m1_1.Draw("lsame")
-        g_excl_xsec_exp_2   .SetLineColor(root.kRed  ); g_excl_xsec_exp_2   .SetLineWidth(3); g_excl_xsec_exp_2   .SetLineStyle(1); g_excl_xsec_exp_2   .Draw("lsame")
-        g_excl_xsec_exp_p1_2.SetLineColor(root.kRed  ); g_excl_xsec_exp_p1_2.SetLineWidth(2); g_excl_xsec_exp_p1_2.SetLineStyle(4); g_excl_xsec_exp_p1_2.Draw("lsame")
-        g_excl_xsec_exp_m1_2.SetLineColor(root.kRed  ); g_excl_xsec_exp_m1_2.SetLineWidth(2); g_excl_xsec_exp_m1_2.SetLineStyle(4); g_excl_xsec_exp_m1_2.Draw("lsame")
-        g_excl_xsec_obs_2   .SetLineColor(root.kBlack); g_excl_xsec_obs_2   .SetLineWidth(3); g_excl_xsec_obs_2   .SetLineStyle(1); g_excl_xsec_obs_2   .Draw("lsame")
-        g_excl_xsec_obs_p1_2.SetLineColor(root.kBlack); g_excl_xsec_obs_p1_2.SetLineWidth(2); g_excl_xsec_obs_p1_2.SetLineStyle(4); g_excl_xsec_obs_p1_2.Draw("lsame")
-        g_excl_xsec_obs_m1_2.SetLineColor(root.kBlack); g_excl_xsec_obs_m1_2.SetLineWidth(2); g_excl_xsec_obs_m1_2.SetLineStyle(4); g_excl_xsec_obs_m1_2.Draw("lsame")
+        g_excl_xsec_exp   .SetLineColor(root.kRed  ); g_excl_xsec_exp   .SetLineWidth(3); g_excl_xsec_exp   .SetLineStyle(1); g_excl_xsec_exp   .Draw("lsame")
+        g_excl_xsec_exp_p1.SetLineColor(root.kRed  ); g_excl_xsec_exp_p1.SetLineWidth(2); g_excl_xsec_exp_p1.SetLineStyle(4); g_excl_xsec_exp_p1.Draw("lsame")
+        g_excl_xsec_exp_m1.SetLineColor(root.kRed  ); g_excl_xsec_exp_m1.SetLineWidth(2); g_excl_xsec_exp_m1.SetLineStyle(4); g_excl_xsec_exp_m1.Draw("lsame")
+        g_excl_xsec_obs   .SetLineColor(root.kBlack); g_excl_xsec_obs   .SetLineWidth(3); g_excl_xsec_obs   .SetLineStyle(1); g_excl_xsec_obs   .Draw("lsame")
+        g_excl_xsec_obs_p1.SetLineColor(root.kBlack); g_excl_xsec_obs_p1.SetLineWidth(2); g_excl_xsec_obs_p1.SetLineStyle(4); g_excl_xsec_obs_p1.Draw("lsame")
+        g_excl_xsec_obs_m1.SetLineColor(root.kBlack); g_excl_xsec_obs_m1.SetLineWidth(2); g_excl_xsec_obs_m1.SetLineStyle(4); g_excl_xsec_obs_m1.Draw("lsame")
         
         # legend
         stat_y1 = 1.0 - root.gStyle.GetPadTopMargin() - 0.01;
