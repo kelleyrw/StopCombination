@@ -238,6 +238,7 @@ def FillBogus(hist, level=0.0, bogus=9999):
                 hist.SetBinContent(xbin, ybin, bogus)
     return
 
+# get the contour from the histogram
 def GetContourTGraph(hist, level = 1.0):
     g_name  = hist.GetName().replace("h_", "g_") 
     g_title = hist.GetTitle()
@@ -262,6 +263,7 @@ def GetContourTGraph(hist, level = 1.0):
     curve.SetLineWidth(3)
     return curve;
 
+# add two contours into one
 def CombineTGraphs(g1, g2, name, title):
     if g1.GetN()==0 and g2.GetN()==0:
         g = root.TGraph(0)
@@ -287,7 +289,7 @@ def CombineTGraphs(g1, g2, name, title):
     g.SetLineWidth(3)
     return g
 
-# extract the contour
+# extract the exclusion contour
 def ExtractContour(hist_name, hist_title, mi, h_ul, h_xsec):
     
     # subtract to determine exclusions
@@ -303,8 +305,7 @@ def ExtractContour(hist_name, hist_title, mi, h_ul, h_xsec):
     # contours
     g1 = GetContourTGraph(h_excl_1)
     g2 = GetContourTGraph(h_excl_2)
-
-#     g  = CombineTGraphs(g1, g2, hist_name.replace("h_", "g_"), hist_title) 
+    #g = CombineTGraphs(g1, g2, hist_name.replace("h_", "g_"), hist_title) 
 
     return (g1, g2) 
 
@@ -314,7 +315,7 @@ def ExtractContour(hist_name, hist_title, mi, h_ul, h_xsec):
 
 def main():
 
-#     try:
+    try:
         # inputs
         # -------------------------------------------------------------------- #
 
@@ -334,7 +335,6 @@ def main():
             sys.exit()
         tree = root.TChain("tree")
         tree.Add(tree_file)
-#         tree.GetListOfBranches().ls()
 
         # output path
         output_path = "plots/limits/%s/%s/%s/%s" % (label, method, model, analysis)
@@ -360,7 +360,6 @@ def main():
             for ybin in xrange(1, h_xsec.GetNbinsY()+1):
                 mass_stop = h_xsec.GetXaxis().GetBinCenter(xbin)
                 mass_lsp  = h_xsec.GetYaxis().GetBinCenter(ybin)
-#                 if (mass_stop >= mass_lsp + mi.offset and mass_stop <= mi.xmax - mi.bin_width/2.0):
                 if (mass_stop >= mass_lsp + 100): 
                     xsec_value = h_xsec_orig.GetBinContent(h_xsec_orig.FindBin(mass_stop))
                     xsec_error = h_xsec_orig.GetBinError  (h_xsec_orig.FindBin(mass_stop))
@@ -381,14 +380,6 @@ def main():
         h_ul_xsec_exp_p1 = root.TH2D("h_ul_xsec_exp_p1", "Expected+1#sigma %s" % hist_title_stem, mi.NbinsX(), mi.xmin, mi.xmax, mi.NbinsY(), mi.ymin, mi.ymax)
         h_ul_xsec_exp_m1 = root.TH2D("h_ul_xsec_exp_m1", "Expected-1#sigma %s" % hist_title_stem, mi.NbinsX(), mi.xmin, mi.xmax, mi.NbinsY(), mi.ymin, mi.ymax)
 
-#         hist_title_stem    = "%s Exclusion on #sigma #times Branching Fraction (%s);%s;%s;%s"%(analysis, model, mi.xtitle, mi.ytitle, mi.ztitle),
-#         h_excl_xsec_obs    = root.TH2D("h_excl_xsec_obs"   , "Observed %s"              % hist_title_stem, mi.NbinsX(), mi.xmin, mi.xmax, mi.NbinsY(), mi.ymin, mi.ymax)
-#         h_excl_xsec_obs_p1 = root.TH2D("h_excl_xsec_obs_p1", "Observed+1#sigma_{th} %s" % hist_title_stem, mi.NbinsX(), mi.xmin, mi.xmax, mi.NbinsY(), mi.ymin, mi.ymax)
-#         h_excl_xsec_obs_m1 = root.TH2D("h_excl_xsec_obs_m1", "Observed-1#sigma_{th} %s" % hist_title_stem, mi.NbinsX(), mi.xmin, mi.xmax, mi.NbinsY(), mi.ymin, mi.ymax)
-#         h_excl_xsec_exp    = root.TH2D("h_excl_xsec_exp"   , "Expected %s"              % hist_title_stem, mi.NbinsX(), mi.xmin, mi.xmax, mi.NbinsY(), mi.ymin, mi.ymax)
-#         h_excl_xsec_exp_p1 = root.TH2D("h_excl_xsec_exp_p1", "Expected+1#sigma_{exp} %s"% hist_title_stem, mi.NbinsX(), mi.xmin, mi.xmax, mi.NbinsY(), mi.ymin, mi.ymax)
-#         h_excl_xsec_exp_m1 = root.TH2D("h_excl_xsec_exp_m1", "Expected-1#sigma_{exp} %s"% hist_title_stem, mi.NbinsX(), mi.xmin, mi.xmax, mi.NbinsY(), mi.ymin, mi.ymax)
-
         # fill hists 
         # -------------------------------------------------------------------- #
 
@@ -396,13 +387,6 @@ def main():
         tree.Project("h_ul_xsec_exp"    , "mass_lsp:mass_stop" , "ul_exp"          )
         tree.Project("h_ul_xsec_exp_p1" , "mass_lsp:mass_stop" , "ul_exp_1sigma_up")
         tree.Project("h_ul_xsec_exp_m1" , "mass_lsp:mass_stop" , "ul_exp_1sigma_dn")
-
-#         tree.Project("h_excl_xsec_obs"   , "mass_lsp:mass_stop" , "excl_obs"          )
-#         tree.Project("h_excl_xsec_obs_p1", "mass_lsp:mass_stop" , "excl_obs_1sigma_up")
-#         tree.Project("h_excl_xsec_obs_m1", "mass_lsp:mass_stop" , "excl_obs_1sigma_dn")
-#         tree.Project("h_excl_xsec_exp"   , "mass_lsp:mass_stop" , "excl_exp"          )
-#         tree.Project("h_excl_xsec_exp_p1", "mass_lsp:mass_stop" , "excl_exp_1sigma_up")
-#         tree.Project("h_excl_xsec_exp_m1", "mass_lsp:mass_stop" , "excl_exp_1sigma_dn")
 
         # smoothing/interpolation 
         # -------------------------------------------------------------------- #
@@ -433,7 +417,6 @@ def main():
             g_excl_xsec_exp_p1_1 = GetContourTGraph(orig_an_file.Get("hR_expp1_smallDM"))
             g_excl_xsec_exp_m1_1 = GetContourTGraph(orig_an_file.Get("hR_expm1_smallDM"))
         
-
         # write the output
         # -------------------------------------------------------------------- #
 
@@ -521,12 +504,12 @@ def main():
         # print the output
         canvas.Print("%s/%s_interp_%s.pdf"%(output_path, model, analysis))
 
-#     except Exception, e:
-#         print "[stop_create_contour_hists] ERROR:", e
-#         return 1
-#     except:
-#         print "[stop_create_contour_hists] ERROR:", sys.exc_info()[0]
-#         return 1
+    except Exception, e:
+        print "[stop_create_contour_hists] ERROR:", e
+        return 1
+    except:
+        print "[stop_create_contour_hists] ERROR:", sys.exc_info()[0]
+        return 1
 
 # do it
 if __name__ == '__main__':
