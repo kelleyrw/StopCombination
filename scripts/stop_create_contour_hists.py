@@ -416,6 +416,12 @@ def main():
             g_excl_xsec_exp_1    = GetContourTGraph(orig_an_file.Get("hR_exp_smallDM"  ))
             g_excl_xsec_exp_p1_1 = GetContourTGraph(orig_an_file.Get("hR_expp1_smallDM"))
             g_excl_xsec_exp_m1_1 = GetContourTGraph(orig_an_file.Get("hR_expm1_smallDM"))
+            g_excl_xsec_obs_1    .SetName("g_excl_xsec_obs_1")
+            g_excl_xsec_obs_p1_1 .SetName("g_excl_xsec_obs_p1_1")
+            g_excl_xsec_obs_m1_1 .SetName("g_excl_xsec_obs_m1_1")
+            g_excl_xsec_exp_1    .SetName("g_excl_xsec_exp_1")
+            g_excl_xsec_exp_p1_1 .SetName("g_excl_xsec_exp_p1_1")
+            g_excl_xsec_exp_m1_1 .SetName("g_excl_xsec_exp_m1_1")
         
         # write the output
         # -------------------------------------------------------------------- #
