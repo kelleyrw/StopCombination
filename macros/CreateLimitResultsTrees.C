@@ -52,6 +52,7 @@ class LimitInfo
 
         // methods: 
         void SetBranches(TTree& tree);
+        void Reset();
 };
 
 LimitInfo::LimitInfo()
@@ -71,13 +72,39 @@ LimitInfo::LimitInfo()
     , ul_exp_2sigma_up_err ( -999999)
     , ul_exp_2sigma_dn     ( -999999)
     , ul_exp_2sigma_dn_err ( -999999)
-    , excl_obs             ( 0.0  )
-    , excl_obs_1sigma_up   ( 0.0  )
-    , excl_obs_1sigma_dn   ( 0.0  )
-    , excl_exp             ( 0.0  )
-    , excl_exp_1sigma_up   ( 0.0  )
-    , excl_exp_1sigma_dn   ( 0.0  )
+    , excl_obs             ( 0      )
+    , excl_obs_1sigma_up   ( 0      )
+    , excl_obs_1sigma_dn   ( 0      )
+    , excl_exp             ( 0      )
+    , excl_exp_1sigma_up   ( 0      )
+    , excl_exp_1sigma_dn   ( 0      )
 {
+}
+
+void LimitInfo::Reset()
+{
+    mass_stop            = -999999;
+    mass_lsp             = -999999;
+    xsec                 = -999999;
+    xsec_err             = -999999;
+    ul_obs               = -999999;
+    ul_obs_err           = -999999;
+    ul_exp               = -999999;
+    ul_exp_err           = -999999;
+    ul_exp_1sigma_up     = -999999;
+    ul_exp_1sigma_up_err = -999999;
+    ul_exp_1sigma_dn     = -999999;
+    ul_exp_1sigma_dn_err = -999999;
+    ul_exp_2sigma_up     = -999999;
+    ul_exp_2sigma_up_err = -999999;
+    ul_exp_2sigma_dn     = -999999;
+    ul_exp_2sigma_dn_err = -999999;
+    excl_obs             = 0      ;
+    excl_obs_1sigma_up   = 0      ;
+    excl_obs_1sigma_dn   = 0      ;
+    excl_exp             = 0      ;
+    excl_exp_1sigma_up   = 0      ;
+    excl_exp_1sigma_dn   = 0      ;
 }
 
 void LimitInfo::SetBranches(TTree& tree)
@@ -199,13 +226,13 @@ void SetLimitInfo
     chain.GetEntry(3);
     limit_info.ul_exp_1sigma_up     = limit_info.xsec * ul;
     limit_info.ul_exp_1sigma_up_err = limit_info.xsec * ul_err;
-    chain.GetEntry(0);
+    chain.GetEntry(1);
     limit_info.ul_exp_1sigma_dn     = limit_info.xsec * ul;
     limit_info.ul_exp_1sigma_dn_err = limit_info.xsec * ul_err;
     chain.GetEntry(4);
     limit_info.ul_exp_2sigma_up     = limit_info.xsec * ul;
     limit_info.ul_exp_2sigma_up_err = limit_info.xsec * ul_err;
-    chain.GetEntry(1);
+    chain.GetEntry(0);
     limit_info.ul_exp_2sigma_dn     = limit_info.xsec * ul;
     limit_info.ul_exp_2sigma_dn_err = limit_info.xsec * ul_err;
 
@@ -215,13 +242,13 @@ void SetLimitInfo
     const float xsec_up  = xsec + xsec_err;
     const float xsec_dn  = xsec - xsec_err;
 
-    if (xsec    > limit_info.ul_obs) {limit_info.excl_obs           = 1.0;}
-    if (xsec_up > limit_info.ul_obs) {limit_info.excl_obs_1sigma_up = 1.0;}
-    if (xsec_dn > limit_info.ul_obs) {limit_info.excl_obs_1sigma_dn = 1.0;}
+    if (xsec    > limit_info.ul_obs) {limit_info.excl_obs           = 1;}
+    if (xsec_up > limit_info.ul_obs) {limit_info.excl_obs_1sigma_up = 1;}
+    if (xsec_dn > limit_info.ul_obs) {limit_info.excl_obs_1sigma_dn = 1;}
 
-    if (xsec > limit_info.ul_exp          ) {limit_info.excl_exp           = 1.0;}
-    if (xsec > limit_info.ul_exp_1sigma_up) {limit_info.excl_exp_1sigma_up = 1.0;}
-    if (xsec > limit_info.ul_exp_1sigma_dn) {limit_info.excl_exp_1sigma_dn = 1.0;}
+    if (xsec > limit_info.ul_exp          ) {limit_info.excl_exp           = 1;}
+    if (xsec > limit_info.ul_exp_1sigma_up) {limit_info.excl_exp_1sigma_up = 1;}
+    if (xsec > limit_info.ul_exp_1sigma_dn) {limit_info.excl_exp_1sigma_dn = 1;}
 
     return;
 }
@@ -277,6 +304,9 @@ void CreateLimitResultsTree
                 const float mass_lsp  = h_bins.GetYaxis()->GetBinCenter(ybin);
                 if (mass_lsp > (mass_stop - 100)) {continue;}
 
+                // reset tree info
+                limit_info.Reset();
+
                 // get the best SR for that mass point
                 const int sr_num                        = static_cast<int>(rt::GetBinContent2D(&h_sr_best, mass_stop, mass_lsp));
                 const stop::SignalRegion::value_type sr = static_cast<stop::SignalRegion::value_type>(sr_num);
@@ -326,10 +356,16 @@ void CreateLimitResultsTrees()
 {
     // hard coded meta-data
 /*     const std::string limit_results_path = "/hadoop/cms/store/user/rwkelley/limits/stopcombo/v0/asymptotic/t2tt"; */
-    const std::string limit_results_path = "output/limits/v0/asymptotic/t2tt";
-    const std::string output_file_stem   = "output/limit_trees/v0/asymptotic/t2tt/limit_result_ntuple";
+/*     const std::string limit_results_path = "output/limits/v0/asymptotic/t2tt"; */
+/*     const std::string output_file_stem   = "output/limit_trees/v0/asymptotic/t2tt/limit_result_ntuple"; */
+
+/*     const std::string limit_results_path = "/hadoop/cms/store/user/rwkelley/limits/stopcombo/v0/hybrid/t2tt"; */
+    const std::string limit_results_path = "output/limits/v0/hybrid/t2tt";
+    const std::string output_file_stem   = "output/limit_trees/v0/hybrid/t2tt/limit_result_ntuple";
 
     // create the limit ntuples
-    CreateLimitResultsTree("t2tt", Analysis::razor, limit_results_path, output_file_stem + "_razor.root"); 
+    CreateLimitResultsTree("t2tt", Analysis::razor   , limit_results_path, output_file_stem + "_razor.root"   ); 
+    CreateLimitResultsTree("t2tt", Analysis::onelep  , limit_results_path, output_file_stem + "_onelep.root"  ); 
+    CreateLimitResultsTree("t2tt", Analysis::combined, limit_results_path, output_file_stem + "_combined.root"); 
 }
 
