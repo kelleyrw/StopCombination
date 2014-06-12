@@ -23,12 +23,15 @@
 #include "SignalRegion.h"
 #include "PrintFormattedXSecHist.h"
 
-void CreateExpComparisonPlot(const std::string& suffix = "pdf")
+void CreateExpComparisonPlot
+(
+    const std::string& sample = "t2tt",
+    const std::string& method = "hybrid",
+    const std::string& label  = "v0",
+    const std::string& suffix = "pdf"
+)
 {
     // inputs:
-    const std::string sample = "t2tt";
-    const std::string label  = "v0";
-    const std::string method = "hybrid";
 
     const stop::Sample::Info sample_info = stop::GetSampleInfo(sample);
 
