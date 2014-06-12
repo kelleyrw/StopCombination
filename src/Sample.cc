@@ -15,7 +15,7 @@ namespace stop
             // name
             "t2tt", 
             // title
-            "pp #rightarrow #tilde{t}#tilde{t}, #tilde{t} #rightarrow t+#tilde{#chi}_{1}^{0}",
+            "pp #rightarrow #tilde{t} #tilde{t}*, #tilde{t} #rightarrow t+#tilde{#chi}_{1}^{0}",
             // latex
             "pp \\rightarrow \\tilde{t}\\tilde{t}, \\tilde{t} \\rightarrow t+\\tilde{\\chi}_{1}^{0}",
             // ntuple_path
@@ -34,7 +34,7 @@ namespace stop
             // name
             "t2tb_br0p5", 
             // title
-            "pp #rightarrow #tilde{t}#tilde{t}, #tilde{t} #rightarrow t+#tilde{#chi}_{1}^{0}/b#tilde{#chi}_{1}^{#pm}",
+            "pp #rightarrow #tilde{t} #tilde{t}*, #tilde{t} #rightarrow t+#tilde{#chi}_{1}^{0}/b#tilde{#chi}_{1}^{#pm}",
             // latex
             "pp \\rightarrow \\tilde{t}\\tilde{t}, \\tilde{t} \\rightarrow t+\\tilde{\\chi}_{1}^{0}/b\\tilde{\\chi}_{1}^{\\pm}",
             // ntuple_path
