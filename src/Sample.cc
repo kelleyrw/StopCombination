@@ -15,9 +15,9 @@ namespace stop
             // name
             "t2tt", 
             // title
-            "pp #rightarrow #tilde{t} #tilde{t}*, #tilde{t} #rightarrow t+#tilde{#chi}_{1}^{0}",
+            "pp #rightarrow #tilde{t}  #tilde{t}*, #tilde{t} #rightarrow t #tilde{#chi}_{1}^{0}",
             // latex
-            "pp \\rightarrow \\tilde{t}\\tilde{t}, \\tilde{t} \\rightarrow t+\\tilde{\\chi}_{1}^{0}",
+            "pp \\rightarrow \\tilde{t}\\tilde{t}, \\tilde{t} \\rightarrow t \\tilde{\\chi}_{1}^{0}",
             // ntuple_path
             "/nfs-7/userdata/rwkelley/babies/stop/cms2V05-03-26_stoplooperV00-02-24/T2tt_mad/minibaby_V00-03-06/Skim_4jets_MET100_MT120/merged*root,"
             "/nfs-7/userdata/rwkelley/babies/stop/cms2V05-03-26_stoplooperV00-02-25/T2tt_mad/minibabies_V00-03-12/Skim_4jets_MET100_MT120/merged*root",
@@ -34,9 +34,9 @@ namespace stop
             // name
             "t2tb_br0p5", 
             // title
-            "pp #rightarrow #tilde{t} #tilde{t}*, #tilde{t} #rightarrow t+#tilde{#chi}_{1}^{0}/b#tilde{#chi}_{1}^{#pm}",
+            "pp #rightarrow #tilde{t}  #tilde{t}*, #tilde{t} #rightarrow t #tilde{#chi}_{1}^{0}/b #tilde{#chi}_{1}^{#pm}",
             // latex
-            "pp \\rightarrow \\tilde{t}\\tilde{t}, \\tilde{t} \\rightarrow t+\\tilde{\\chi}_{1}^{0}/b\\tilde{\\chi}_{1}^{\\pm}",
+            "pp \\rightarrow \\tilde{t}\\tilde{t}, \\tilde{t} \\rightarrow t \\tilde{\\chi}_{1}^{0}/b \\tilde{\\chi}_{1}^{\\pm}",
             // ntuple_path
             "/nfs-7/userdata/rwkelley/babies/stop/cms2V05-03-26_stoplooperV00-02-24/T2tt_mad/minibaby_V00-03-06/Skim_4jets_MET100_MT120/merged*root,"
             "/nfs-7/userdata/rwkelley/babies/stop/cms2V05-03-26_stoplooperV00-02-25/T2tt_mad/minibabies_V00-03-12/Skim_4jets_MET100_MT120/merged*root",

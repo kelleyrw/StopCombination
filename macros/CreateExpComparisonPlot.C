@@ -75,8 +75,8 @@ void CreateExpComparisonPlot
 
     // TLegend
     TLegend leg(0.18, 0.78, 0.6, 0.68);
-    leg.AddEntry(&g_razor , "Razor 0L (SUS-13-004)", "l");
-    leg.AddEntry(&g_onelep, "MVA 1L (SUS-13-011)"  , "l");
+    leg.AddEntry(&g_razor , "Razor 0L (SUS-13-004), L = 19.4 fb^{-1}", "l");
+    leg.AddEntry(&g_onelep, "MVA 1L (SUS-13-011), L = 19.5 fb^{-1}"  , "l");
     leg.SetFillColor(0);  // 0 makes it the background clear on the pad
     leg.SetFillStyle(0);
     leg.SetBorderSize(0);
@@ -100,7 +100,7 @@ void CreateExpComparisonPlot
     // overlay
     TCanvas c1("c1", "c1", 600, 600);
     rt::SetTDRStyle();
-    h_exp.SetTitle("CMS Preliminary, L = 19.3 fb^{-1}, #sqrt{s} = 8 TeV");
+    h_exp.SetTitle("CMS Preliminary, #sqrt{s} = 8 TeV");
     h_exp.SetTitleFont(42);
     h_exp.SetTitleSize(0.05);
     h_exp.SetStats(false);
