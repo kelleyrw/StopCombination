@@ -48,6 +48,25 @@ namespace stop
             0.5,
             // Sample
             Sample::t2tb_br0p5
+        },
+        {
+            // name
+            "t2bw", 
+            // title
+            "pp #rightarrow #tilde{t}  #tilde{t}*, #tilde{t} #rightarrow b #tilde{#chi}_{1}^{#pm}",
+            // latex
+            "pp \\rightarrow \\tilde{t}\\tilde{t}, \\tilde{t} \\rightarrow b \\tilde{\\chi}_{1}^{\\pm}",
+            // ntuple_path
+            "/nfs-7/userdata/rwkelley/babies/stop/cms2V05-03-26_stoplooperV00-02-24/T2tt_mad/minibaby_V00-03-06/Skim_4jets_MET100_MT120/merged*root,"
+            "/nfs-7/userdata/rwkelley/babies/stop/cms2V05-03-26_stoplooperV00-02-25/T2tt_mad/minibabies_V00-03-12/Skim_4jets_MET100_MT120/merged*root",
+            // ngen_file
+            "/nfs-7/userdata/rwkelley/babies/stop/cms2V05-03-26_stoplooperV00-02-25/T2tt_mad/minibabies_V00-03-12/Skim_4jets_MET100_MT120/myMassDB_T2tt_combined_lowmass_25GeVbins.root",
+            // ngen_hist_name
+            "masses",
+            // branching ratio,
+            0.0,
+            // Sample
+            Sample::t2bw
         }
     };
 

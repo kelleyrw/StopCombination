@@ -17,6 +17,7 @@ namespace stop
             {
                 t2tt,
                 t2tb_br0p5,
+                t2bw,
                 static_size
             };
 

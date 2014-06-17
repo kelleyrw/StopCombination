@@ -119,7 +119,10 @@ def main():
 
 		# sample
 		sample = options.sample.lower()
-		sample_upper = sample[0].upper() + sample[1:]
+		sample_razor = sample[0].upper() + sample[1:]
+		if "t2tb" in sample:
+			sample_razor = "T2tb"
+
 
 		# make combined dir if doens't exist
 		if (not os.path.exists(options.combined_path)):
@@ -146,17 +149,17 @@ def main():
 					os.system(cmd)
 
 				# get the razor card name
-				razor_card     = "razor_combine_Had_%s_MG_%1.0f.000000_MCHI_%1.0f.000000.txt" % (sample_upper, mass_stop, mass_lsp)
+				razor_card     = "razor_combine_Had_%s_MG_%1.0f.000000_MCHI_%1.0f.000000.txt" % (sample_razor, mass_stop, mass_lsp)
 				razor_card_new = "razor_%s_%1.0f_%1.0f.txt" % (sample, mass_stop, mass_lsp)
 				razor_full     = "%s/%s" % (options.razor_path, razor_card)
 				if (not os.path.isfile(razor_full)):
 					print ("razor card %s does not exist -- skipping" % razor_full)
 					continue
-				razor_multijet_root = "%s/razor_combine_MultiJet_%s_MG_%1.0f.000000_MCHI_%1.0f.000000.root" % (options.razor_path, sample_upper, mass_stop, mass_lsp)
+				razor_multijet_root = "%s/razor_combine_MultiJet_%s_MG_%1.0f.000000_MCHI_%1.0f.000000.root" % (options.razor_path, sample_razor, mass_stop, mass_lsp)
 				if (not os.path.isfile(razor_multijet_root)):
 					print ("razor ROOT file %s does not exist -- skipping" % razor_multijet_root)
 					continue
-				razor_jet2b_root = "%s/razor_combine_Jet2b_%s_MG_%1.0f.000000_MCHI_%1.0f.000000.root" % (options.razor_path, sample_upper, mass_stop, mass_lsp)
+				razor_jet2b_root = "%s/razor_combine_Jet2b_%s_MG_%1.0f.000000_MCHI_%1.0f.000000.root" % (options.razor_path, sample_razor, mass_stop, mass_lsp)
 				if (not os.path.isfile(razor_jet2b_root)):
 					print ("razor ROOT file %s does not exist -- skipping" % razor_jet2b_root)
 					continue

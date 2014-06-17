@@ -371,7 +371,7 @@ try
     info.bkgd_unc  = 1.0 + stop_result.bkgd.lep.frac_error(); 
 
     info.xsec        = rt::GetBinContent1D(hc["h_xsec"], mass_stop);
-    info.acc         = lumi*GetValueFromScanHist(hc["h_eff_"+signal_region_info.label], mass_stop, mass_lsp)*sample_info.bratio;
+    info.acc         = lumi*GetValueFromScanHist(hc["h_eff_"+signal_region_info.label], mass_stop, mass_lsp);
     info.ngen        = GetValueFromScanHist(hc["h_ngen"], mass_stop, mass_lsp);
     info.trig_unc    = 1.0 + GetValueFromScanHist(hc["h_err_trig_"  +signal_region_info.label], mass_stop, mass_lsp);
     info.lumi_unc    = 1.0 + GetValueFromScanHist(hc["h_err_lumi_"  +signal_region_info.label], mass_stop, mass_lsp);
@@ -386,6 +386,10 @@ try
     info.jes_unc_dn  = 1.0 + GetValueFromScanHist(hc["h_err_jesdn_" +signal_region_info.label], mass_stop, mass_lsp);
     info.stat_unc    = 1.0 + GetValueFromScanHist(hc["h_err_stats_" +signal_region_info.label], mass_stop, mass_lsp);
     info.total_unc   = 1.0 + GetValueFromScanHist(hc["h_err_total_" +signal_region_info.label], mass_stop, mass_lsp);
+
+    // apply branching ratio
+    // one copy for each stop decay
+    info.acc *= sample_info.bratio * sample_info.bratio;
 
     // print the card
     if (output_file.empty())
