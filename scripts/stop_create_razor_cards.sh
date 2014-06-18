@@ -1,10 +1,10 @@
 #!/bin/bash
 
-# sample="t2tb_br0p5"
-# sample_full="T2tb"
-sample="t2bw"
-sample_full="T2bw"
-input_path="/Users/rwk7t/Development/CMSSW_6_1_2_Analysis/src/StopAnalysis/CombinedExclusions/cards/from_javier_14May2014/cards/${sample_full}"
+sample="t2tb_br0p5"
+sample_full="T2tb"
+# sample="t2bw"
+# sample_full="T2bw"
+input_path="/Users/rwk7t/Development/CMSSW_6_1_2_Analysis/src/StopAnalysis/CombinedExclusions/cards/from_javier_17jun2014/${sample_full}"
 output_path="$CMSSW_BASE/src/Analysis/StopCombination/cards/$sample/razor"
 
 # copy cards to correct place
