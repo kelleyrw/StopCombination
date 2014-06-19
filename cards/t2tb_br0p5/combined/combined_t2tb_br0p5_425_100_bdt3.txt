@@ -1,11 +1,11 @@
-Combination of razor=razor_t2tb_br0p5_500_0.txt  onelep=onelep_t2tb_br0p5_500_0_bdt3.txt
+Combination of razor=razor_t2tb_br0p5_425_100.txt  onelep=onelep_t2tb_br0p5_425_100_bdt3.txt
 imax 3 number of bins
 jmax 11 number of processes minus 1
 kmax 12 number of nuisance parameters
 ----------------------------------------------------------------------------------------------------------------------------------
 shapes *               onelep          FAKE
-shapes *               razor_Jet2b     razor_combine_Jet2b_T2tb_MG_500.000000_MCHI_1.000000.root wJet2b:$PROCESS wJet2b:$PROCESS_$SYSTEMATIC
-shapes *               razor_MultiJet  razor_combine_MultiJet_T2tb_MG_500.000000_MCHI_1.000000.root wMultiJet:$PROCESS wMultiJet:$PROCESS_$SYSTEMATIC
+shapes *               razor_Jet2b     razor_combine_Jet2b_T2tb_MG_425.000000_MCHI_100.000000.root wJet2b:$PROCESS wJet2b:$PROCESS_$SYSTEMATIC
+shapes *               razor_MultiJet  razor_combine_MultiJet_T2tb_MG_425.000000_MCHI_100.000000.root wMultiJet:$PROCESS wMultiJet:$PROCESS_$SYSTEMATIC
 ----------------------------------------------------------------------------------------------------------------------------------
 bin          razor_MultiJet  razor_Jet2b     onelep        
 observation  2589.0          728.0           8.0           
@@ -13,11 +13,11 @@ observation  2589.0          728.0           8.0
 bin                                razor_MultiJet  razor_MultiJet  razor_MultiJet  razor_MultiJet  razor_Jet2b     razor_Jet2b     razor_Jet2b     onelep          onelep          onelep          onelep          onelep        
 process                            MultiJet_T2tb   MultiJet_TTj3b  MultiJet_TTj1b  MultiJet_TTj2b  Jet2b_T2tb      Jet2b_TTj2b     Jet2b_TTj3b     signal          rare            wjets           ttslo           ttdil         
 process                            -2              1               2               3               -1              4               5               0               6               7               8               9             
-rate                               117.8840        85.0150         1754.9450       748.9590        20.8260         701.8940        24.8270         5.7636          2.6000          2.2000          3.6000          4.6000        
+rate                               146.0560        85.0150         1754.9450       748.9590        111.3190        701.8940        24.8270         5.7044          2.6000          2.2000          3.6000          4.6000        
 ----------------------------------------------------------------------------------------------------------------------------------
-Btag                    shape?     1.0             -               -               -               1.0             -               -               0.990/1.011     -               -               -               -             
-Isr                     shape?     1.0             -               -               -               1.0             -               -               1.057           -               -               -               -             
-Jes                     shape?     1.0             -               -               -               1.0             -               -               0.951/1.046     -               -               -               -             
+Btag                    shape?     1.0             -               -               -               1.0             -               -               0.985/1.005     -               -               -               -             
+Isr                     shape?     1.0             -               -               -               1.0             -               -               1.07            -               -               -               -             
+Jes                     shape?     1.0             -               -               -               1.0             -               -               0.899/1.086     -               -               -               -             
 Pdf                     shape      1.0             -               -               -               1.0             -               -               -               -               -               -               -             
 lep                     lnN        -               -               -               -               -               -               -               0.950/1.050     -               -               -               -             
 lumi                    lnN        1.026           1.0             1.0             1.0             1.026           1.0             1.0             1.044           -               -               -               -             
