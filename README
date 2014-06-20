@@ -328,6 +328,19 @@ cp higgsCombine_t2tt_200_100_bdt5.Asymptotic.mH120.1234.root combine_output_t2tt
 8. extracting the limits from the grid output
 --------------------------------------------------------------------------------
 
+use macros/CreateLimitResultsTrees.C.
+
+Edit the hard coded values to reflect which sample you wish to use and where is the grid output.
+
+    // hard coded meta-data
+    const std::string sample_name        = "t2tt";
+    const std::string method             = "hybrid";
+    const std::string label              = "v0";
+    const std::string limit_results_path = Form("/hadoop/cms/store/user/rwkelley/limits/stopcombo/%s/%s/%x", label.c_str(), method.c_str(), sample_name.c_str());
+    const std::string output_file_stem   = Form("output/limit_trees/%s/%s/%s/limit_result_ntuple", label.c_str(), method.c_str(), sample_name.c_str());
+
+root [9] .x macros/CreateLimitResultsTrees.C+
+
 --------------------------------------------------------------------------------
 8. creating exclusion plots
 --------------------------------------------------------------------------------

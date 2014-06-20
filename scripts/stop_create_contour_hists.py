@@ -44,6 +44,7 @@ class ModelInfo:
 
     # construct:
     def __init__(self, 
+			name,
             xtitle,
             xmin,
             xmax,
@@ -58,6 +59,7 @@ class ModelInfo:
             smoothing,
             epsilon
         ):
+        self.name      = str(name)
         self.xtitle    = str(xtitle)
         self.xmin      = float(xmin)
         self.xmax      = float(xmax)
@@ -82,6 +84,25 @@ class ModelInfo:
 def GetModelInfo(model):
     if model.lower() == "t2tt":
         model_info = ModelInfo( 
+			name      = "T2tt",
+            xtitle    = "m_{#tilde{t}} (GeV)",
+            xmin      = 150.0-12.5, 
+            xmax      = 925.0-12.5, 
+            ytitle    = "m_{#tilde{#chi}^{0}} (GeV)",
+            ymin      = 0.0-12.5, 
+            ymax      = 725.0-12.5, 
+            ztitle    = "95% C.L. upper limit on cross section (pb)",
+            zmin      = 0.001, 
+            zmax      = 10, 
+            bin_width = 25.0, 
+            offset    = 175.0+25.0, # m_top + bin_width
+            smoothing = 20, 
+            epsilon   = 5
+        )
+        return model_info 
+    elif model.lower() == "t2tb_br0p5":
+        model_info = ModelInfo( 
+			name      = "T2tb",
             xtitle    = "m_{#tilde{t}} (GeV)",
             xmin      = 150.0-12.5, 
             xmax      = 925.0-12.5, 
@@ -413,7 +434,7 @@ def main():
         (g_excl_xsec_exp_m1_1, g_excl_xsec_exp_m1_2) = ExtractContour("h_excl_xsec_exp_m1", "Expected-1#sigma_{exp} %s"% hist_title_stem, mi, h_ul_xsec_exp_m1_smooth, h_xsec      )
     
         # pull g1 from Ben's original result
-        if (options.orig_curve_file and (analysis == "onelep" or analysis == "combined")):
+        if (options.orig_curve_file and mi.name == "t2tt" and (analysis == "onelep" or analysis == "combined")):
             orig_an_file = root.TFile.Open(options.orig_curve_file)
             g_excl_xsec_obs_1    = GetContourTGraph(orig_an_file.Get("hR_obs_smallDM"  ))
             g_excl_xsec_obs_p1_1 = GetContourTGraph(orig_an_file.Get("hR_obsp1_smallDM"))
@@ -518,8 +539,8 @@ def main():
         stat_x1 = root.gStyle.GetPadLeftMargin() + 0.02;
         stat_x2 = 0.5;
         leg = root.TLegend(stat_x1, stat_y1, stat_x2, stat_y2);
-        leg.AddEntry(g_excl_xsec_exp_2, "Expected", "L");
-        leg.AddEntry(g_excl_xsec_obs_2, "Observed", "L");
+        leg.AddEntry(g_excl_xsec_exp, "Expected", "L");
+        leg.AddEntry(g_excl_xsec_obs, "Observed", "L");
         leg.SetFillColor(0);  # 0 makes it the background clear on the pad
         leg.SetFillStyle(0);
         leg.SetBorderSize(0);

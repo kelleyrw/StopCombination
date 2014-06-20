@@ -81,9 +81,9 @@ void PrintLimitHists
 )
 {
     // binning info
-    BinInfo xbin_info = {"m_{#tilde{t}} (GeV)"                         , 150   , 900 , 25, 12.5};
-    BinInfo ybin_info = {"m_{#tilde{#chi}^{0}} (GeV)"                  , 0     , 700 , 25, 12.5};
-    BinInfo zbin_info = {"95\% C.L. upper limit on cross section (pb)" , 0.001 , 10  ,  1,    0};
+    BinInfo xbin_info = {"m_{#tilde{t}} (GeV)"                         , 150 , 900 , 25, 12.5};
+    BinInfo ybin_info = {"m_{#tilde{#chi}^{0}} (GeV)"                  , 0   , 700 , 25, 12.5};
+    BinInfo zbin_info = {"95\% C.L. upper limit on cross section (pb)" , 1e-3, 1e1 ,  1,    0};
     //std::cout << xbin_info << std::endl;
     //std::cout << ybin_info << std::endl;
     //std::cout << zbin_info << std::endl;
@@ -137,10 +137,17 @@ void PrintLimitHists
 void PrintLimitHistsNoCurve()
 {
     // hard coded meta-data
-    const std::string tree_path   = "output/limit_trees/v0/asymptotic/t2tt/limit_result_ntuple";
-    const std::string output_path = "plots/limits/v0/asymptotic/t2tt";
-    const std::string suffix      = "png";
+    const std::string suffix             = "png";
+    const std::string sample_name        = "t2tb_br0p5";
+/*     const std::string sample_name        = "t2tt"; */
+/*     const std::string method             = "hybrid"; */
+    const std::string method             = "asymptotic";
+    const std::string label              = "v0";
+    const std::string tree_path   = Form("output/limit_trees/%s/%s/%s/limit_result_ntuple", label.c_str(), method.c_str(), sample_name.c_str());
+    const std::string output_path = Form("plots/limits/%s/%s/%s"                          , label.c_str(), method.c_str(), sample_name.c_str());
 
     // create the limit ntuples
-    PrintLimitHists(tree_path + "_razor.root", output_path + "/razor", suffix);
+    PrintLimitHists(tree_path + "_razor.root"   , output_path + "/razor"   , suffix);
+    PrintLimitHists(tree_path + "_onelep.root"  , output_path + "/onelep"  , suffix);
+    PrintLimitHists(tree_path + "_combined.root", output_path + "/combined", suffix);
 }

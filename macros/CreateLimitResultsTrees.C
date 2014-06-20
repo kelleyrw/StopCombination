@@ -194,8 +194,16 @@ void SetLimitInfo
 /*     std::cout << raw_file_name << std::endl; */
     const std::vector<std::string> split = lt::string_split(raw_file_name, "_");
 /*     std::cout << lt::ArrayString(split) << std::endl; */
-    limit_info.mass_stop = lt::string_to_double(split.at(4));
-    limit_info.mass_lsp  = lt::string_to_double(split.at(5));
+    if (lt::string_contains(raw_file_name, "_br"))
+    {
+        limit_info.mass_stop = lt::string_to_double(split.at(5));
+        limit_info.mass_lsp  = lt::string_to_double(split.at(6));
+    }
+    else
+    {
+        limit_info.mass_stop = lt::string_to_double(split.at(4));
+        limit_info.mass_lsp  = lt::string_to_double(split.at(5));
+    }
     limit_info.xsec      = rt::GetBinContent2D(&h_xsec, limit_info.mass_stop, limit_info.mass_lsp);
     limit_info.xsec_err  = rt::GetBinError2D  (&h_xsec, limit_info.mass_stop, limit_info.mass_lsp);
 
@@ -268,7 +276,7 @@ void CreateLimitResultsTree
         // ------------------------------------------------------------- //
 
         // get best SR histogram 
-        const TH2F h_sr_best(*rt::GetHistFromRootFile<TH2F>(Form("data/%s_onelep_bdt_AN-2013-89.root", sample_name.c_str()), "hbest"));
+        const TH2F h_sr_best(*rt::GetHistFromRootFile<TH2F>("data/t2tt_onelep_bdt_AN-2013-89.root", "hbest"));
 
         // theoretical xsec
         const TH2F h_xsec(*rt::GetHistFromRootFile<TH2F>("data/stop_xsec_2D.root", "h_stop_xsec_2D"));
@@ -332,7 +340,15 @@ void CreateLimitResultsTree
 
                 // set the values to the limit_info object
                 SetLimitInfo(limit_info, h_xsec, limit_file_name);
-                //cout << limit_info << endl;
+/*                 if (lt::is_equal(mass_stop, 400.0) && lt::is_equal(mass_lsp, 100.0)) */
+/*                 { */
+/*                     cout << limit_info << endl; */
+/*                 } */
+                if ((Analysis::razor or Analysis::combined) and lt::is_equal(mass_lsp, 0.0f))
+                {
+                    cout << "skipping mass_lsp = 0 point" << endl;
+                    continue; 
+                }
 
                 // fill the tree
                 tree.Fill();
@@ -355,17 +371,18 @@ void CreateLimitResultsTree
 void CreateLimitResultsTrees()
 {
     // hard coded meta-data
-/*     const std::string limit_results_path = "/hadoop/cms/store/user/rwkelley/limits/stopcombo/v0/asymptotic/t2tt"; */
-/*     const std::string limit_results_path = "output/limits/v0/asymptotic/t2tt"; */
-/*     const std::string output_file_stem   = "output/limit_trees/v0/asymptotic/t2tt/limit_result_ntuple"; */
-
-/*     const std::string limit_results_path = "/hadoop/cms/store/user/rwkelley/limits/stopcombo/v0/hybrid/t2tt"; */
-    const std::string limit_results_path = "output/limits/v0/hybrid/t2tt";
-    const std::string output_file_stem   = "output/limit_trees/v0/hybrid/t2tt/limit_result_ntuple";
+    const std::string sample_name        = "t2tb_br0p5";
+/*     const std::string sample_name        = "t2tt"; */
+/*     const std::string method             = "hybrid"; */
+    const std::string method             = "asymptotic";
+    const std::string label              = "v0";
+/*     const std::string limit_results_path = Form("/hadoop/cms/store/user/rwkelley/limits/stopcombo/%s/%s/%x", label.c_str(), method.c_str(), sample_name.c_str()); */
+    const std::string limit_results_path = Form("output/limits/%s/%s/%s"                         , label.c_str(), method.c_str(), sample_name.c_str());
+    const std::string output_file_stem   = Form("output/limit_trees/%s/%s/%s/limit_result_ntuple", label.c_str(), method.c_str(), sample_name.c_str());
 
     // create the limit ntuples
-    CreateLimitResultsTree("t2tt", Analysis::razor   , limit_results_path, output_file_stem + "_razor.root"   ); 
-    CreateLimitResultsTree("t2tt", Analysis::onelep  , limit_results_path, output_file_stem + "_onelep.root"  ); 
-    CreateLimitResultsTree("t2tt", Analysis::combined, limit_results_path, output_file_stem + "_combined.root"); 
+    CreateLimitResultsTree(sample_name, Analysis::razor   , limit_results_path, output_file_stem + "_razor.root"   ); 
+    CreateLimitResultsTree(sample_name, Analysis::onelep  , limit_results_path, output_file_stem + "_onelep.root"  ); 
+    CreateLimitResultsTree(sample_name, Analysis::combined, limit_results_path, output_file_stem + "_combined.root"); 
 }
 
