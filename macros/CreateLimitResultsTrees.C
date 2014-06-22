@@ -373,8 +373,9 @@ void CreateLimitResultsTrees()
     // hard coded meta-data
     const std::string sample_name        = "t2tb_br0p5";
 /*     const std::string sample_name        = "t2tt"; */
-/*     const std::string method             = "hybrid"; */
-    const std::string method             = "asymptotic";
+/*     const std::string sample_name        = "t2bw"; */
+    const std::string method             = "hybrid";
+/*     const std::string method             = "asymptotic"; */
     const std::string label              = "v0";
 /*     const std::string limit_results_path = Form("/hadoop/cms/store/user/rwkelley/limits/stopcombo/%s/%s/%x", label.c_str(), method.c_str(), sample_name.c_str()); */
     const std::string limit_results_path = Form("output/limits/%s/%s/%s"                         , label.c_str(), method.c_str(), sample_name.c_str());

@@ -1,42 +1,47 @@
 #!/bin/bash
 
-# model="t2tt"
-model="t2tb_br0p5"
+function make_sms_plots
+{
+    model=$1
+    model_official=$2
+    method=$3
+    label=$4
+    method_upper=`echo $method | awk '{print toupper($0)}'` 
+    result_dir="$HOME/Dropbox/Public/stop/plots/results/${model}"
+    
+    # test inputs
+    echo "model          = " $model
+    echo "model_official = " $model_official
+    echo "method         = " $method
+    echo "method_upper   = " $method_upper
+    echo "label          = " $label
+    echo "result_dir     = " $result_dir
+    
+    # create the histograms and TGraphs
+    python scripts/stop_create_contour_hists.py --model $model --analysis razor    --method $method
+    python scripts/stop_create_contour_hists.py --model $model --analysis onelep   --method $method
+    python scripts/stop_create_contour_hists.py --model $model --analysis combined --method $method
+    
+    # polished SMS plots
+    python $CMSSW_BASE/src/AnalysisTools/PlotsSMS/python/makeSMSplots.py pset/${model_official}_SUS13004_${method_upper}.cfg plots/limits/${label}/${method}/${model}/razor/${model_official}_RAZOR_${method_upper}_ 
+    python $CMSSW_BASE/src/AnalysisTools/PlotsSMS/python/makeSMSplots.py pset/${model_official}_SUS13011_${method_upper}.cfg plots/limits/${label}/${method}/${model}/onelep/${model_official}_ONELEP_${method_upper}_ 
+    python $CMSSW_BASE/src/AnalysisTools/PlotsSMS/python/makeSMSplots.py pset/${model_official}_SUS14125_${method_upper}.cfg plots/limits/${label}/${method}/${model}/combined/${model_official}_COMBINED_${method_upper}_ 
+    
+    # copy to drop box
+    mkdir -p ${result_dir}
+    cp $CMSSW_BASE/src/AnalysisTools/RootTools/tools/index.php                                          ${result_dir}/.
+    cp plots/limits/${label}/${method}/${model}/razor/${model_official}_RAZOR_${method_upper}_*.*       ${result_dir}/.
+    cp plots/limits/${label}/${method}/${model}/onelep/${model_official}_ONELEP_${method_upper}_*.*     ${result_dir}/.
+    cp plots/limits/${label}/${method}/${model}/combined/${model_official}_COMBINED_${method_upper}_*.* ${result_dir}/.
+    ls -1 ${result_dir}
+}
 
-# create the histograms and TGraphs
-python scripts/stop_create_contour_hists.py --model $model --analysis razor    --method asymptotic
-python scripts/stop_create_contour_hists.py --model $model --analysis onelep   --method asymptotic
-python scripts/stop_create_contour_hists.py --model $model --analysis combined --method asymptotic
-python scripts/stop_create_contour_hists.py --model $model --analysis razor    --method hybrid
-python scripts/stop_create_contour_hists.py --model $model --analysis onelep   --method hybrid
-python scripts/stop_create_contour_hists.py --model $model --analysis combined --method hybrid
+label="v0"
 
-# polished SMS plots
-# python $CMSSW_BASE/src/AnalysisTools/PlotsSMS/python/makeSMSplots.py pset/T2tt_SUS13004_ASYMPTOTIC.cfg plots/limits/v0/asymptotic/t2tt/razor/T2tt_RAZOR_ASYMPTOTIC_ 
-# python $CMSSW_BASE/src/AnalysisTools/PlotsSMS/python/makeSMSplots.py pset/T2tt_SUS13011_ASYMPTOTIC.cfg plots/limits/v0/asymptotic/t2tt/onelep/T2tt_ONELEP_ASYMPTOTIC_ 
-# python $CMSSW_BASE/src/AnalysisTools/PlotsSMS/python/makeSMSplots.py pset/T2tt_SUS14125_ASYMPTOTIC.cfg plots/limits/v0/asymptotic/t2tt/combined/T2tt_COMBINED_ASYMPTOTIC_ 
-# 
-# python $CMSSW_BASE/src/AnalysisTools/PlotsSMS/python/makeSMSplots.py pset/T2tt_SUS13004_HYBRID.cfg plots/limits/v0/hybrid/t2tt/razor/T2tt_RAZOR_HYBRID_ 
-# python $CMSSW_BASE/src/AnalysisTools/PlotsSMS/python/makeSMSplots.py pset/T2tt_SUS13011_HYBRID.cfg plots/limits/v0/hybrid/t2tt/onelep/T2tt_ONELEP_HYBRID_ 
-# python $CMSSW_BASE/src/AnalysisTools/PlotsSMS/python/makeSMSplots.py pset/T2tt_SUS14125_HYBRID.cfg plots/limits/v0/hybrid/t2tt/combined/T2tt_COMBINED_HYBRID_ 
+make_sms_plots "t2tt"       "T2tt" "asymptotic" $label
+make_sms_plots "t2tb_br0p5" "T2tb" "asymptotic" $label
+make_sms_plots "t2bw"       "T2bw" "asymptotic" $label
 
-# copy to drop box
-# cp $CMSSW_BASE/src/AnalysisTools/RootTools/tools/index.php                  ~/Dropbox/Public/stop/plots/results/
-# cp plots/limits/v0/asymptotic/t2tt/combined/T2tt_COMBINED_ASYMPTOTIC_BAND.* ~/Dropbox/Public/stop/plots/results/
-# cp plots/limits/v0/asymptotic/t2tt/combined/T2tt_COMBINED_ASYMPTOTIC_CONT.* ~/Dropbox/Public/stop/plots/results/
-# cp plots/limits/v0/asymptotic/t2tt/combined/T2tt_COMBINED_ASYMPTOTIC_XSEC.* ~/Dropbox/Public/stop/plots/results/
-# cp plots/limits/v0/asymptotic/t2tt/onelep/T2tt_ONELEP_ASYMPTOTIC_BAND.*     ~/Dropbox/Public/stop/plots/results/
-# cp plots/limits/v0/asymptotic/t2tt/onelep/T2tt_ONELEP_ASYMPTOTIC_CONT.*     ~/Dropbox/Public/stop/plots/results/
-# cp plots/limits/v0/asymptotic/t2tt/onelep/T2tt_ONELEP_ASYMPTOTIC_XSEC.*     ~/Dropbox/Public/stop/plots/results/
-# cp plots/limits/v0/asymptotic/t2tt/razor/T2tt_RAZOR_ASYMPTOTIC_BAND.*       ~/Dropbox/Public/stop/plots/results/
-# cp plots/limits/v0/asymptotic/t2tt/razor/T2tt_RAZOR_ASYMPTOTIC_CONT.*       ~/Dropbox/Public/stop/Plots/results/
-# cp plots/limits/v0/asymptotic/t2tt/razor/T2tt_RAZOR_ASYMPTOTIC_XSEC.*       ~/Dropbox/Public/stop/Plots/results/
-# cp plots/limits/v0/hybrid/t2tt/combined/T2tt_COMBINED_HYBRID_BAND.*         ~/Dropbox/Public/stop/Plots/results/
-# cp plots/limits/v0/hybrid/t2tt/combined/T2tt_COMBINED_HYBRID_CONT.*         ~/Dropbox/Public/stop/Plots/results/
-# cp plots/limits/v0/hybrid/t2tt/combined/T2tt_COMBINED_HYBRID_XSEC.*         ~/Dropbox/Public/stop/Plots/results/
-# cp plots/limits/v0/hybrid/t2tt/onelep/T2tt_ONELEP_HYBRID_BAND.*             ~/Dropbox/Public/stop/Plots/results/
-# cp plots/limits/v0/hybrid/t2tt/onelep/T2tt_ONELEP_HYBRID_CONT.*             ~/Dropbox/Public/stop/Plots/results/
-# cp plots/limits/v0/hybrid/t2tt/onelep/T2tt_ONELEP_HYBRID_XSEC.*             ~/Dropbox/Public/stop/Plots/results/
-# cp plots/limits/v0/hybrid/t2tt/razor/T2tt_RAZOR_HYBRID_BAND.*               ~/Dropbox/Public/stop/Plots/results/
-# cp plots/limits/v0/hybrid/t2tt/razor/T2tt_RAZOR_HYBRID_CONT.*               ~/Dropbox/Public/stop/Plots/results/
-# cp plots/limits/v0/hybrid/t2tt/razor/T2tt_RAZOR_HYBRID_XSEC.*               ~/Dropbox/Public/stop/Plots/results/
+make_sms_plots "t2tt"       "T2tt" "hybrid"     $label
+make_sms_plots "t2tb_br0p5" "T2tb" "hybrid"     $label
+make_sms_plots "t2bw"       "T2bw" "hybrid"     $label

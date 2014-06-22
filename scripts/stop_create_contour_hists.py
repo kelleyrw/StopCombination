@@ -118,6 +118,24 @@ def GetModelInfo(model):
             epsilon   = 5
         )
         return model_info 
+    elif model.lower() == "t2bw":
+        model_info = ModelInfo( 
+			name      = "T2bW",
+            xtitle    = "m_{#tilde{t}} (GeV)",
+            xmin      = 150.0-12.5, 
+            xmax      = 925.0-12.5, 
+            ytitle    = "m_{#tilde{#chi}^{0}} (GeV)",
+            ymin      = 0.0-12.5, 
+            ymax      = 725.0-12.5, 
+            ztitle    = "95% C.L. upper limit on cross section (pb)",
+            zmin      = 0.001, 
+            zmax      = 10, 
+            bin_width = 25.0, 
+            offset    = 175.0+25.0, # m_top + bin_width
+            smoothing = 20, 
+            epsilon   = 5
+        )
+        return model_info 
     else:
         print "[stop_create_contour_hists] Error: %s not supported" % model
         sys.exit()  
@@ -434,7 +452,7 @@ def main():
         (g_excl_xsec_exp_m1_1, g_excl_xsec_exp_m1_2) = ExtractContour("h_excl_xsec_exp_m1", "Expected-1#sigma_{exp} %s"% hist_title_stem, mi, h_ul_xsec_exp_m1_smooth, h_xsec      )
     
         # pull g1 from Ben's original result
-        if (options.orig_curve_file and mi.name == "t2tt" and (analysis == "onelep" or analysis == "combined")):
+        if (options.orig_curve_file and mi.name.lower() == "t2tt" and (analysis == "onelep" or analysis == "combined")):
             orig_an_file = root.TFile.Open(options.orig_curve_file)
             g_excl_xsec_obs_1    = GetContourTGraph(orig_an_file.Get("hR_obs_smallDM"  ))
             g_excl_xsec_obs_p1_1 = GetContourTGraph(orig_an_file.Get("hR_obsp1_smallDM"))
