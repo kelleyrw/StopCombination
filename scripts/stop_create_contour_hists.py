@@ -44,7 +44,7 @@ class ModelInfo:
 
     # construct:
     def __init__(self, 
-			name,
+            name,
             xtitle,
             xmin,
             xmax,
@@ -84,7 +84,7 @@ class ModelInfo:
 def GetModelInfo(model):
     if model.lower() == "t2tt":
         model_info = ModelInfo( 
-			name      = "T2tt",
+            name      = "T2tt",
             xtitle    = "m_{#tilde{t}} (GeV)",
             xmin      = 150.0-12.5, 
             xmax      = 925.0-12.5, 
@@ -102,7 +102,7 @@ def GetModelInfo(model):
         return model_info 
     elif model.lower() == "t2tb_br0p5":
         model_info = ModelInfo( 
-			name      = "T2tb",
+            name      = "T2tb",
             xtitle    = "m_{#tilde{t}} (GeV)",
             xmin      = 150.0-12.5, 
             xmax      = 925.0-12.5, 
@@ -120,7 +120,7 @@ def GetModelInfo(model):
         return model_info 
     elif model.lower() == "t2bw":
         model_info = ModelInfo( 
-			name      = "T2bW",
+            name      = "T2bW",
             xtitle    = "m_{#tilde{t}} (GeV)",
             xmin      = 150.0-12.5, 
             xmax      = 925.0-12.5, 
@@ -371,6 +371,9 @@ def main():
         xsec_file_name = options.xsec_file_name
         label          = options.label         
         method         = options.method        
+
+        # turn off graphics
+        root.gROOT.SetBatch(True)
 
         # check inputs
         tree_file = "output/limit_trees/%s/%s/%s/limit_result_ntuple_%s.root" % (label, method, model, analysis)

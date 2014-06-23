@@ -305,7 +305,7 @@ void CreateLimitResultsTree
 
         for (int xbin = 1; xbin < h_bins.GetNbinsX(); ++xbin)
         {
-            for (int ybin = 1; ybin < h_bins.GetNbinsX(); ++ybin)
+            for (int ybin = 1; ybin < h_bins.GetNbinsY(); ++ybin)
             {
                 // get the mass for that bin
                 const float mass_stop = h_bins.GetXaxis()->GetBinCenter(xbin);
