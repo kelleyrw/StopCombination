@@ -53,7 +53,7 @@ void ExtractBestBR(rt::TH1Container& hc, const TH2& h_100, const TH2& h_050, con
     // "best" BR hist
     const std::string br_hist_name = lt::string_replace_all(h_100.GetName(), "xsec", "best_br");
     TH2* const h_br = dynamic_cast<TH2*>(h_100.Clone(br_hist_name.c_str()));
-    h_br->SetTitle("Best branching ratio to top");
+    h_br->SetTitle("CMS, L = 19.5 fb^{-1}, #sqrt{s} = 8 TeV");
     h_br->Reset();
 
     // loop over bins and fill "best" hist
@@ -120,7 +120,6 @@ void ExtractBestUL(rt::TH1Container& hc, const TH2& h_br, const TH2& h_100, cons
     }
 
     // smooth
-    h_ul->Smooth(1);
     hc.Add(h_ul);
     return;
 }
@@ -304,7 +303,9 @@ std::pair<TH2* const, TH2* const> Split2DHist(TH2& hist)
 std::pair<TGraph* const, TGraph* const> ExtractContour(const std::string& hist_name, const std::string& hist_title, TH2& h_ul, TH2& h_xsec)
 {
     // subtract to determine exclusions
-    TH2* const h_excl = static_cast<TH2*>(rt::DivideHists(&h_ul, &h_xsec, hist_name, hist_title));
+    TH2* const h_ul_smooth = dynamic_cast<TH2*>(h_ul.Clone());
+    h_ul_smooth->Smooth(1);
+    TH2* const h_excl = static_cast<TH2*>(rt::DivideHists(h_ul_smooth, &h_xsec, hist_name, hist_title));
 
     // split the histogram into regions
     std::pair<TH2* const, TH2* const> h_excl_pair = Split2DHist(*h_excl);
