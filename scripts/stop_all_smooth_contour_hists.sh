@@ -17,22 +17,22 @@ function make_sms_plots
     echo "result_dir     = " $result_dir
     
     # create the histograms and TGraphs
-    python scripts/stop_create_contour_hists.py --sample $sample --analysis razor    --method $method
-    python scripts/stop_create_contour_hists.py --sample $sample --analysis onelep   --method $method
-    python scripts/stop_create_contour_hists.py --sample $sample --analysis combined --method $method
+    echo python scripts/stop_create_contour_hists.py --sample $sample --analysis razor    --method $method
+    echo python scripts/stop_create_contour_hists.py --sample $sample --analysis onelep   --method $method
+    echo python scripts/stop_create_contour_hists.py --sample $sample --analysis combined --method $method
     
     # polished SMS plots
-    python $CMSSW_BASE/src/AnalysisTools/PlotsSMS/python/makeSMSplots.py pset/${sample_upper}_SUS13004_${method_upper}.cfg plots/limits/${label}/${method}/${sample}/razor/${sample_upper}_RAZOR_${method_upper}_ 
-    python $CMSSW_BASE/src/AnalysisTools/PlotsSMS/python/makeSMSplots.py pset/${sample_upper}_SUS13011_${method_upper}.cfg plots/limits/${label}/${method}/${sample}/onelep/${sample_upper}_ONELEP_${method_upper}_ 
-    python $CMSSW_BASE/src/AnalysisTools/PlotsSMS/python/makeSMSplots.py pset/${sample_upper}_SUS14125_${method_upper}.cfg plots/limits/${label}/${method}/${sample}/combined/${sample_upper}_COMBINED_${method_upper}_ 
+#     python $CMSSW_BASE/src/AnalysisTools/PlotsSMS/python/makeSMSplots.py pset/${sample_upper}_SUS13004_${method_upper}.cfg plots/limits/${label}/${method}/${sample}/razor/${sample_upper}_RAZOR_${method_upper}_ 
+#     python $CMSSW_BASE/src/AnalysisTools/PlotsSMS/python/makeSMSplots.py pset/${sample_upper}_SUS13011_${method_upper}.cfg plots/limits/${label}/${method}/${sample}/onelep/${sample_upper}_ONELEP_${method_upper}_ 
+#     python $CMSSW_BASE/src/AnalysisTools/PlotsSMS/python/makeSMSplots.py pset/${sample_upper}_SUS14125_${method_upper}.cfg plots/limits/${label}/${method}/${sample}/combined/${sample_upper}_COMBINED_${method_upper}_ 
     
     # copy to drop box
-    mkdir -p ${result_dir}
-    cp $CMSSW_BASE/src/AnalysisTools/RootTools/tools/index.php                                         ${result_dir}/.
-    cp plots/limits/${label}/${method}/${sample}/razor/${sample_upper}_RAZOR_${method_upper}_*.*       ${result_dir}/.
-    cp plots/limits/${label}/${method}/${sample}/onelep/${sample_upper}_ONELEP_${method_upper}_*.*     ${result_dir}/.
-    cp plots/limits/${label}/${method}/${sample}/combined/${sample_upper}_COMBINED_${method_upper}_*.* ${result_dir}/.
-    ls -1 ${result_dir}
+#     mkdir -p ${result_dir}
+#     cp $CMSSW_BASE/src/AnalysisTools/RootTools/tools/index.php                                         ${result_dir}/.
+#     cp plots/limits/${label}/${method}/${sample}/razor/${sample_upper}_RAZOR_${method_upper}_*.*       ${result_dir}/.
+#     cp plots/limits/${label}/${method}/${sample}/onelep/${sample_upper}_ONELEP_${method_upper}_*.*     ${result_dir}/.
+#     cp plots/limits/${label}/${method}/${sample}/combined/${sample_upper}_COMBINED_${method_upper}_*.* ${result_dir}/.
+#     ls -1 ${result_dir}
 }
 
 label="v0"
@@ -50,5 +50,5 @@ make_sms_plots "t2tb_br0p5" "hybrid" $label
 make_sms_plots "t2bw"       "hybrid" $label
 
 # BR indepedent 
-root -b -q -l "macros/CreateBRIndependentExcl.C+"
-python $CMSSW_BASE/src/AnalysisTools/PlotsSMS/python/makeSMSplots.py pset/T2bri_SUS14125_HYBRID.cfg plots/limits/${label}/hybrid/t2bri/combined/T2bri_COMBINED_HYBRID_ 
+# root -b -q -l "macros/CreateBRIndependentExcl.C+"
+# python $CMSSW_BASE/src/AnalysisTools/PlotsSMS/python/makeSMSplots.py pset/T2bri_SUS14125_HYBRID.cfg plots/limits/${label}/hybrid/t2bri/combined/T2bri_COMBINED_HYBRID_ 
