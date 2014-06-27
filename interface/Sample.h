@@ -16,7 +16,9 @@ namespace stop
             enum value_type
             {
                 t2tt,
+                t2tb_br0p3,
                 t2tb_br0p5,
+                t2tb_br0p7,
                 t2bw,
                 static_size
             };
@@ -25,6 +27,7 @@ namespace stop
             struct Info
             {
                 std::string name;           // short name
+                std::string razor_name;     // the name Javier used
                 std::string title;          // ROOT TLatex title
                 std::string latex;          // real latex title
                 std::string ntuple_path;    // logical name for path

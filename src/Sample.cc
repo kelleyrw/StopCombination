@@ -14,6 +14,8 @@ namespace stop
         {
             // name
             "t2tt", 
+            // razor name
+            "T2tt", 
             // title
             "pp #rightarrow #tilde{t}  #tilde{t}*, #tilde{t} #rightarrow t #tilde{#chi}_{1}^{0}",
             // latex
@@ -32,7 +34,30 @@ namespace stop
         },
         {
             // name
+            "t2tb_br0p7", 
+            // razor name
+            "T2tb_70_30", 
+            // title
+            "pp #rightarrow #tilde{t}  #tilde{t}*, #tilde{t} #rightarrow t #tilde{#chi}_{1}^{0}/b #tilde{#chi}_{1}^{#pm}",
+            // latex
+            "pp \\rightarrow \\tilde{t}\\tilde{t}, \\tilde{t} \\rightarrow t \\tilde{\\chi}_{1}^{0}/b \\tilde{\\chi}_{1}^{\\pm}",
+            // ntuple_path
+            "/nfs-7/userdata/rwkelley/babies/stop/cms2V05-03-26_stoplooperV00-02-24/T2tt_mad/minibaby_V00-03-06/Skim_4jets_MET100_MT120/merged*root,"
+            "/nfs-7/userdata/rwkelley/babies/stop/cms2V05-03-26_stoplooperV00-02-25/T2tt_mad/minibabies_V00-03-12/Skim_4jets_MET100_MT120/merged*root",
+            // ngen_file
+            "/nfs-7/userdata/rwkelley/babies/stop/cms2V05-03-26_stoplooperV00-02-25/T2tt_mad/minibabies_V00-03-12/Skim_4jets_MET100_MT120/myMassDB_T2tt_combined_lowmass_25GeVbins.root",
+            // ngen_hist_name
+            "masses",
+            // branching ratio,
+            0.7,
+            // Sample
+            Sample::t2tb_br0p7
+        },
+        {
+            // name
             "t2tb_br0p5", 
+            // razor name
+            "T2tb", 
             // title
             "pp #rightarrow #tilde{t}  #tilde{t}*, #tilde{t} #rightarrow t #tilde{#chi}_{1}^{0}/b #tilde{#chi}_{1}^{#pm}",
             // latex
@@ -51,7 +76,30 @@ namespace stop
         },
         {
             // name
+            "t2tb_br0p3", 
+            // razor name
+            "T2tb_30_70", 
+            // title
+            "pp #rightarrow #tilde{t}  #tilde{t}*, #tilde{t} #rightarrow t #tilde{#chi}_{1}^{0}/b #tilde{#chi}_{1}^{#pm}",
+            // latex
+            "pp \\rightarrow \\tilde{t}\\tilde{t}, \\tilde{t} \\rightarrow t \\tilde{\\chi}_{1}^{0}/b \\tilde{\\chi}_{1}^{\\pm}",
+            // ntuple_path
+            "/nfs-7/userdata/rwkelley/babies/stop/cms2V05-03-26_stoplooperV00-02-24/T2tt_mad/minibaby_V00-03-06/Skim_4jets_MET100_MT120/merged*root,"
+            "/nfs-7/userdata/rwkelley/babies/stop/cms2V05-03-26_stoplooperV00-02-25/T2tt_mad/minibabies_V00-03-12/Skim_4jets_MET100_MT120/merged*root",
+            // ngen_file
+            "/nfs-7/userdata/rwkelley/babies/stop/cms2V05-03-26_stoplooperV00-02-25/T2tt_mad/minibabies_V00-03-12/Skim_4jets_MET100_MT120/myMassDB_T2tt_combined_lowmass_25GeVbins.root",
+            // ngen_hist_name
+            "masses",
+            // branching ratio,
+            0.3,
+            // Sample
+            Sample::t2tb_br0p3
+        },
+        {
+            // name
             "t2bw", 
+            // razor name
+            "T2bw", 
             // title
             "pp #rightarrow #tilde{t}  #tilde{t}*, #tilde{t} #rightarrow b #tilde{#chi}_{1}^{#pm}",
             // latex

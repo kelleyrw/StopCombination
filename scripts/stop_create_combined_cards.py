@@ -56,11 +56,11 @@ def CheckOptions():
 # get the best SR 
 # ------------------#
 
-from ROOT import TFile, TH1
+import ROOT
 
 def GetBestSRHist():
 	# get the tree
-	file = TFile.Open(options.sr_filename)
+	file = ROOT.TFile.Open(options.sr_filename)
 	if file.IsZombie():
 		raise Exception("[stop_create_combined_card.py.py] file is zombie")
 	hist = file.Get(options.sr_histname)
@@ -118,10 +118,14 @@ def main():
 		hist_best_sr = GetBestSRHist()
 
 		# sample
-		sample = options.sample.lower()
-		sample_razor = sample[0].upper() + sample[1:]
-		if "t2tb" in sample:
-			sample_razor = "T2tb"
+		sample_info  = ROOT.stop.GetSampleInfo(options.sample.lower())
+		sample       = sample_info.name
+		sample_razor = sample_info.razor_name
+# 		sample = options.sample.lower()
+# 		sample_razor = rt.stop.GetSampleInfo(rt.dy.Sample.t2b
+# 		sample_razor = sample[0].upper() + sample[1:]
+# 		if "t2tb" in sample:
+# 			sample_razor = "T2tb"
 
 
 		# make combined dir if doens't exist

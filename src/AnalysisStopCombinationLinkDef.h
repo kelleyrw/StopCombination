@@ -11,6 +11,7 @@
 
 #pragma link C++ namespace stop;
 #pragma link C++ class stop::Sample+;
+#pragma link C++ class stop::Sample::Info+;
 #pragma link C++ class stop::SignalRegion+;
 #pragma link C++ class stop::Yield+;
 #pragma link C++ class stop::Result+;
@@ -19,6 +20,7 @@
 #pragma link C++ enum stop::SignalRegion::value_type;
 #pragma link C++ enum Direction::value_type;
 #pragma link C++ typedef stop::ResultArray;
+#pragma link C++ function stop::GetSampleInfo;
 #pragma link C++ function stop::GetResultArray;
 #pragma link C++ function stop::GetResult;
 #pragma link C++ function stop::PrintFormattedXSecHist;
