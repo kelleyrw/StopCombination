@@ -13,7 +13,7 @@ observation  2589.0          728.0           8.0
 bin                                razor_MultiJet  razor_MultiJet  razor_MultiJet  razor_MultiJet  razor_Jet2b     razor_Jet2b     razor_Jet2b     onelep          onelep          onelep          onelep          onelep        
 process                            MultiJet_T2bw   MultiJet_TTj3b  MultiJet_TTj1b  MultiJet_TTj2b  Jet2b_T2bw      Jet2b_TTj3b     Jet2b_TTj2b     signal          rare            wjets           ttslo           ttdil         
 process                            -2              1               2               3               -1              4               5               0               6               7               8               9             
-rate                               24.1470         85.0150         1754.9450       748.9590        56.4870         24.8270         701.8940        0.0002767       2.6000          2.2000          3.6000          4.6000        
+rate                               24.1460         85.0150         1754.9450       748.9590        56.4850         24.8270         701.8940        0.0002767       2.6000          2.2000          3.6000          4.6000        
 ----------------------------------------------------------------------------------------------------------------------------------
 Btag                    shape?     1.0             -               -               -               1.0             -               -               0.992/1.012     -               -               -               -             
 Isr                     shape?     1.0             -               -               -               1.0             -               -               1.081           -               -               -               -             

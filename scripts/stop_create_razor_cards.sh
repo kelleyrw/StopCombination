@@ -1,9 +1,9 @@
 #!/bin/bash
 
-sample="t2tb_br0p3"
-sample_full="T2tb_30_70"
-# sample="t2bw"
-# sample_full="T2bw"
+# sample="t2tb_br0p3"
+# sample_full="T2tb_30_70"
+sample="t2bw"
+sample_full="T2bw"
 # input_path="/Users/rwk7t/Development/CMSSW_6_1_2_Analysis/src/StopAnalysis/CombinedExclusions/cards/from_javier_17jun2014/${sample_full}"
 input_path="$CMSSW_BASE/src/Analysis/StopCombination/cards/$sample/razor"
 output_path="$CMSSW_BASE/src/Analysis/StopCombination/cards/$sample/razor"

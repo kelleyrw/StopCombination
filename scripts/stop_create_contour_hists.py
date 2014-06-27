@@ -455,20 +455,26 @@ def main():
         (g_excl_xsec_exp_m1_1, g_excl_xsec_exp_m1_2) = ExtractContour("h_excl_xsec_exp_m1", "Expected-1#sigma_{exp} %s"% hist_title_stem, mi, h_ul_xsec_exp_m1_smooth, h_xsec      )
     
         # pull g1 from Ben's original result
-        if (options.orig_curve_file and mi.name.lower() == "t2tt" and (analysis == "onelep" or analysis == "combined")):
-            orig_an_file = root.TFile.Open(options.orig_curve_file)
-            g_excl_xsec_obs_1    = GetContourTGraph(orig_an_file.Get("hR_obs_smallDM"  ))
-            g_excl_xsec_obs_p1_1 = GetContourTGraph(orig_an_file.Get("hR_obsp1_smallDM"))
-            g_excl_xsec_obs_m1_1 = GetContourTGraph(orig_an_file.Get("hR_obsm1_smallDM"))
-            g_excl_xsec_exp_1    = GetContourTGraph(orig_an_file.Get("hR_exp_smallDM"  ))
-            g_excl_xsec_exp_p1_1 = GetContourTGraph(orig_an_file.Get("hR_expp1_smallDM"))
-            g_excl_xsec_exp_m1_1 = GetContourTGraph(orig_an_file.Get("hR_expm1_smallDM"))
-            g_excl_xsec_obs_1    .SetName("g_excl_xsec_obs_1")
-            g_excl_xsec_obs_p1_1 .SetName("g_excl_xsec_obs_p1_1")
-            g_excl_xsec_obs_m1_1 .SetName("g_excl_xsec_obs_m1_1")
-            g_excl_xsec_exp_1    .SetName("g_excl_xsec_exp_1")
-            g_excl_xsec_exp_p1_1 .SetName("g_excl_xsec_exp_p1_1")
-            g_excl_xsec_exp_m1_1 .SetName("g_excl_xsec_exp_m1_1")
+        if (options.orig_curve_file and (analysis == "onelep" or analysis == "combined")):
+        	if   (mi.name.lower() == "t2tt"      ): hist_stem = "hR"
+        	elif (mi.name.lower() == "t2tb_br0p7"): hist_stem = "hR_BF70"
+        	elif (mi.name.lower() == "t2tb_br0p7"): hist_stem = "hR_BF50"
+        	elif (mi.name.lower() == "t2tb_br0p7"): hist_stem = "hR_BF30"
+			else: hist_stem = ""
+			if (hist_stem != ""):
+            	orig_an_file = root.TFile.Open(options.orig_curve_file)
+            	g_excl_xsec_obs_1    = GetContourTGraph(orig_an_file.Get(hist_stem+"_obs_smallDM"  ))
+            	g_excl_xsec_obs_p1_1 = GetContourTGraph(orig_an_file.Get(hist_stem+"_obsp1_smallDM"))
+            	g_excl_xsec_obs_m1_1 = GetContourTGraph(orig_an_file.Get(hist_stem+"_obsm1_smallDM"))
+            	g_excl_xsec_exp_1    = GetContourTGraph(orig_an_file.Get(hist_stem+"_exp_smallDM"  ))
+            	g_excl_xsec_exp_p1_1 = GetContourTGraph(orig_an_file.Get(hist_stem+"_expp1_smallDM"))
+            	g_excl_xsec_exp_m1_1 = GetContourTGraph(orig_an_file.Get(hist_stem+"_expm1_smallDM"))
+            	g_excl_xsec_obs_1    .SetName("g_excl_xsec_obs_1")
+            	g_excl_xsec_obs_p1_1 .SetName("g_excl_xsec_obs_p1_1")
+            	g_excl_xsec_obs_m1_1 .SetName("g_excl_xsec_obs_m1_1")
+            	g_excl_xsec_exp_1    .SetName("g_excl_xsec_exp_1")
+            	g_excl_xsec_exp_p1_1 .SetName("g_excl_xsec_exp_p1_1")
+            	g_excl_xsec_exp_m1_1 .SetName("g_excl_xsec_exp_m1_1")
         
         g_excl_xsec_obs    = CombineTGraphs(g_excl_xsec_obs_1   , g_excl_xsec_obs_2   , "g_excl_xsec_obs"   , "g_excl_xsec_obs"   )
         g_excl_xsec_obs_p1 = CombineTGraphs(g_excl_xsec_obs_p1_1, g_excl_xsec_obs_p1_2, "g_excl_xsec_obs_p1", "g_excl_xsec_obs_p1")
