@@ -121,12 +121,6 @@ def main():
 		sample_info  = ROOT.stop.GetSampleInfo(options.sample.lower())
 		sample       = sample_info.name
 		sample_razor = sample_info.razor_name
-# 		sample = options.sample.lower()
-# 		sample_razor = rt.stop.GetSampleInfo(rt.dy.Sample.t2b
-# 		sample_razor = sample[0].upper() + sample[1:]
-# 		if "t2tb" in sample:
-# 			sample_razor = "T2tb"
-
 
 		# make combined dir if doens't exist
 		if (not os.path.exists(options.combined_path)):

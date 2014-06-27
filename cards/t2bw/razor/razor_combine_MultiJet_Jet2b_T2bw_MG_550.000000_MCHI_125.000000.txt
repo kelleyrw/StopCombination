@@ -12,7 +12,7 @@ observation  2589.0    728.0
 bin                               MultiJet        MultiJet        MultiJet        MultiJet        Jet2b           Jet2b           Jet2b         
 process                           MultiJet_T2bw   MultiJet_TTj3b  MultiJet_TTj1b  MultiJet_TTj2b  Jet2b_T2bw      Jet2b_TTj3b     Jet2b_TTj2b   
 process                           -1              1               2               3               0               4               5             
-rate                              42.8630         85.0150         1754.9450       748.9590        115.6540        24.8270         701.8940      
+rate                              42.8640         85.0150         1754.9450       748.9590        115.6550        24.8270         701.8940      
 ----------------------------------------------------------------------------------------------------------------------------------
 Btag                    shape     1.0             -               -               -               1.0             -               -             
 Isr                     shape     1.0             -               -               -               1.0             -               -             

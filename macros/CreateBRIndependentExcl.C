@@ -41,14 +41,31 @@ bool operator < (const UpperLimit& l1, const UpperLimit& l2)
     return l1.value < l2.value;
 }
 
-UpperLimit MaxUpperLimit(const UpperLimit& l1, const UpperLimit& l2, const UpperLimit& l3)
+UpperLimit MaxUpperLimit
+(
+    const UpperLimit& l1,
+    const UpperLimit& l2,
+    const UpperLimit& l3,
+    const UpperLimit& l4,
+    const UpperLimit& l5
+)
 {
     UpperLimit l_max = std::max(l1, l2);
     l_max = std::max(l_max, l3);
+    l_max = std::max(l_max, l4);
+    l_max = std::max(l_max, l5);
     return l_max;
 }
 
-void ExtractBestBR(rt::TH1Container& hc, const TH2& h_100, const TH2& h_050, const TH2& h_000)
+void ExtractBestBR
+(
+    rt::TH1Container& hc,
+    const TH2& h_100,
+    const TH2& h_070,
+    const TH2& h_050,
+    const TH2& h_030,
+    const TH2& h_000
+)
 {
     // "best" BR hist
     const std::string br_hist_name = lt::string_replace_all(h_100.GetName(), "xsec", "best_br");
@@ -68,9 +85,11 @@ void ExtractBestBR(rt::TH1Container& hc, const TH2& h_100, const TH2& h_050, con
 
             // best UL
             const UpperLimit ul_000 = {0.001, h_000.GetBinContent(xbin, ybin), h_000.GetBinError(xbin, ybin)}; // added small value to make it show up
+            const UpperLimit ul_030 = {0.300, h_030.GetBinContent(xbin, ybin), h_030.GetBinError(xbin, ybin)};
             const UpperLimit ul_050 = {0.500, h_050.GetBinContent(xbin, ybin), h_050.GetBinError(xbin, ybin)};
+            const UpperLimit ul_070 = {0.700, h_070.GetBinContent(xbin, ybin), h_070.GetBinError(xbin, ybin)};
             const UpperLimit ul_100 = {1.000, h_100.GetBinContent(xbin, ybin), h_100.GetBinError(xbin, ybin)};
-            const UpperLimit ul_best = MaxUpperLimit(ul_000, ul_050, ul_100);
+            const UpperLimit ul_best = MaxUpperLimit(ul_000, ul_030, ul_050, ul_070, ul_100);
             rt::SetBinContent2D(h_br, mass_stop, mass_lsp, ul_best.br, 0.0);
         }
     }
@@ -78,7 +97,16 @@ void ExtractBestBR(rt::TH1Container& hc, const TH2& h_100, const TH2& h_050, con
     return;
 }
 
-void ExtractBestUL(rt::TH1Container& hc, const TH2& h_br, const TH2& h_100, const TH2& h_050, const TH2& h_000)
+void ExtractBestUL
+(
+    rt::TH1Container& hc,
+    const TH2& h_br,
+    const TH2& h_100,
+    const TH2& h_070,
+    const TH2& h_050,
+    const TH2& h_030,
+    const TH2& h_000
+)
 {
     // "best" upper limit hist
     TH2* const h_ul = dynamic_cast<TH2*>(h_100.Clone());
@@ -105,10 +133,20 @@ void ExtractBestUL(rt::TH1Container& hc, const TH2& h_br, const TH2& h_100, cons
                 value = h_000.GetBinContent(xbin, ybin);
                 error = h_000.GetBinContent(xbin, ybin);
             }
+            else if (lt::is_equal(best_br, 0.30))
+            {
+                value = h_030.GetBinContent(xbin, ybin);
+                error = h_030.GetBinContent(xbin, ybin);
+            }
             else if (lt::is_equal(best_br, 0.50))
             {
                 value = h_050.GetBinContent(xbin, ybin);
                 error = h_050.GetBinContent(xbin, ybin);
+            }
+            else if (lt::is_equal(best_br, 0.70))
+            {
+                value = h_070.GetBinContent(xbin, ybin);
+                error = h_070.GetBinContent(xbin, ybin);
             }
             else if (lt::is_equal(best_br, 1.00))
             {
@@ -317,8 +355,8 @@ std::pair<TGraph* const, TGraph* const> ExtractContour(const std::string& hist_n
     FillBogus(h_excl_2);
 
     // contours
-    TGraph* g1 = GetContourTGraph(h_excl_1);
-    TGraph* g2 = GetContourTGraph(h_excl_2);
+    TGraph* const g1 = GetContourTGraph(h_excl_1);
+    TGraph* const g2 = GetContourTGraph(h_excl_2);
     return std::make_pair(g1, g2);
 }
 
@@ -331,7 +369,9 @@ void CreateHists
 {
     // input ROOT files
     rt::TH1Container hc_100(Form("plots/limits/%s/%s/%s/%s/%s_xsec_excl_%s.root", label.c_str(), method.c_str(), "t2tt"      , analysis.c_str(), "t2tt"      , analysis.c_str()));
+    rt::TH1Container hc_070(Form("plots/limits/%s/%s/%s/%s/%s_xsec_excl_%s.root", label.c_str(), method.c_str(), "t2tb_br0p5", analysis.c_str(), "t2tb_br0p5", analysis.c_str()));
     rt::TH1Container hc_050(Form("plots/limits/%s/%s/%s/%s/%s_xsec_excl_%s.root", label.c_str(), method.c_str(), "t2tb_br0p5", analysis.c_str(), "t2tb_br0p5", analysis.c_str()));
+    rt::TH1Container hc_030(Form("plots/limits/%s/%s/%s/%s/%s_xsec_excl_%s.root", label.c_str(), method.c_str(), "t2tb_br0p5", analysis.c_str(), "t2tb_br0p5", analysis.c_str()));
     rt::TH1Container hc_000(Form("plots/limits/%s/%s/%s/%s/%s_xsec_excl_%s.root", label.c_str(), method.c_str(), "t2bw"      , analysis.c_str(), "t2bw"      , analysis.c_str()));
 
     rt::TH1Container hc_best;
@@ -340,19 +380,19 @@ void CreateHists
     hc_best.Add(static_cast<TH1*>(hc_100["h_xsec_plus" ]->Clone()));
 
     // best BR
-    ExtractBestBR(hc_best, hc_100.as<TH2>("h_ul_xsec_exp_smooth"), hc_050.as<TH2>("h_ul_xsec_exp_smooth"), hc_000.as<TH2>("h_ul_xsec_exp_smooth"));
+    ExtractBestBR(hc_best, hc_100.as<TH2>("h_ul_xsec_exp_smooth"), hc_070.as<TH2>("h_ul_xsec_exp_smooth"), hc_050.as<TH2>("h_ul_xsec_exp_smooth"), hc_030.as<TH2>("h_ul_xsec_exp_smooth"), hc_000.as<TH2>("h_ul_xsec_exp_smooth"));
     TH2& h_bestbr = hc_best.as<TH2>("h_ul_best_br_exp_smooth");
 
 
     // best UL based on best BR
-    ExtractBestUL(hc_best, h_bestbr, hc_100.as<TH2>("h_ul_xsec_exp"          ), hc_050.as<TH2>("h_ul_xsec_exp"          ), hc_000.as<TH2>("h_ul_xsec_exp"          ));
-    ExtractBestUL(hc_best, h_bestbr, hc_100.as<TH2>("h_ul_xsec_exp_m1"       ), hc_050.as<TH2>("h_ul_xsec_exp_m1"       ), hc_000.as<TH2>("h_ul_xsec_exp_m1"       ));
-    ExtractBestUL(hc_best, h_bestbr, hc_100.as<TH2>("h_ul_xsec_exp_m1_smooth"), hc_050.as<TH2>("h_ul_xsec_exp_m1_smooth"), hc_000.as<TH2>("h_ul_xsec_exp_m1_smooth"));
-    ExtractBestUL(hc_best, h_bestbr, hc_100.as<TH2>("h_ul_xsec_exp_p1"       ), hc_050.as<TH2>("h_ul_xsec_exp_p1"       ), hc_000.as<TH2>("h_ul_xsec_exp_p1"       ));
-    ExtractBestUL(hc_best, h_bestbr, hc_100.as<TH2>("h_ul_xsec_exp_p1_smooth"), hc_050.as<TH2>("h_ul_xsec_exp_p1_smooth"), hc_000.as<TH2>("h_ul_xsec_exp_p1_smooth"));
-    ExtractBestUL(hc_best, h_bestbr, hc_100.as<TH2>("h_ul_xsec_exp_smooth"   ), hc_050.as<TH2>("h_ul_xsec_exp_smooth"   ), hc_000.as<TH2>("h_ul_xsec_exp_smooth"   ));
-    ExtractBestUL(hc_best, h_bestbr, hc_100.as<TH2>("h_ul_xsec_obs"          ), hc_050.as<TH2>("h_ul_xsec_obs"          ), hc_000.as<TH2>("h_ul_xsec_obs"          ));
-    ExtractBestUL(hc_best, h_bestbr, hc_100.as<TH2>("h_ul_xsec_obs_smooth"   ), hc_050.as<TH2>("h_ul_xsec_obs_smooth"   ), hc_000.as<TH2>("h_ul_xsec_obs_smooth"   ));
+    ExtractBestUL(hc_best, h_bestbr, hc_100.as<TH2>("h_ul_xsec_exp"          ), hc_070.as<TH2>("h_ul_xsec_exp"          ), hc_050.as<TH2>("h_ul_xsec_exp"          ), hc_030.as<TH2>("h_ul_xsec_exp"          ), hc_000.as<TH2>("h_ul_xsec_exp"          ));
+    ExtractBestUL(hc_best, h_bestbr, hc_100.as<TH2>("h_ul_xsec_exp_m1"       ), hc_070.as<TH2>("h_ul_xsec_exp_m1"       ), hc_050.as<TH2>("h_ul_xsec_exp_m1"       ), hc_030.as<TH2>("h_ul_xsec_exp_m1"       ), hc_000.as<TH2>("h_ul_xsec_exp_m1"       ));
+    ExtractBestUL(hc_best, h_bestbr, hc_100.as<TH2>("h_ul_xsec_exp_m1_smooth"), hc_070.as<TH2>("h_ul_xsec_exp_m1_smooth"), hc_050.as<TH2>("h_ul_xsec_exp_m1_smooth"), hc_030.as<TH2>("h_ul_xsec_exp_m1_smooth"), hc_000.as<TH2>("h_ul_xsec_exp_m1_smooth"));
+    ExtractBestUL(hc_best, h_bestbr, hc_100.as<TH2>("h_ul_xsec_exp_p1"       ), hc_070.as<TH2>("h_ul_xsec_exp_p1"       ), hc_050.as<TH2>("h_ul_xsec_exp_p1"       ), hc_030.as<TH2>("h_ul_xsec_exp_p1"       ), hc_000.as<TH2>("h_ul_xsec_exp_p1"       ));
+    ExtractBestUL(hc_best, h_bestbr, hc_100.as<TH2>("h_ul_xsec_exp_p1_smooth"), hc_070.as<TH2>("h_ul_xsec_exp_p1_smooth"), hc_050.as<TH2>("h_ul_xsec_exp_p1_smooth"), hc_030.as<TH2>("h_ul_xsec_exp_p1_smooth"), hc_000.as<TH2>("h_ul_xsec_exp_p1_smooth"));
+    ExtractBestUL(hc_best, h_bestbr, hc_100.as<TH2>("h_ul_xsec_exp_smooth"   ), hc_070.as<TH2>("h_ul_xsec_exp_smooth"   ), hc_050.as<TH2>("h_ul_xsec_exp_smooth"   ), hc_030.as<TH2>("h_ul_xsec_exp_smooth"   ), hc_000.as<TH2>("h_ul_xsec_exp_smooth"   ));
+    ExtractBestUL(hc_best, h_bestbr, hc_100.as<TH2>("h_ul_xsec_obs"          ), hc_070.as<TH2>("h_ul_xsec_obs"          ), hc_050.as<TH2>("h_ul_xsec_obs"          ), hc_030.as<TH2>("h_ul_xsec_obs"          ), hc_000.as<TH2>("h_ul_xsec_obs"          ));
+    ExtractBestUL(hc_best, h_bestbr, hc_100.as<TH2>("h_ul_xsec_obs_smooth"   ), hc_070.as<TH2>("h_ul_xsec_obs_smooth"   ), hc_050.as<TH2>("h_ul_xsec_obs_smooth"   ), hc_030.as<TH2>("h_ul_xsec_obs_smooth"   ), hc_000.as<TH2>("h_ul_xsec_obs_smooth"   ));
 
     // output
     hc_best.List();

@@ -20,7 +20,7 @@ from scipy.interpolate import Rbf
 # parameter options
 parser = OptionParser()
 parser.add_option("--analysis"       , dest="analysis"       , default="razor"                               , type="string" , help="analysis type: onlep, razor, combined"                      )
-parser.add_option("--model"          , dest="model"          , default="t2tt"                                , type="string" , help="model to use (only t2tt for now)"                           )
+parser.add_option("--sample"          , dest="sample"          , default="t2tt"                                , type="string" , help="sample to use (only t2tt for now)"                           )
 parser.add_option("--xsec_file_name" , dest="xsec_file_name" , default="data/stop_xsec.root"                 , type="string" , help="cross-section file"                                         )
 parser.add_option("--label"          , dest="label"          , default="v0"                                  , type="string" , help="label for version"                                          )
 parser.add_option("--method"         , dest="method"         , default="hybrid"                              , type="string" , help="method for limits: asymptotic or hybrid"                    )
@@ -81,8 +81,8 @@ class ModelInfo:
     def NbinsY(self):
         return int((self.ymax-self.ymin)/self.bin_width)
 
-def GetModelInfo(model):
-    if model.lower() == "t2tt":
+def GetModelInfo(sample):
+    if sample.lower() == "t2tt":
         model_info = ModelInfo( 
             name      = "T2tt",
             xtitle    = "m_{#tilde{t}} (GeV)",
@@ -100,7 +100,7 @@ def GetModelInfo(model):
             epsilon   = 5
         )
         return model_info 
-    elif model.lower() == "t2tb_br0p5":
+    elif "t2tb" in sample.lower():
         model_info = ModelInfo( 
             name      = "T2tb",
             xtitle    = "m_{#tilde{t}} (GeV)",
@@ -118,7 +118,7 @@ def GetModelInfo(model):
             epsilon   = 5
         )
         return model_info 
-    elif model.lower() == "t2bw":
+    elif sample.lower() == "t2bw":
         model_info = ModelInfo( 
             name      = "T2bW",
             xtitle    = "m_{#tilde{t}} (GeV)",
@@ -367,7 +367,7 @@ def main():
         CheckOptions()
 
         analysis       = options.analysis      
-        model          = options.model         
+        model          = options.sample         
         xsec_file_name = options.xsec_file_name
         label          = options.label         
         method         = options.method        

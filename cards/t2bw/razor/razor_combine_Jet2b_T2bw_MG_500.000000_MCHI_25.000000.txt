@@ -9,7 +9,7 @@ shapes * * razor_combine_Jet2b_T2bw_MG_500.000000_MCHI_25.000000.root wJet2b:$PR
 bin		Jet2b			Jet2b			Jet2b
 process		Jet2b_T2bw 	Jet2b_TTj2b	Jet2b_TTj3b
 process        	0          		1			2
-rate            131.963		701.894		24.827
+rate            131.964		701.894		24.827
 ------------------------------------------------------------
 lumi			lnN	1.026       1.00 1.00
 lepton			lnN	1.000       1.00 1.00
