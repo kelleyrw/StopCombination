@@ -369,9 +369,9 @@ void CreateHists
 {
     // input ROOT files
     rt::TH1Container hc_100(Form("plots/limits/%s/%s/%s/%s/%s_xsec_excl_%s.root", label.c_str(), method.c_str(), "t2tt"      , analysis.c_str(), "t2tt"      , analysis.c_str()));
-    rt::TH1Container hc_070(Form("plots/limits/%s/%s/%s/%s/%s_xsec_excl_%s.root", label.c_str(), method.c_str(), "t2tb_br0p5", analysis.c_str(), "t2tb_br0p5", analysis.c_str()));
+    rt::TH1Container hc_070(Form("plots/limits/%s/%s/%s/%s/%s_xsec_excl_%s.root", label.c_str(), method.c_str(), "t2tb_br0p7", analysis.c_str(), "t2tb_br0p7", analysis.c_str()));
     rt::TH1Container hc_050(Form("plots/limits/%s/%s/%s/%s/%s_xsec_excl_%s.root", label.c_str(), method.c_str(), "t2tb_br0p5", analysis.c_str(), "t2tb_br0p5", analysis.c_str()));
-    rt::TH1Container hc_030(Form("plots/limits/%s/%s/%s/%s/%s_xsec_excl_%s.root", label.c_str(), method.c_str(), "t2tb_br0p5", analysis.c_str(), "t2tb_br0p5", analysis.c_str()));
+    rt::TH1Container hc_030(Form("plots/limits/%s/%s/%s/%s/%s_xsec_excl_%s.root", label.c_str(), method.c_str(), "t2tb_br0p3", analysis.c_str(), "t2tb_br0p3", analysis.c_str()));
     rt::TH1Container hc_000(Form("plots/limits/%s/%s/%s/%s/%s_xsec_excl_%s.root", label.c_str(), method.c_str(), "t2bw"      , analysis.c_str(), "t2bw"      , analysis.c_str()));
 
     rt::TH1Container hc_best;
