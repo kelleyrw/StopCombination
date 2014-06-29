@@ -20,12 +20,15 @@ from scipy.interpolate import Rbf
 # parameter options
 parser = OptionParser()
 parser.add_option("--analysis"       , dest="analysis"       , default="razor"                               , type="string" , help="analysis type: onlep, razor, combined"                      )
-parser.add_option("--sample"          , dest="sample"          , default="t2tt"                                , type="string" , help="sample to use (only t2tt for now)"                           )
+parser.add_option("--sample"         , dest="sample"         , default="t2tt"                                , type="string" , help="sample to use (only t2tt for now)"                           )
 parser.add_option("--xsec_file_name" , dest="xsec_file_name" , default="data/stop_xsec.root"                 , type="string" , help="cross-section file"                                         )
 parser.add_option("--label"          , dest="label"          , default="v0"                                  , type="string" , help="label for version"                                          )
 parser.add_option("--method"         , dest="method"         , default="hybrid"                              , type="string" , help="method for limits: asymptotic or hybrid"                    )
 parser.add_option("--orig_curve_file", dest="orig_curve_file", default="data/t2tt_onelep_bdt_AN-2013-89.root", type="string" , help="original curves file from AN-2013-89: blank means don't use")
 (options, args) = parser.parse_args()
+
+# print args
+# print options
 
 # check for validity
 def CheckOptions():
@@ -359,7 +362,7 @@ def ExtractContour(hist_name, hist_title, mi, h_ul, h_xsec):
 
 def main():
 
-    try:
+#     try:
         # inputs
         # -------------------------------------------------------------------- #
 
@@ -456,26 +459,20 @@ def main():
     
         # pull g1 from Ben's original result
         if (options.orig_curve_file and (analysis == "onelep" or analysis == "combined")):
-            if   (mi.name.lower() == "t2tt"      ): hist_stem = "hR"
-            elif (mi.name.lower() == "t2tb_br0p7"): hist_stem = "hR_BF70"
-            elif (mi.name.lower() == "t2tb_br0p5"): hist_stem = "hR_BF50"
-            elif (mi.name.lower() == "t2tb_br0p3"): hist_stem = "hR_BF30"
+            if   (options.sample == "t2tt"      ): hist_stem = "hR"     ; level = 1.0
+            elif (options.sample == "t2tb_br0p7"): hist_stem = "hR_BF70"; level = 0.7*0.7
+            elif (options.sample == "t2tb_br0p5"): hist_stem = "hR_BF50"; level = 0.5*0.5
+            elif (options.sample == "t2tb_br0p3"): hist_stem = "hR_BF30"; level = 0.3*0.3
             else: hist_stem = ""
             if (hist_stem != ""):
                 orig_an_file = root.TFile.Open(options.orig_curve_file)
-                g_excl_xsec_obs_1    = GetContourTGraph(orig_an_file.Get(hist_stem+"_obs_smallDM"  ))
-                g_excl_xsec_obs_p1_1 = GetContourTGraph(orig_an_file.Get(hist_stem+"_obsp1_smallDM"))
-                g_excl_xsec_obs_m1_1 = GetContourTGraph(orig_an_file.Get(hist_stem+"_obsm1_smallDM"))
-                g_excl_xsec_exp_1    = GetContourTGraph(orig_an_file.Get(hist_stem+"_exp_smallDM"  ))
-                g_excl_xsec_exp_p1_1 = GetContourTGraph(orig_an_file.Get(hist_stem+"_expp1_smallDM"))
-                g_excl_xsec_exp_m1_1 = GetContourTGraph(orig_an_file.Get(hist_stem+"_expm1_smallDM"))
-                g_excl_xsec_obs_1    .SetName("g_excl_xsec_obs_1")
-                g_excl_xsec_obs_p1_1 .SetName("g_excl_xsec_obs_p1_1")
-                g_excl_xsec_obs_m1_1 .SetName("g_excl_xsec_obs_m1_1")
-                g_excl_xsec_exp_1    .SetName("g_excl_xsec_exp_1")
-                g_excl_xsec_exp_p1_1 .SetName("g_excl_xsec_exp_p1_1")
-                g_excl_xsec_exp_m1_1 .SetName("g_excl_xsec_exp_m1_1")
-        
+                g_excl_xsec_obs_1    = GetContourTGraph(orig_an_file.Get(hist_stem+"_obs_smallDM"  ), level)
+                g_excl_xsec_obs_p1_1 = GetContourTGraph(orig_an_file.Get(hist_stem+"_obsp1_smallDM"), level)
+                g_excl_xsec_obs_m1_1 = GetContourTGraph(orig_an_file.Get(hist_stem+"_obsm1_smallDM"), level)
+                g_excl_xsec_exp_1    = GetContourTGraph(orig_an_file.Get(hist_stem+"_exp_smallDM"  ), level)
+                g_excl_xsec_exp_p1_1 = GetContourTGraph(orig_an_file.Get(hist_stem+"_expp1_smallDM"), level)
+                g_excl_xsec_exp_m1_1 = GetContourTGraph(orig_an_file.Get(hist_stem+"_expm1_smallDM"), level)
+
         g_excl_xsec_obs    = CombineTGraphs(g_excl_xsec_obs_1   , g_excl_xsec_obs_2   , "g_excl_xsec_obs"   , "g_excl_xsec_obs"   )
         g_excl_xsec_obs_p1 = CombineTGraphs(g_excl_xsec_obs_p1_1, g_excl_xsec_obs_p1_2, "g_excl_xsec_obs_p1", "g_excl_xsec_obs_p1")
         g_excl_xsec_obs_m1 = CombineTGraphs(g_excl_xsec_obs_m1_1, g_excl_xsec_obs_m1_2, "g_excl_xsec_obs_m1", "g_excl_xsec_obs_m1")
@@ -576,12 +573,12 @@ def main():
         # print the output
         canvas.Print("%s/%s_interp_%s.pdf"%(output_path, model, analysis))
 
-    except Exception, e:
-        print "[stop_create_contour_hists] ERROR:", e
-        return 1
-    except:
-        print "[stop_create_contour_hists] ERROR:", sys.exc_info()[0]
-        return 1
+#     except Exception, e:
+#         print "[stop_create_contour_hists] ERROR:", e
+#         return 1
+#     except:
+#         print "[stop_create_contour_hists] ERROR:", sys.exc_info()[0]
+#         return 1
 
 # do it
 if __name__ == '__main__':

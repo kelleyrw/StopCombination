@@ -187,8 +187,8 @@ void PrintFormattedBestBRHist
     hist.SetMaximum(1.0);
 
     // define the palette for z axis
+    static const int NCont     = 5;
     static const int NRGBs     = 5;
-    static const int NCont     = 3;
     static double stops[NRGBs] = {0.00 , 0.34 , 0.61 , 0.84 , 1.00};
     static double red  [NRGBs] = {0.50 , 0.50 , 1.00 , 1.00 , 1.00};
     static double green[NRGBs] = {0.50 , 1.00 , 1.00 , 0.60 , 0.50};
@@ -507,10 +507,13 @@ void CreateHists
     output_file.Close();
 }
 
-void CreateBRIndependentExcl()
+void CreateBRIndependentExcl
+(
+    const std::string label  = "v0",
+    const std::string method = "asymptotic"
+)
 {
-    const std::string label = "v0";
-/*     CreateHists("onelep"  , "hybrid", label); */
-/*     CreateHists("razor"   , "hybrid", label); */
-    CreateHists("combined", "hybrid", label);
+/*     CreateHists("onelep"  , method, label); */
+/*     CreateHists("razor"   , method, label); */
+    CreateHists("combined", method, label);
 }
