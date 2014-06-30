@@ -99,6 +99,8 @@ void CreateExpComparisonPlot
 
     // overlay
     TCanvas c1("c1", "c1", 600, 600);
+    c1.SetGridx(false);
+    c1.SetGridy(false);
     rt::SetTDRStyle();
     h_exp.SetTitle("CMS Preliminary, #sqrt{s} = 8 TeV");
     h_exp.SetTitleFont(42);
@@ -112,7 +114,7 @@ void CreateExpComparisonPlot
     h_exp.GetXaxis()->SetTitleFont(42);
     h_exp.GetXaxis()->SetLabelSize(0.03);
     h_exp.GetXaxis()->SetLabelFont(42);
-    h_exp.GetYaxis()->SetRangeUser(0+offset , 400-offset);
+    h_exp.GetYaxis()->SetRangeUser(0+offset , 450-2*offset);
     h_exp.GetYaxis()->SetTitleOffset(1.35);
     h_exp.GetYaxis()->SetTitleFont(42);
     h_exp.GetYaxis()->SetLabelSize(0.03);
