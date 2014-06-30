@@ -368,19 +368,16 @@ void CreateLimitResultsTree
 }
 
 // hard coded values 
-void CreateLimitResultsTrees()
+void CreateTrees
+(
+    const std::string& label,
+    const std::string& sample_name,
+    const std::string& method
+)
 {
-    // hard coded meta-data
-/*     const std::string sample_name        = "t2tb_br0p3"; */
-    const std::string sample_name        = "t2tb_br0p7";
-/*     const std::string sample_name        = "t2tb_br0p5"; */
-/*     const std::string sample_name        = "t2tt"; */
-/*     const std::string sample_name        = "t2bw"; */
-    const std::string method             = "hybrid";
-/*     const std::string method             = "asymptotic"; */
-    const std::string label              = "v0";
-/*     const std::string limit_results_path = Form("/hadoop/cms/store/user/rwkelley/limits/stopcombo/%s/%s/%s", label.c_str(), method.c_str(), sample_name.c_str()); */
-    const std::string limit_results_path = Form("output/limits/%s/%s/%s"                         , label.c_str(), method.c_str(), sample_name.c_str());
+    // meta-data
+    const std::string limit_results_path = Form("/hadoop/cms/store/user/rwkelley/limits/stopcombo/%s/%s/%s", label.c_str(), method.c_str(), sample_name.c_str());
+/*     const std::string limit_results_path = Form("output/limits/%s/%s/%s"                         , label.c_str(), method.c_str(), sample_name.c_str()); */
     const std::string output_file_stem   = Form("output/limit_trees/%s/%s/%s/limit_result_ntuple", label.c_str(), method.c_str(), sample_name.c_str());
 
     // create the limit ntuples
@@ -389,3 +386,18 @@ void CreateLimitResultsTrees()
     CreateLimitResultsTree(sample_name, Analysis::combined, limit_results_path, output_file_stem + "_combined.root"); 
 }
 
+void CreateLimitResultsTrees()
+{
+    const std::string label = "v0";
+    CreateTrees(label, "t2tt"      , "hybrid");
+    CreateTrees(label, "t2tb_br0p7", "hybrid");
+    CreateTrees(label, "t2tb_br0p5", "hybrid");
+    CreateTrees(label, "t2tb_br0p3", "hybrid");
+    CreateTrees(label, "t2bw"      , "hybrid");
+
+    CreateTrees(label, "t2tt"      , "asymptotic");
+    CreateTrees(label, "t2tb_br0p7", "asymptotic");
+    CreateTrees(label, "t2tb_br0p5", "asymptotic");
+    CreateTrees(label, "t2tb_br0p3", "asymptotic");
+    CreateTrees(label, "t2bw"      , "asymptotic");
+}
