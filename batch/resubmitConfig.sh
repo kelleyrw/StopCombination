@@ -62,7 +62,7 @@ if [ ${num_missing_files} -gt 0 ]; then
 
 	# same name as originial condor script with _resubmit appended
 	condor_resubmit_script_filename=${condor_script_filename%.*}_resubmit.cmd
-	echo Missing ${num_missing_files} / ${num_args} files 
+	echo Missing ${num_missing_files} / ${num_args} files from $condor_script_filename
 	echo creating resumit list: $condor_resubmit_script_filename
 	
 	# do the same header as original file
@@ -80,7 +80,7 @@ queue
 EOF
 	done
 else
-	echo "No missing files" 
+	echo "No missing files from" $condor_script_filename
 
 	# create a blank resubmit script 
 	condor_resubmit_script_filename=${condor_script_filename%.*}_resubmit.cmd
