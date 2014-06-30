@@ -1,0 +1,916 @@
+{
+//=========Macro generated from canvas: cCONT_/cCONT_
+//=========  (Sun Jun 29 21:56:34 2014) by ROOT version5.34/03
+   TCanvas *cCONT_ = new TCanvas("cCONT_", "cCONT_",0,0,600,600);
+   gStyle->SetOptFit(1);
+   gStyle->SetOptStat(0);
+   gStyle->SetOptTitle(0);
+   cCONT_->SetHighLightColor(2);
+   cCONT_->Range(-6.716415,-107.6923,1112.687,661.5385);
+   cCONT_->SetFillColor(0);
+   cCONT_->SetBorderMode(0);
+   cCONT_->SetBorderSize(2);
+   cCONT_->SetLogz();
+   cCONT_->SetTickx(1);
+   cCONT_->SetTicky(1);
+   cCONT_->SetLeftMargin(0.14);
+   cCONT_->SetRightMargin(0.19);
+   cCONT_->SetTopMargin(0.08);
+   cCONT_->SetBottomMargin(0.14);
+   cCONT_->SetFrameBorderMode(0);
+   cCONT_->SetFrameBorderMode(0);
+   
+   TH2D *emptyHisto = new TH2D("emptyHisto","",1,150,900,1,0,600);
+
+   Int_t ci;   // for color index setting
+   ci = TColor::GetColor("#0000ff");
+   emptyHisto->SetLineColor(ci);
+   emptyHisto->GetXaxis()->SetTitle("m_{#tilde{t}} (GeV)");
+   emptyHisto->GetXaxis()->SetNdivisions(409);
+   emptyHisto->GetXaxis()->SetLabelFont(42);
+   emptyHisto->GetXaxis()->SetTitleSize(0.05);
+   emptyHisto->GetXaxis()->SetTitleOffset(1.2);
+   emptyHisto->GetXaxis()->SetTitleFont(42);
+   emptyHisto->GetYaxis()->SetTitle("m_{#tilde{#chi}^{0}} (GeV)");
+   emptyHisto->GetYaxis()->SetNdivisions(408);
+   emptyHisto->GetYaxis()->SetLabelFont(42);
+   emptyHisto->GetYaxis()->SetTitleSize(0.05);
+   emptyHisto->GetYaxis()->SetTitleOffset(1.35);
+   emptyHisto->GetYaxis()->SetTitleFont(42);
+   emptyHisto->Draw("");
+   
+   TH2D *h_ul_xsec_exp_smoothEMPTY = new TH2D("h_ul_xsec_exp_smoothEMPTY","Expected razor #sigma #times Branching Fraction (t2bw)EMPTY",31,137.5,912.5,29,-12.5,712.5);
+
+   ci = TColor::GetColor("#0000ff");
+   h_ul_xsec_exp_smoothEMPTY->SetLineColor(ci);
+   h_ul_xsec_exp_smoothEMPTY->GetXaxis()->SetLabelSize(0.035);
+   h_ul_xsec_exp_smoothEMPTY->GetYaxis()->SetLabelSize(0.035);
+   h_ul_xsec_exp_smoothEMPTY->GetYaxis()->SetTitleOffset(1.2);
+   h_ul_xsec_exp_smoothEMPTY->Draw("SAME");
+   
+   TGraph *graph = new TGraph(3);
+   graph->SetName("diagonal");
+   graph->SetTitle("Graph");
+
+   ci = TColor::GetColor("#cccccc");
+   graph->SetLineColor(ci);
+   graph->SetLineStyle(2);
+   graph->SetPoint(0,0,-100);
+   graph->SetPoint(1,20000,19900);
+   graph->SetPoint(2,150,900);
+   
+   TH1F *Graph_diagonal17 = new TH1F("Graph_diagonal17","Graph",100,0,22000);
+   Graph_diagonal17->SetMinimum(-2100);
+   Graph_diagonal17->SetMaximum(21900);
+   Graph_diagonal17->SetDirectory(0);
+   Graph_diagonal17->SetStats(0);
+
+   ci = TColor::GetColor("#0000ff");
+   Graph_diagonal17->SetLineColor(ci);
+   Graph_diagonal17->GetXaxis()->SetLabelSize(0.035);
+   Graph_diagonal17->GetYaxis()->SetLabelSize(0.035);
+   Graph_diagonal17->GetYaxis()->SetTitleOffset(1.2);
+   graph->SetHistogram(Graph_diagonal17);
+   
+   graph->Draw("f");
+   
+   graph = new TGraph(3);
+   graph->SetName("diagonal");
+   graph->SetTitle("Graph");
+
+   ci = TColor::GetColor("#cccccc");
+   graph->SetLineColor(ci);
+   graph->SetLineStyle(2);
+   graph->SetPoint(0,0,-100);
+   graph->SetPoint(1,20000,19900);
+   graph->SetPoint(2,150,900);
+   
+   TH1F *Graph_Graph_diagonal1718 = new TH1F("Graph_Graph_diagonal1718","Graph",100,0,22000);
+   Graph_Graph_diagonal1718->SetMinimum(-2100);
+   Graph_Graph_diagonal1718->SetMaximum(21900);
+   Graph_Graph_diagonal1718->SetDirectory(0);
+   Graph_Graph_diagonal1718->SetStats(0);
+
+   ci = TColor::GetColor("#0000ff");
+   Graph_Graph_diagonal1718->SetLineColor(ci);
+   Graph_Graph_diagonal1718->GetXaxis()->SetLabelSize(0.035);
+   Graph_Graph_diagonal1718->GetYaxis()->SetLabelSize(0.035);
+   Graph_Graph_diagonal1718->GetYaxis()->SetTitleOffset(1.2);
+   graph->SetHistogram(Graph_Graph_diagonal1718);
+   
+   graph->Draw("l");
+   
+   graph = new TGraph(55);
+   graph->SetName("g_excl_xsec_obs");
+   graph->SetTitle("g_excl_xsec_obs");
+
+   ci = TColor::GetColor("#cccccc");
+   graph->SetFillColor(ci);
+   graph->SetLineWidth(4);
+   graph->SetPoint(0,571.8442479,0);
+   graph->SetPoint(1,575,2.277507024);
+   graph->SetPoint(2,598.9891133,25);
+   graph->SetPoint(3,600,25.65127804);
+   graph->SetPoint(4,625,39.68776719);
+   graph->SetPoint(5,650,47.56776283);
+   graph->SetPoint(6,658.2101932,50);
+   graph->SetPoint(7,675,57.24308107);
+   graph->SetPoint(8,700,62.58796519);
+   graph->SetPoint(9,725,70.99632711);
+   graph->SetPoint(10,732.8913343,75);
+   graph->SetPoint(11,750,97.4915532);
+   graph->SetPoint(12,751.1984786,100);
+   graph->SetPoint(13,753.1597783,125);
+   graph->SetPoint(14,750,132.6025068);
+   graph->SetPoint(15,741.8622587,150);
+   graph->SetPoint(16,729.0542319,175);
+   graph->SetPoint(17,725,182.3346154);
+   graph->SetPoint(18,700,199.9725207);
+   graph->SetPoint(19,699.9742243,200);
+   graph->SetPoint(20,686.2103804,225);
+   graph->SetPoint(21,675,234.0490114);
+   graph->SetPoint(22,661.4513367,250);
+   graph->SetPoint(23,650,257.566899);
+   graph->SetPoint(24,625,268.3448409);
+   graph->SetPoint(25,608.5756074,275);
+   graph->SetPoint(26,600,276.5729105);
+   graph->SetPoint(27,575,275.4980663);
+   graph->SetPoint(28,573.8937714,275);
+   graph->SetPoint(29,550,258.7524897);
+   graph->SetPoint(30,536.55264,250);
+   graph->SetPoint(31,525,243.195877);
+   graph->SetPoint(32,500,228.4888096);
+   graph->SetPoint(33,493.8975191,225);
+   graph->SetPoint(34,475,212.5953688);
+   graph->SetPoint(35,450,202.3399196);
+   graph->SetPoint(36,446.9233675,200);
+   graph->SetPoint(37,425,182.5500502);
+   graph->SetPoint(38,405.9226639,175);
+   graph->SetPoint(39,400,172.0430953);
+   graph->SetPoint(40,375,157.8226418);
+   graph->SetPoint(41,357.6659785,150);
+   graph->SetPoint(42,350,145.0632531);
+   graph->SetPoint(43,325,125.0000513);
+   graph->SetPoint(44,324.9999487,125);
+   graph->SetPoint(45,300,100.0003728);
+   graph->SetPoint(46,299.9996272,100);
+   graph->SetPoint(47,275,75.00022336);
+   graph->SetPoint(48,274.9997766,75);
+   graph->SetPoint(49,250,50.00009107);
+   graph->SetPoint(50,249.9999089,50);
+   graph->SetPoint(51,237.5178062,25);
+   graph->SetPoint(52,230.3206417,0);
+   graph->SetPoint(53,1300,-1300);
+   graph->SetPoint(54,-1300,-1300);
+   
+   TH1F *Graph_g_excl_xsec_obs19 = new TH1F("Graph_g_excl_xsec_obs19","g_excl_xsec_obs",100,-1560,1560);
+   Graph_g_excl_xsec_obs19->SetMinimum(-1457.657);
+   Graph_g_excl_xsec_obs19->SetMaximum(434.2302);
+   Graph_g_excl_xsec_obs19->SetDirectory(0);
+   Graph_g_excl_xsec_obs19->SetStats(0);
+
+   ci = TColor::GetColor("#0000ff");
+   Graph_g_excl_xsec_obs19->SetLineColor(ci);
+   Graph_g_excl_xsec_obs19->GetXaxis()->SetLabelSize(0.035);
+   Graph_g_excl_xsec_obs19->GetYaxis()->SetLabelSize(0.035);
+   Graph_g_excl_xsec_obs19->GetYaxis()->SetTitleOffset(1.2);
+   graph->SetHistogram(Graph_g_excl_xsec_obs19);
+   
+   graph->Draw("f");
+   
+   graph = new TGraph(52);
+   graph->SetName("g_excl_xsec_exp");
+   graph->SetTitle("g_excl_xsec_exp");
+
+   ci = TColor::GetColor("#ff807e");
+   graph->SetFillColor(ci);
+
+   ci = TColor::GetColor("#ff0000");
+   graph->SetLineColor(ci);
+   graph->SetLineStyle(7);
+   graph->SetLineWidth(4);
+   graph->SetPoint(0,637.8735423,0);
+   graph->SetPoint(1,650,12.86170582);
+   graph->SetPoint(2,662.282118,25);
+   graph->SetPoint(3,675,34.35762705);
+   graph->SetPoint(4,696.8267453,50);
+   graph->SetPoint(5,700,52.79136307);
+   graph->SetPoint(6,725,73.01476556);
+   graph->SetPoint(7,726.8766121,75);
+   graph->SetPoint(8,737.7592056,100);
+   graph->SetPoint(9,742.3070232,125);
+   graph->SetPoint(10,741.2310974,150);
+   graph->SetPoint(11,739.1509148,175);
+   graph->SetPoint(12,735.6365958,200);
+   graph->SetPoint(13,730.3123054,225);
+   graph->SetPoint(14,726.5776445,250);
+   graph->SetPoint(15,725,263.4728212);
+   graph->SetPoint(16,723.495181,275);
+   graph->SetPoint(17,715.8151216,300);
+   graph->SetPoint(18,702.6565401,325);
+   graph->SetPoint(19,700,328.3265417);
+   graph->SetPoint(20,675,340.5903696);
+   graph->SetPoint(21,650,338.2846063);
+   graph->SetPoint(22,625,331.9283404);
+   graph->SetPoint(23,607.4035617,325);
+   graph->SetPoint(24,600,321.6011145);
+   graph->SetPoint(25,575,306.7540352);
+   graph->SetPoint(26,563.9464019,300);
+   graph->SetPoint(27,550,289.8056853);
+   graph->SetPoint(28,525,275.0182581);
+   graph->SetPoint(29,524.9709494,275);
+   graph->SetPoint(30,500,256.4148335);
+   graph->SetPoint(31,488.2878251,250);
+   graph->SetPoint(32,475,240.3316843);
+   graph->SetPoint(33,452.8213639,225);
+   graph->SetPoint(34,450,222.9537441);
+   graph->SetPoint(35,425,204.2906287);
+   graph->SetPoint(36,418.3496527,200);
+   graph->SetPoint(37,400,186.2767606);
+   graph->SetPoint(38,383.9420411,175);
+   graph->SetPoint(39,375,166.5003494);
+   graph->SetPoint(40,353.0161584,150);
+   graph->SetPoint(41,350,147.3848172);
+   graph->SetPoint(42,325,125.0001289);
+   graph->SetPoint(43,324.9998711,125);
+   graph->SetPoint(44,300,100.0003475);
+   graph->SetPoint(45,299.9996525,100);
+   graph->SetPoint(46,275,75.00031852);
+   graph->SetPoint(47,274.9996815,75);
+   graph->SetPoint(48,250,50.0000681);
+   graph->SetPoint(49,249.9999319,50);
+   graph->SetPoint(50,238.8047691,25);
+   graph->SetPoint(51,234.3141614,0);
+   
+   TH1F *Graph_Graph_g_excl_xsec_exp320 = new TH1F("Graph_Graph_g_excl_xsec_exp320","g_excl_xsec_exp",100,183.5149,793.1063);
+   Graph_Graph_g_excl_xsec_exp320->SetMinimum(0);
+   Graph_Graph_g_excl_xsec_exp320->SetMaximum(374.6494);
+   Graph_Graph_g_excl_xsec_exp320->SetDirectory(0);
+   Graph_Graph_g_excl_xsec_exp320->SetStats(0);
+
+   ci = TColor::GetColor("#0000ff");
+   Graph_Graph_g_excl_xsec_exp320->SetLineColor(ci);
+   Graph_Graph_g_excl_xsec_exp320->GetXaxis()->SetLabelSize(0.035);
+   Graph_Graph_g_excl_xsec_exp320->GetYaxis()->SetLabelSize(0.035);
+   Graph_Graph_g_excl_xsec_exp320->GetYaxis()->SetTitleOffset(1.2);
+   graph->SetHistogram(Graph_Graph_g_excl_xsec_exp320);
+   
+   graph->Draw("l");
+   
+   graph = new TGraph(45);
+   graph->SetName("g_excl_xsec_exp_p1");
+   graph->SetTitle("g_excl_xsec_exp_p1");
+
+   ci = TColor::GetColor("#ff807e");
+   graph->SetFillColor(ci);
+
+   ci = TColor::GetColor("#ff0000");
+   graph->SetLineColor(ci);
+   graph->SetLineStyle(7);
+   graph->SetLineWidth(2);
+   graph->SetPoint(0,586.1183578,0);
+   graph->SetPoint(1,600,13.97616683);
+   graph->SetPoint(2,610.1932389,25);
+   graph->SetPoint(3,625,36.92988273);
+   graph->SetPoint(4,641.9843964,50);
+   graph->SetPoint(5,650,58.41527368);
+   graph->SetPoint(6,666.628205,75);
+   graph->SetPoint(7,675,88.70847724);
+   graph->SetPoint(8,681.7478999,100);
+   graph->SetPoint(9,686.7209338,125);
+   graph->SetPoint(10,684.7667478,150);
+   graph->SetPoint(11,681.6448801,175);
+   graph->SetPoint(12,676.7236051,200);
+   graph->SetPoint(13,675,209.6768042);
+   graph->SetPoint(14,671.7642639,225);
+   graph->SetPoint(15,665.2519601,250);
+   graph->SetPoint(16,650.804422,275);
+   graph->SetPoint(17,650,275.8605063);
+   graph->SetPoint(18,625,290.2493432);
+   graph->SetPoint(19,600,289.4759395);
+   graph->SetPoint(20,575,279.8518434);
+   graph->SetPoint(21,565.8258738,275);
+   graph->SetPoint(22,550,266.3077655);
+   graph->SetPoint(23,525,252.6404018);
+   graph->SetPoint(24,520.3247532,250);
+   graph->SetPoint(25,500,236.7289955);
+   graph->SetPoint(26,480.0687898,225);
+   graph->SetPoint(27,475,221.4512882);
+   graph->SetPoint(28,450,204.9174548);
+   graph->SetPoint(29,442.7029731,200);
+   graph->SetPoint(30,425,185.4202184);
+   graph->SetPoint(31,408.325266,175);
+   graph->SetPoint(32,400,167.8458607);
+   graph->SetPoint(33,380.0273853,150);
+   graph->SetPoint(34,375,145.2847005);
+   graph->SetPoint(35,350,125.383458);
+   graph->SetPoint(36,349.4709658,125);
+   graph->SetPoint(37,325,105.6930631);
+   graph->SetPoint(38,316.7608495,100);
+   graph->SetPoint(39,300,82.50439662);
+   graph->SetPoint(40,293.3580776,75);
+   graph->SetPoint(41,275.2078909,50);
+   graph->SetPoint(42,275,49.2923734);
+   graph->SetPoint(43,268.9403195,25);
+   graph->SetPoint(44,270.11425,0);
+   
+   TH1F *Graph_Graph_g_excl_xsec_exp_p1421 = new TH1F("Graph_Graph_g_excl_xsec_exp_p1421","g_excl_xsec_exp_p1",100,227.1623,728.499);
+   Graph_Graph_g_excl_xsec_exp_p1421->SetMinimum(0);
+   Graph_Graph_g_excl_xsec_exp_p1421->SetMaximum(319.2743);
+   Graph_Graph_g_excl_xsec_exp_p1421->SetDirectory(0);
+   Graph_Graph_g_excl_xsec_exp_p1421->SetStats(0);
+
+   ci = TColor::GetColor("#0000ff");
+   Graph_Graph_g_excl_xsec_exp_p1421->SetLineColor(ci);
+   Graph_Graph_g_excl_xsec_exp_p1421->GetXaxis()->SetLabelSize(0.035);
+   Graph_Graph_g_excl_xsec_exp_p1421->GetYaxis()->SetLabelSize(0.035);
+   Graph_Graph_g_excl_xsec_exp_p1421->GetYaxis()->SetTitleOffset(1.2);
+   graph->SetHistogram(Graph_Graph_g_excl_xsec_exp_p1421);
+   
+   graph->Draw("l");
+   
+   graph = new TGraph(61);
+   graph->SetName("g_excl_xsec_exp_m1");
+   graph->SetTitle("g_excl_xsec_exp_m1");
+
+   ci = TColor::GetColor("#ff807e");
+   graph->SetFillColor(ci);
+
+   ci = TColor::GetColor("#ff0000");
+   graph->SetLineColor(ci);
+   graph->SetLineStyle(7);
+   graph->SetLineWidth(2);
+   graph->SetPoint(0,700.7454822,0);
+   graph->SetPoint(1,725,21.50474714);
+   graph->SetPoint(2,728.7425897,25);
+   graph->SetPoint(3,750,40.95012954);
+   graph->SetPoint(4,760.5582412,50);
+   graph->SetPoint(5,775,68.07643177);
+   graph->SetPoint(6,779.8074129,75);
+   graph->SetPoint(7,791.0068237,100);
+   graph->SetPoint(8,797.3536082,125);
+   graph->SetPoint(9,800,149.2746428);
+   graph->SetPoint(10,800.0610336,150);
+   graph->SetPoint(11,800,151.4624143);
+   graph->SetPoint(12,798.5851028,175);
+   graph->SetPoint(13,794.6944538,200);
+   graph->SetPoint(14,790.332406,225);
+   graph->SetPoint(15,786.6420905,250);
+   graph->SetPoint(16,780.1927843,275);
+   graph->SetPoint(17,775,292.1310429);
+   graph->SetPoint(18,772.6015698,300);
+   graph->SetPoint(19,764.4081974,325);
+   graph->SetPoint(20,755.7285166,350);
+   graph->SetPoint(21,750,359.3221821);
+   graph->SetPoint(22,739.1457459,375);
+   graph->SetPoint(23,725,387.6837148);
+   graph->SetPoint(24,700,391.9310133);
+   graph->SetPoint(25,675,384.3448089);
+   graph->SetPoint(26,650,375.0633371);
+   graph->SetPoint(27,649.8927577,375);
+   graph->SetPoint(28,625,358.0358265);
+   graph->SetPoint(29,610.520502,350);
+   graph->SetPoint(30,600,343.0687401);
+   graph->SetPoint(31,575,328.2466226);
+   graph->SetPoint(32,569.9413148,325);
+   graph->SetPoint(33,550,309.70153);
+   graph->SetPoint(34,535.1529802,300);
+   graph->SetPoint(35,525,292.2612401);
+   graph->SetPoint(36,500,275.846459);
+   graph->SetPoint(37,498.6403996,275);
+   graph->SetPoint(38,475,258.2302363);
+   graph->SetPoint(39,462.1601147,250);
+   graph->SetPoint(40,450,240.2905158);
+   graph->SetPoint(41,425.7983189,225);
+   graph->SetPoint(42,425,224.3951046);
+   graph->SetPoint(43,400,200.0003484);
+   graph->SetPoint(44,399.9996516,200);
+   graph->SetPoint(45,375,175.0006012);
+   graph->SetPoint(46,374.9993988,175);
+   graph->SetPoint(47,350,150.0007521);
+   graph->SetPoint(48,349.9992479,150);
+   graph->SetPoint(49,325,125.0008915);
+   graph->SetPoint(50,324.9991085,125);
+   graph->SetPoint(51,300,100.0010599);
+   graph->SetPoint(52,299.9989401,100);
+   graph->SetPoint(53,275,75.00102365);
+   graph->SetPoint(54,274.9989763,75);
+   graph->SetPoint(55,250,50.00086247);
+   graph->SetPoint(56,249.9991375,50);
+   graph->SetPoint(57,225,25.0005114);
+   graph->SetPoint(58,224.9994886,25);
+   graph->SetPoint(59,200,0.000113774145);
+   graph->SetPoint(60,199.9998862,0);
+   
+   TH1F *Graph_Graph_g_excl_xsec_exp_m1522 = new TH1F("Graph_Graph_g_excl_xsec_exp_m1522","g_excl_xsec_exp_m1",100,139.9938,860.0671);
+   Graph_Graph_g_excl_xsec_exp_m1522->SetMinimum(0);
+   Graph_Graph_g_excl_xsec_exp_m1522->SetMaximum(431.1241);
+   Graph_Graph_g_excl_xsec_exp_m1522->SetDirectory(0);
+   Graph_Graph_g_excl_xsec_exp_m1522->SetStats(0);
+
+   ci = TColor::GetColor("#0000ff");
+   Graph_Graph_g_excl_xsec_exp_m1522->SetLineColor(ci);
+   Graph_Graph_g_excl_xsec_exp_m1522->GetXaxis()->SetLabelSize(0.035);
+   Graph_Graph_g_excl_xsec_exp_m1522->GetYaxis()->SetLabelSize(0.035);
+   Graph_Graph_g_excl_xsec_exp_m1522->GetYaxis()->SetTitleOffset(1.2);
+   graph->SetHistogram(Graph_Graph_g_excl_xsec_exp_m1522);
+   
+   graph->Draw("l");
+   
+   graph = new TGraph(55);
+   graph->SetName("g_excl_xsec_obs");
+   graph->SetTitle("g_excl_xsec_obs");
+
+   ci = TColor::GetColor("#cccccc");
+   graph->SetFillColor(ci);
+   graph->SetLineWidth(4);
+   graph->SetPoint(0,571.8442479,0);
+   graph->SetPoint(1,575,2.277507024);
+   graph->SetPoint(2,598.9891133,25);
+   graph->SetPoint(3,600,25.65127804);
+   graph->SetPoint(4,625,39.68776719);
+   graph->SetPoint(5,650,47.56776283);
+   graph->SetPoint(6,658.2101932,50);
+   graph->SetPoint(7,675,57.24308107);
+   graph->SetPoint(8,700,62.58796519);
+   graph->SetPoint(9,725,70.99632711);
+   graph->SetPoint(10,732.8913343,75);
+   graph->SetPoint(11,750,97.4915532);
+   graph->SetPoint(12,751.1984786,100);
+   graph->SetPoint(13,753.1597783,125);
+   graph->SetPoint(14,750,132.6025068);
+   graph->SetPoint(15,741.8622587,150);
+   graph->SetPoint(16,729.0542319,175);
+   graph->SetPoint(17,725,182.3346154);
+   graph->SetPoint(18,700,199.9725207);
+   graph->SetPoint(19,699.9742243,200);
+   graph->SetPoint(20,686.2103804,225);
+   graph->SetPoint(21,675,234.0490114);
+   graph->SetPoint(22,661.4513367,250);
+   graph->SetPoint(23,650,257.566899);
+   graph->SetPoint(24,625,268.3448409);
+   graph->SetPoint(25,608.5756074,275);
+   graph->SetPoint(26,600,276.5729105);
+   graph->SetPoint(27,575,275.4980663);
+   graph->SetPoint(28,573.8937714,275);
+   graph->SetPoint(29,550,258.7524897);
+   graph->SetPoint(30,536.55264,250);
+   graph->SetPoint(31,525,243.195877);
+   graph->SetPoint(32,500,228.4888096);
+   graph->SetPoint(33,493.8975191,225);
+   graph->SetPoint(34,475,212.5953688);
+   graph->SetPoint(35,450,202.3399196);
+   graph->SetPoint(36,446.9233675,200);
+   graph->SetPoint(37,425,182.5500502);
+   graph->SetPoint(38,405.9226639,175);
+   graph->SetPoint(39,400,172.0430953);
+   graph->SetPoint(40,375,157.8226418);
+   graph->SetPoint(41,357.6659785,150);
+   graph->SetPoint(42,350,145.0632531);
+   graph->SetPoint(43,325,125.0000513);
+   graph->SetPoint(44,324.9999487,125);
+   graph->SetPoint(45,300,100.0003728);
+   graph->SetPoint(46,299.9996272,100);
+   graph->SetPoint(47,275,75.00022336);
+   graph->SetPoint(48,274.9997766,75);
+   graph->SetPoint(49,250,50.00009107);
+   graph->SetPoint(50,249.9999089,50);
+   graph->SetPoint(51,237.5178062,25);
+   graph->SetPoint(52,230.3206417,0);
+   graph->SetPoint(53,1300,-1300);
+   graph->SetPoint(54,-1300,-1300);
+   
+   TH1F *Graph_Graph_g_excl_xsec_obs1923 = new TH1F("Graph_Graph_g_excl_xsec_obs1923","g_excl_xsec_obs",100,-1560,1560);
+   Graph_Graph_g_excl_xsec_obs1923->SetMinimum(-1457.657);
+   Graph_Graph_g_excl_xsec_obs1923->SetMaximum(434.2302);
+   Graph_Graph_g_excl_xsec_obs1923->SetDirectory(0);
+   Graph_Graph_g_excl_xsec_obs1923->SetStats(0);
+
+   ci = TColor::GetColor("#0000ff");
+   Graph_Graph_g_excl_xsec_obs1923->SetLineColor(ci);
+   Graph_Graph_g_excl_xsec_obs1923->GetXaxis()->SetLabelSize(0.035);
+   Graph_Graph_g_excl_xsec_obs1923->GetYaxis()->SetLabelSize(0.035);
+   Graph_Graph_g_excl_xsec_obs1923->GetYaxis()->SetTitleOffset(1.2);
+   graph->SetHistogram(Graph_Graph_g_excl_xsec_obs1923);
+   
+   graph->Draw("l");
+   
+   graph = new TGraph(55);
+   graph->SetName("g_excl_xsec_obs_p1");
+   graph->SetTitle("g_excl_xsec_obs_p1");
+
+   ci = TColor::GetColor("#ff807e");
+   graph->SetFillColor(ci);
+   graph->SetLineWidth(2);
+   graph->SetPoint(0,597.2190212,0);
+   graph->SetPoint(1,600,2.570275741);
+   graph->SetPoint(2,625,24.01601166);
+   graph->SetPoint(3,626.9369272,25);
+   graph->SetPoint(4,650,32.48972037);
+   graph->SetPoint(5,675,39.21908305);
+   graph->SetPoint(6,700,42.85138563);
+   graph->SetPoint(7,725,48.99791089);
+   graph->SetPoint(8,727.6529993,50);
+   graph->SetPoint(9,750,60.71544386);
+   graph->SetPoint(10,766.2539709,75);
+   graph->SetPoint(11,775,91.09662528);
+   graph->SetPoint(12,779.4811909,100);
+   graph->SetPoint(13,783.5700004,125);
+   graph->SetPoint(14,778.3227431,150);
+   graph->SetPoint(15,775,165.5479972);
+   graph->SetPoint(16,771.5650995,175);
+   graph->SetPoint(17,759.1015705,200);
+   graph->SetPoint(18,750,214.7806105);
+   graph->SetPoint(19,741.3356787,225);
+   graph->SetPoint(20,725,237.3325325);
+   graph->SetPoint(21,710.9287644,250);
+   graph->SetPoint(22,700,269.7870202);
+   graph->SetPoint(23,687.1414628,275);
+   graph->SetPoint(24,675,277.6859909);
+   graph->SetPoint(25,650,283.1943176);
+   graph->SetPoint(26,625,289.4302477);
+   graph->SetPoint(27,600,288.278738);
+   graph->SetPoint(28,575,283.7279729);
+   graph->SetPoint(29,555.9699315,275);
+   graph->SetPoint(30,550,270.8788189);
+   graph->SetPoint(31,525,252.682908);
+   graph->SetPoint(32,520.6227242,250);
+   graph->SetPoint(33,500,236.2877761);
+   graph->SetPoint(34,480.4768213,225);
+   graph->SetPoint(35,475,221.3735648);
+   graph->SetPoint(36,450,209.4476803);
+   graph->SetPoint(37,437.6484699,200);
+   graph->SetPoint(38,425,189.8913119);
+   graph->SetPoint(39,400,178.5667571);
+   graph->SetPoint(40,390.7452161,175);
+   graph->SetPoint(41,375,165.7444497);
+   graph->SetPoint(42,350,150.0001778);
+   graph->SetPoint(43,349.9998222,150);
+   graph->SetPoint(44,325,125.0003575);
+   graph->SetPoint(45,324.9996425,125);
+   graph->SetPoint(46,300,100.0006453);
+   graph->SetPoint(47,299.9993547,100);
+   graph->SetPoint(48,275,75.00051578);
+   graph->SetPoint(49,274.9994842,75);
+   graph->SetPoint(50,250,50.00040083);
+   graph->SetPoint(51,249.9995992,50);
+   graph->SetPoint(52,227.8608905,25);
+   graph->SetPoint(53,225,16.63854525);
+   graph->SetPoint(54,219.0040426,0);
+   
+   TH1F *Graph_Graph_g_excl_xsec_obs_p1724 = new TH1F("Graph_Graph_g_excl_xsec_obs_p1724","g_excl_xsec_obs_p1",100,162.5474,840.0266);
+   Graph_Graph_g_excl_xsec_obs_p1724->SetMinimum(0);
+   Graph_Graph_g_excl_xsec_obs_p1724->SetMaximum(318.3733);
+   Graph_Graph_g_excl_xsec_obs_p1724->SetDirectory(0);
+   Graph_Graph_g_excl_xsec_obs_p1724->SetStats(0);
+
+   ci = TColor::GetColor("#0000ff");
+   Graph_Graph_g_excl_xsec_obs_p1724->SetLineColor(ci);
+   Graph_Graph_g_excl_xsec_obs_p1724->GetXaxis()->SetLabelSize(0.035);
+   Graph_Graph_g_excl_xsec_obs_p1724->GetYaxis()->SetLabelSize(0.035);
+   Graph_Graph_g_excl_xsec_obs_p1724->GetYaxis()->SetTitleOffset(1.2);
+   graph->SetHistogram(Graph_Graph_g_excl_xsec_obs_p1724);
+   
+   graph->Draw("l");
+   
+   graph = new TGraph(48);
+   graph->SetName("g_excl_xsec_obs_m1");
+   graph->SetTitle("g_excl_xsec_obs_m1");
+
+   ci = TColor::GetColor("#ff807e");
+   graph->SetFillColor(ci);
+   graph->SetLineWidth(2);
+   graph->SetPoint(0,541.5763949,0);
+   graph->SetPoint(1,550,7.198877978);
+   graph->SetPoint(2,575,24.29997905);
+   graph->SetPoint(3,575.7177834,25);
+   graph->SetPoint(4,600,41.0253351);
+   graph->SetPoint(5,615.8256057,50);
+   graph->SetPoint(6,625,57.34143624);
+   graph->SetPoint(7,650,68.35808038);
+   graph->SetPoint(8,664.5803704,75);
+   graph->SetPoint(9,675,83.62715854);
+   graph->SetPoint(10,700,95.24033664);
+   graph->SetPoint(11,705.5562891,100);
+   graph->SetPoint(12,706.6868713,125);
+   graph->SetPoint(13,700,138.9901399);
+   graph->SetPoint(14,695.1594303,150);
+   graph->SetPoint(15,682.6434376,175);
+   graph->SetPoint(16,675,183.6071474);
+   graph->SetPoint(17,658.780074,200);
+   graph->SetPoint(18,650,208.2429309);
+   graph->SetPoint(19,637.3654438,225);
+   graph->SetPoint(20,625,239.0429645);
+   graph->SetPoint(21,609.9439294,250);
+   graph->SetPoint(22,600,254.8927757);
+   graph->SetPoint(23,575,256.2166718);
+   graph->SetPoint(24,561.6228804,250);
+   graph->SetPoint(25,550,244.9040547);
+   graph->SetPoint(26,525,232.5032702);
+   graph->SetPoint(27,510.7985779,225);
+   graph->SetPoint(28,500,218.4174524);
+   graph->SetPoint(29,475,203.8171729);
+   graph->SetPoint(30,464.9594812,200);
+   graph->SetPoint(31,450,192.7518849);
+   graph->SetPoint(32,425,175.2087885);
+   graph->SetPoint(33,424.4802789,175);
+   graph->SetPoint(34,400,162.6275759);
+   graph->SetPoint(35,375.2308379,150);
+   graph->SetPoint(36,375,149.8442079);
+   graph->SetPoint(37,350,133.684711);
+   graph->SetPoint(38,338.1816935,125);
+   graph->SetPoint(39,325,116.4034441);
+   graph->SetPoint(40,300,100.0000064);
+   graph->SetPoint(41,299.9999936,100);
+   graph->SetPoint(42,280.260156,75);
+   graph->SetPoint(43,275,69.04758273);
+   graph->SetPoint(44,259.3614878,50);
+   graph->SetPoint(45,250,32.28569944);
+   graph->SetPoint(46,247.0706847,25);
+   graph->SetPoint(47,243.0698978,0);
+   
+   TH1F *Graph_Graph_g_excl_xsec_obs_m1825 = new TH1F("Graph_Graph_g_excl_xsec_obs_m1825","g_excl_xsec_obs_m1",100,196.7082,753.0486);
+   Graph_Graph_g_excl_xsec_obs_m1825->SetMinimum(0);
+   Graph_Graph_g_excl_xsec_obs_m1825->SetMaximum(281.8383);
+   Graph_Graph_g_excl_xsec_obs_m1825->SetDirectory(0);
+   Graph_Graph_g_excl_xsec_obs_m1825->SetStats(0);
+
+   ci = TColor::GetColor("#0000ff");
+   Graph_Graph_g_excl_xsec_obs_m1825->SetLineColor(ci);
+   Graph_Graph_g_excl_xsec_obs_m1825->GetXaxis()->SetLabelSize(0.035);
+   Graph_Graph_g_excl_xsec_obs_m1825->GetYaxis()->SetLabelSize(0.035);
+   Graph_Graph_g_excl_xsec_obs_m1825->GetYaxis()->SetTitleOffset(1.2);
+   graph->SetHistogram(Graph_Graph_g_excl_xsec_obs_m1825);
+   
+   graph->Draw("l");
+   
+   TH2D *emptyHisto__2 = new TH2D("emptyHisto__2","",1,150,900,1,0,600);
+   emptyHisto__2->SetDirectory(0);
+
+   ci = TColor::GetColor("#0000ff");
+   emptyHisto__2->SetLineColor(ci);
+   emptyHisto__2->GetXaxis()->SetTitle("m_{#tilde{t}} (GeV)");
+   emptyHisto__2->GetXaxis()->SetNdivisions(409);
+   emptyHisto__2->GetXaxis()->SetLabelFont(42);
+   emptyHisto__2->GetXaxis()->SetTitleSize(0.05);
+   emptyHisto__2->GetXaxis()->SetTitleOffset(1.2);
+   emptyHisto__2->GetXaxis()->SetTitleFont(42);
+   emptyHisto__2->GetYaxis()->SetTitle("m_{#tilde{#chi}^{0}} (GeV)");
+   emptyHisto__2->GetYaxis()->SetNdivisions(408);
+   emptyHisto__2->GetYaxis()->SetLabelFont(42);
+   emptyHisto__2->GetYaxis()->SetTitleSize(0.05);
+   emptyHisto__2->GetYaxis()->SetTitleOffset(1.35);
+   emptyHisto__2->GetYaxis()->SetTitleFont(42);
+   emptyHisto__2->Draw("sameaxis");
+   
+   graph = new TGraph(5);
+   graph->SetName("white");
+   graph->SetTitle("white");
+   graph->SetLineWidth(3);
+   graph->SetPoint(0,150,600);
+   graph->SetPoint(1,900,600);
+   graph->SetPoint(2,900,450);
+   graph->SetPoint(3,150,450);
+   graph->SetPoint(4,150,600);
+   
+   TH1F *Graph_white26 = new TH1F("Graph_white26","white",100,75,975);
+   Graph_white26->SetMinimum(435);
+   Graph_white26->SetMaximum(615);
+   Graph_white26->SetDirectory(0);
+   Graph_white26->SetStats(0);
+
+   ci = TColor::GetColor("#0000ff");
+   Graph_white26->SetLineColor(ci);
+   Graph_white26->GetXaxis()->SetLabelSize(0.035);
+   Graph_white26->GetYaxis()->SetLabelSize(0.035);
+   Graph_white26->GetYaxis()->SetTitleOffset(1.2);
+   graph->SetHistogram(Graph_white26);
+   
+   graph->Draw("f");
+   
+   graph = new TGraph(5);
+   graph->SetName("white");
+   graph->SetTitle("white");
+   graph->SetLineWidth(3);
+   graph->SetPoint(0,150,600);
+   graph->SetPoint(1,900,600);
+   graph->SetPoint(2,900,450);
+   graph->SetPoint(3,150,450);
+   graph->SetPoint(4,150,600);
+   
+   TH1F *Graph_Graph_white2627 = new TH1F("Graph_Graph_white2627","white",100,75,975);
+   Graph_Graph_white2627->SetMinimum(435);
+   Graph_Graph_white2627->SetMaximum(615);
+   Graph_Graph_white2627->SetDirectory(0);
+   Graph_Graph_white2627->SetStats(0);
+
+   ci = TColor::GetColor("#0000ff");
+   Graph_Graph_white2627->SetLineColor(ci);
+   Graph_Graph_white2627->GetXaxis()->SetLabelSize(0.035);
+   Graph_Graph_white2627->GetYaxis()->SetLabelSize(0.035);
+   Graph_Graph_white2627->GetYaxis()->SetTitleOffset(1.2);
+   graph->SetHistogram(Graph_Graph_white2627);
+   
+   graph->Draw("l");
+   TLatex *   tex = new TLatex(0.25,0.98,"CMS, L = 19.4 fb^{-1}, #sqrt{s} = 8 TeV");
+tex->SetNDC();
+   tex->SetTextAlign(13);
+   tex->SetTextFont(42);
+   tex->SetTextSize(0.038);
+   tex->SetLineWidth(2);
+   tex->Draw();
+      tex = new TLatex(0.16,0.9,"pp #rightarrow #tilde{t}#tilde{t}, #tilde{t} #rightarrow b#tilde{#chi}^{#pm}_{1}");
+tex->SetNDC();
+   tex->SetTextAlign(13);
+   tex->SetTextFont(42);
+   tex->SetTextSize(0.04);
+   tex->SetLineWidth(2);
+   tex->Draw();
+      tex = new TLatex(0.56,0.88,"NLO+NLL exclusion");
+tex->SetNDC();
+   tex->SetTextAlign(13);
+   tex->SetTextFont(42);
+   tex->SetTextSize(0.03);
+   tex->SetLineWidth(2);
+   tex->Draw();
+      tex = new TLatex(0.55,0.82,"m_{#tilde{#chi}^{#pm}}-m_{#tilde{#chi}^{0}} = 5 GeV");
+tex->SetNDC();
+   tex->SetTextAlign(13);
+   tex->SetTextFont(42);
+   tex->SetTextSize(0.038);
+   tex->SetLineWidth(2);
+   tex->Draw();
+      tex = new TLatex(0.18,0.7,"Razor 0L Asymptotic");
+tex->SetNDC();
+   tex->SetTextAlign(13);
+   tex->SetTextFont(42);
+   tex->SetTextSize(0.038);
+   tex->SetLineWidth(2);
+   tex->Draw();
+      tex = new TLatex(232,510,"Observed #pm 1 #sigma_{theory}");
+   tex->SetTextFont(42);
+   tex->SetTextSize(0.04);
+   tex->SetLineWidth(2);
+   tex->Draw();
+      tex = new TLatex(232,471,"Expected #pm 1 #sigma_{experiment}");
+   tex->SetTextFont(42);
+   tex->SetTextSize(0.04);
+   tex->SetLineWidth(2);
+   tex->Draw();
+   
+   graph = new TGraph(2);
+   graph->SetName("LObs");
+   graph->SetTitle("LObs");
+   graph->SetFillColor(1);
+   graph->SetLineWidth(4);
+   graph->SetMarkerStyle(20);
+   graph->SetPoint(0,172,519);
+   graph->SetPoint(1,225,519);
+   
+   TH1F *Graph_LObs28 = new TH1F("Graph_LObs28","LObs",100,166.7,230.3);
+   Graph_LObs28->SetMinimum(518.9);
+   Graph_LObs28->SetMaximum(520.1);
+   Graph_LObs28->SetDirectory(0);
+   Graph_LObs28->SetStats(0);
+
+   ci = TColor::GetColor("#0000ff");
+   Graph_LObs28->SetLineColor(ci);
+   Graph_LObs28->GetXaxis()->SetLabelSize(0.035);
+   Graph_LObs28->GetYaxis()->SetLabelSize(0.035);
+   Graph_LObs28->GetYaxis()->SetTitleOffset(1.2);
+   graph->SetHistogram(Graph_LObs28);
+   
+   graph->Draw("l");
+   
+   graph = new TGraph(2);
+   graph->SetName("LObsM");
+   graph->SetTitle("LObsM");
+   graph->SetFillColor(1);
+   graph->SetLineWidth(2);
+   graph->SetMarkerStyle(20);
+   graph->SetPoint(0,172,510);
+   graph->SetPoint(1,225,510);
+   
+   TH1F *Graph_LObsM29 = new TH1F("Graph_LObsM29","LObsM",100,166.7,230.3);
+   Graph_LObsM29->SetMinimum(509.9);
+   Graph_LObsM29->SetMaximum(511.1);
+   Graph_LObsM29->SetDirectory(0);
+   Graph_LObsM29->SetStats(0);
+
+   ci = TColor::GetColor("#0000ff");
+   Graph_LObsM29->SetLineColor(ci);
+   Graph_LObsM29->GetXaxis()->SetLabelSize(0.035);
+   Graph_LObsM29->GetYaxis()->SetLabelSize(0.035);
+   Graph_LObsM29->GetYaxis()->SetTitleOffset(1.2);
+   graph->SetHistogram(Graph_LObsM29);
+   
+   graph->Draw("l");
+   
+   graph = new TGraph(2);
+   graph->SetName("LObsP");
+   graph->SetTitle("LObsP");
+   graph->SetFillColor(1);
+   graph->SetLineWidth(2);
+   graph->SetMarkerStyle(20);
+   graph->SetPoint(0,172,528);
+   graph->SetPoint(1,225,528);
+   
+   TH1F *Graph_LObsP30 = new TH1F("Graph_LObsP30","LObsP",100,166.7,230.3);
+   Graph_LObsP30->SetMinimum(527.9);
+   Graph_LObsP30->SetMaximum(529.1);
+   Graph_LObsP30->SetDirectory(0);
+   Graph_LObsP30->SetStats(0);
+
+   ci = TColor::GetColor("#0000ff");
+   Graph_LObsP30->SetLineColor(ci);
+   Graph_LObsP30->GetXaxis()->SetLabelSize(0.035);
+   Graph_LObsP30->GetYaxis()->SetLabelSize(0.035);
+   Graph_LObsP30->GetYaxis()->SetTitleOffset(1.2);
+   graph->SetHistogram(Graph_LObsP30);
+   
+   graph->Draw("l");
+   
+   graph = new TGraph(2);
+   graph->SetName("LExp");
+   graph->SetTitle("LExp");
+   graph->SetFillColor(1);
+
+   ci = TColor::GetColor("#ff0000");
+   graph->SetLineColor(ci);
+   graph->SetLineStyle(7);
+   graph->SetLineWidth(4);
+   graph->SetPoint(0,172,480);
+   graph->SetPoint(1,225,480);
+   
+   TH1F *Graph_LExp31 = new TH1F("Graph_LExp31","LExp",100,166.7,230.3);
+   Graph_LExp31->SetMinimum(479.9);
+   Graph_LExp31->SetMaximum(481.1);
+   Graph_LExp31->SetDirectory(0);
+   Graph_LExp31->SetStats(0);
+
+   ci = TColor::GetColor("#0000ff");
+   Graph_LExp31->SetLineColor(ci);
+   Graph_LExp31->GetXaxis()->SetLabelSize(0.035);
+   Graph_LExp31->GetYaxis()->SetLabelSize(0.035);
+   Graph_LExp31->GetYaxis()->SetTitleOffset(1.2);
+   graph->SetHistogram(Graph_LExp31);
+   
+   graph->Draw("l");
+   
+   graph = new TGraph(2);
+   graph->SetName("LExpM");
+   graph->SetTitle("LExpM");
+   graph->SetFillColor(1);
+
+   ci = TColor::GetColor("#ff0000");
+   graph->SetLineColor(ci);
+   graph->SetLineStyle(7);
+   graph->SetLineWidth(2);
+   graph->SetPoint(0,172,471);
+   graph->SetPoint(1,225,471);
+   
+   TH1F *Graph_LExpM32 = new TH1F("Graph_LExpM32","LExpM",100,166.7,230.3);
+   Graph_LExpM32->SetMinimum(470.9);
+   Graph_LExpM32->SetMaximum(472.1);
+   Graph_LExpM32->SetDirectory(0);
+   Graph_LExpM32->SetStats(0);
+
+   ci = TColor::GetColor("#0000ff");
+   Graph_LExpM32->SetLineColor(ci);
+   Graph_LExpM32->GetXaxis()->SetLabelSize(0.035);
+   Graph_LExpM32->GetYaxis()->SetLabelSize(0.035);
+   Graph_LExpM32->GetYaxis()->SetTitleOffset(1.2);
+   graph->SetHistogram(Graph_LExpM32);
+   
+   graph->Draw("l");
+   
+   graph = new TGraph(2);
+   graph->SetName("LExpP");
+   graph->SetTitle("LExpP");
+   graph->SetFillColor(1);
+
+   ci = TColor::GetColor("#ff0000");
+   graph->SetLineColor(ci);
+   graph->SetLineStyle(7);
+   graph->SetLineWidth(2);
+   graph->SetPoint(0,172,489);
+   graph->SetPoint(1,225,489);
+   
+   TH1F *Graph_LExpP33 = new TH1F("Graph_LExpP33","LExpP",100,166.7,230.3);
+   Graph_LExpP33->SetMinimum(488.9);
+   Graph_LExpP33->SetMaximum(490.1);
+   Graph_LExpP33->SetDirectory(0);
+   Graph_LExpP33->SetStats(0);
+
+   ci = TColor::GetColor("#0000ff");
+   Graph_LExpP33->SetLineColor(ci);
+   Graph_LExpP33->GetXaxis()->SetLabelSize(0.035);
+   Graph_LExpP33->GetYaxis()->SetLabelSize(0.035);
+   Graph_LExpP33->GetYaxis()->SetTitleOffset(1.2);
+   graph->SetHistogram(Graph_LExpP33);
+   
+   graph->Draw("l");
+   cCONT_->Modified();
+   cCONT_->cd();
+   cCONT_->SetSelected(cCONT_);
+}
