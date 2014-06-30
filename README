@@ -11,12 +11,12 @@ This README gives basic instructions on how to use this code.
 3. create "interpretation" histogram 
 4. create the single lepton card
 5. create all the single lepton cards
-5. create the combined stop cards
-6. run the cards interactively
-7. run the cards on the grid
-8. extracting the limits from the grid output
-9. Interpolating and smoothing the xsec plots
-8. creating exclusion plots
+6. Create all the Razor Cards
+7. create the combined stop cards
+8. run the cards interactively
+9. run the cards on the grid
+10. extracting the limits from the grid output
+11. creating exclusion plots
 
 --------------------------------------------------------------------------------
 1. Checkout and compile:
@@ -214,7 +214,7 @@ In order to mass produce the
 A wrapper python script can be used to generate the leptons cards over the
 whole plane and for each signal region: scripts/stop_create_onelep_cards.py
 
-python scripts/stop_create_onlep_cards.py 
+python scripts/stop_create_onelep_cards.py 
 
 The defaults are the values needed for higg's combine.
 
@@ -234,11 +234,26 @@ Options:
   --method=METHOD       method to use (default is 4)
 
 --------------------------------------------------------------------------------
-5. Create the Combined Stop Cards
+6. Create all the Razor Cards
 --------------------------------------------------------------------------------
 
-To combine with razor cards, the original razor cards and associated ROOT
-files have been checked into the repository under cards/t2tt/razor/. You can
+The razor cards are provided by Javier; however, he doesn't provide a single
+card for the "hadronic" channels but provides channels for "mulitjet" and
+"jet2b". To faciliate the combination, I combine these into a "hadronic" card
+with the hard coded script:
+
+scripts/stop_create_razor_cards.sh
+
+When Javier gives you cards, you will need to run this script to create
+the "hadronic" cards and copy the files (and ROOT files) to the specified
+directory.
+
+--------------------------------------------------------------------------------
+7. Create the Combined Stop Cards
+--------------------------------------------------------------------------------
+
+To combine with razor cards, the hadronic razor cards and associated ROOT
+files have been checked into the repository under cards/<sample>/razor/. You can
 combine them with combineCards.py that ships with Higg's combine. I have
 written a wrapper script to add up all the cards need for the combination:
 scripts/stop_create_combined_cards.py
@@ -278,7 +293,7 @@ Presumably at this point, you have all the cards you need for all 3 possibilitie
 all in the same folder given by the combine_cards option.
 
 --------------------------------------------------------------------------------
-6. run the cards interactively
+8. run the cards interactively
 --------------------------------------------------------------------------------
 
 You run the cards individually using the higg's combine on the command line. In
@@ -302,7 +317,7 @@ NOTE: this is the same script that is run on the grid in then next step.
 
 Example:
 
-[rwk7t@tensor StopCombination]$  ./scripts/stop_produce_limit.py --card cards/t2tt/combined/t2tt_200_100_bdt5.txt --method 1 --seed 1234
+[rwk7t@tensor StopCombination]$  ./scripts/stop_produce_limit.py --card cards/t2tt/combined/onelep_t2tt_200_100_bdt5.txt --method 1 --seed 1234
 Loading CMSSW FWLite.
 Loading AnalysisTools
 Loading Stop tools
@@ -321,26 +336,108 @@ Done in 0.00 min (cpu), 0.00 min (real)
 cp higgsCombine_t2tt_200_100_bdt5.Asymptotic.mH120.1234.root combine_output_t2tt_200_100_bdt5.root
 
 --------------------------------------------------------------------------------
-7. run the cards on the grid
+9. run the cards on the grid
 --------------------------------------------------------------------------------
 
+To run the cards on the grid using condor, the appropriate files are in the batch directory:
+
+# prepare the inputs
+cd batch/job_inputs
+./copy_files.sh 
+
+# prepare the condor files
+./writeAllConfig.sh
+
+# run them
+condor_submit <file>.cmd
+
 --------------------------------------------------------------------------------
-8. extracting the limits from the grid output
+10. extracting the limits from the grid output
 --------------------------------------------------------------------------------
 
-use macros/CreateLimitResultsTrees.C.
-
-Edit the hard coded values to reflect which sample you wish to use and where is the grid output.
-
-    // hard coded meta-data
-    const std::string sample_name        = "t2tt";
-    const std::string method             = "hybrid";
-    const std::string label              = "v0";
-    const std::string limit_results_path = Form("/hadoop/cms/store/user/rwkelley/limits/stopcombo/%s/%s/%x", label.c_str(), method.c_str(), sample_name.c_str());
-    const std::string output_file_stem   = Form("output/limit_trees/%s/%s/%s/limit_result_ntuple", label.c_str(), method.c_str(), sample_name.c_str());
+use macros/CreateLimitResultsTrees.C to create a TTree with the limit outputs.
 
 root [9] .x macros/CreateLimitResultsTrees.C+
 
 --------------------------------------------------------------------------------
-8. creating exclusion plots
+11. creating exclusion plots
 --------------------------------------------------------------------------------
+
+use scripts/stop_create_contour_hists.py to create the interpolated and smooth
+curves and 2D UL histograms.
+
+[rwk7t@tensor StopCombination]$  ./scripts/stop_create_contour_hists.py --help
+Usage: stop_create_contour_hists.py [options]
+
+Options:
+  -h, --help            show this help message and exit
+  --analysis=ANALYSIS   analysis type: onlep, razor, combined
+  --sample=SAMPLE       sample to use (only t2tt for now)
+  --xsec_file_name=XSEC_FILE_NAME
+                        cross-section file
+  --label=LABEL         label for version
+  --method=METHOD       method for limits: asymptotic or hybrid
+  --orig_curve_file=ORIG_CURVE_FILE
+                        original curves file from AN-2013-89: blank means
+                        don't use
+
+example:
+
+[rwk7t@tensor StopCombination]$  ./scripts/stop_create_contour_hists.py --sample t2tt --analysis combined --method asymptotic
+Loading CMSSW FWLite.
+Loading AnalysisTools
+Loading Stop tools
+Info in <TCanvas::MakeDefCanvas>:  created default TCanvas with name c1
+TCanvas::Constructor:0: RuntimeWarning: Deleting canvas with same name: c1
+Info in <TCanvas::Print>: pdf file plots/limits/v0/asymptotic/t2tt/combined/h_ul_xsec_exp.pdf has been created
+Info in <TCanvas::Print>: pdf file plots/limits/v0/asymptotic/t2tt/combined/h_ul_xsec_exp_p1.pdf has been created
+Info in <TCanvas::Print>: pdf file plots/limits/v0/asymptotic/t2tt/combined/h_ul_xsec_exp_m1.pdf has been created
+Info in <TCanvas::Print>: pdf file plots/limits/v0/asymptotic/t2tt/combined/h_ul_xsec_obs.pdf has been created
+Info in <TCanvas::Print>: pdf file plots/limits/v0/asymptotic/t2tt/combined/h_ul_xsec_exp_smooth.pdf has been created
+Info in <TCanvas::Print>: pdf file plots/limits/v0/asymptotic/t2tt/combined/h_ul_xsec_exp_p1_smooth.pdf has been created
+Info in <TCanvas::Print>: pdf file plots/limits/v0/asymptotic/t2tt/combined/h_ul_xsec_exp_m1_smooth.pdf has been created
+Info in <TCanvas::Print>: pdf file plots/limits/v0/asymptotic/t2tt/combined/h_ul_xsec_obs_smooth.pdf has been created
+Info in <TCanvas::Print>: pdf file plots/limits/v0/asymptotic/t2tt/combined/g_excl_xsec_obs.pdf has been created
+Info in <TCanvas::Print>: pdf file plots/limits/v0/asymptotic/t2tt/combined/g_excl_xsec_obs_p1.pdf has been created
+Info in <TCanvas::Print>: pdf file plots/limits/v0/asymptotic/t2tt/combined/g_excl_xsec_obs_m1.pdf has been created
+Info in <TCanvas::Print>: pdf file plots/limits/v0/asymptotic/t2tt/combined/g_excl_xsec_exp.pdf has been created
+Info in <TCanvas::Print>: pdf file plots/limits/v0/asymptotic/t2tt/combined/g_excl_xsec_exp_p1.pdf has been created
+Info in <TCanvas::Print>: pdf file plots/limits/v0/asymptotic/t2tt/combined/g_excl_xsec_exp_m1.pdf has been created
+Info in <TCanvas::Print>: pdf file plots/limits/v0/asymptotic/t2tt/combined/hR_obs_smallDM.pdf has been created
+Info in <TCanvas::Print>: pdf file plots/limits/v0/asymptotic/t2tt/combined/hR_obsp1_smallDM.pdf has been created
+Info in <TCanvas::Print>: pdf file plots/limits/v0/asymptotic/t2tt/combined/hR_obsm1_smallDM.pdf has been created
+Info in <TCanvas::Print>: pdf file plots/limits/v0/asymptotic/t2tt/combined/hR_exp_smallDM.pdf has been created
+Info in <TCanvas::Print>: pdf file plots/limits/v0/asymptotic/t2tt/combined/hR_expp1_smallDM.pdf has been created
+Info in <TCanvas::Print>: pdf file plots/limits/v0/asymptotic/t2tt/combined/hR_expm1_smallDM.pdf has been created
+Info in <TCanvas::Print>: pdf file plots/limits/v0/asymptotic/t2tt/combined/g_excl_xsec_obs_2.pdf has been created
+Info in <TCanvas::Print>: pdf file plots/limits/v0/asymptotic/t2tt/combined/g_excl_xsec_obs_p1_2.pdf has been created
+Info in <TCanvas::Print>: pdf file plots/limits/v0/asymptotic/t2tt/combined/g_excl_xsec_obs_m1_2.pdf has been created
+Info in <TCanvas::Print>: pdf file plots/limits/v0/asymptotic/t2tt/combined/g_excl_xsec_exp_2.pdf has been created
+Info in <TCanvas::Print>: pdf file plots/limits/v0/asymptotic/t2tt/combined/g_excl_xsec_exp_p1_2.pdf has been created
+Info in <TCanvas::Print>: pdf file plots/limits/v0/asymptotic/t2tt/combined/g_excl_xsec_exp_m1_2.pdf has been created
+Info in <TCanvas::Print>: pdf file plots/limits/v0/asymptotic/t2tt/combined/t2tt_interp_combined.pdf has been created
+
+The "polished" plot can be done using the PlotsSMS which was checked into the AnalysisTools:
+
+[rwk7t@tensor StopCombination]$  python $CMSSW_BASE/src/AnalysisTools/PlotsSMS/python/makeSMSplots.py pset/T2tt_SUS13011_HYBRID.cfg plots/limits/v0/hybrid/t2tt/onelep/T2tt_ONELEP_HYBRID_ 
+Loading CMSSW FWLite.
+Loading AnalysisTools
+Loading Stop tools
+Info in <TCanvas::Print>: eps file plots/limits/v0/hybrid/t2tt/onelep/T2tt_ONELEP_HYBRID_XSEC.eps has been created
+Info in <TCanvas::Print>: png file plots/limits/v0/hybrid/t2tt/onelep/T2tt_ONELEP_HYBRID_XSEC.png has been created
+Info in <TCanvas::Print>: pdf file plots/limits/v0/hybrid/t2tt/onelep/T2tt_ONELEP_HYBRID_XSEC.pdf has been created
+Info in <TCanvas::SaveSource>: C++ Macro file: plots/limits/v0/hybrid/t2tt/onelep/T2tt_ONELEP_HYBRID_XSEC.C has been generated
+TFile::Append:0: RuntimeWarning: Replacing existing TH1: emptyHisto (Potential memory leak).
+TCanvas::Constructor:0: RuntimeWarning: Deleting canvas with same name: cCONT_
+Info in <TCanvas::Print>: eps file plots/limits/v0/hybrid/t2tt/onelep/T2tt_ONELEP_HYBRID_CONT.eps has been created
+Info in <TCanvas::Print>: png file plots/limits/v0/hybrid/t2tt/onelep/T2tt_ONELEP_HYBRID_CONT.png has been created
+Info in <TCanvas::Print>: pdf file plots/limits/v0/hybrid/t2tt/onelep/T2tt_ONELEP_HYBRID_CONT.pdf has been created
+Info in <TCanvas::SaveSource>: C++ Macro file: plots/limits/v0/hybrid/t2tt/onelep/T2tt_ONELEP_HYBRID_CONT.C has been generated
+TFile::Append:0: RuntimeWarning: Replacing existing TH1: emptyHisto (Potential memory leak).
+TFile::Append:0: RuntimeWarning: Replacing existing TH1: h_ul_xsec_exp_smoothEMPTY (Potential memory leak).
+Info in <TCanvas::Print>: eps file plots/limits/v0/hybrid/t2tt/onelep/T2tt_ONELEP_HYBRID_BAND.eps has been created
+Info in <TCanvas::Print>: png file plots/limits/v0/hybrid/t2tt/onelep/T2tt_ONELEP_HYBRID_BAND.png has been created
+Info in <TCanvas::Print>: pdf file plots/limits/v0/hybrid/t2tt/onelep/T2tt_ONELEP_HYBRID_BAND.pdf has been created
+Info in <TCanvas::SaveSource>: C++ Macro file: plots/limits/v0/hybrid/t2tt/onelep/T2tt_ONELEP_HYBRID_BAND.C has been generated
+
+A simple wrapper script has been written to do them all samples at once:  scripts/stop_all_smooth_contour_hists.sh 
