@@ -37,20 +37,21 @@ function make_sms_plots
 
 label="v0"
 
-# make_sms_plots "t2tt"       "asymptotic" $label
-# make_sms_plots "t2tb_br0p5" "asymptotic" $label
-# make_sms_plots "t2tb_br0p7" "asymptotic" $label
-# make_sms_plots "t2tb_br0p3" "asymptotic" $label
-# make_sms_plots "t2bw"       "asymptotic" $label
+make_sms_plots "t2tt"       "asymptotic" $label
+make_sms_plots "t2tb_br0p5" "asymptotic" $label
+make_sms_plots "t2tb_br0p7" "asymptotic" $label
+make_sms_plots "t2tb_br0p3" "asymptotic" $label
+make_sms_plots "t2bw"       "asymptotic" $label
 
-# make_sms_plots "t2tt"       "hybrid" $label
-# make_sms_plots "t2tb_br0p5" "hybrid" $label
-# make_sms_plots "t2tb_br0p7" "hybrid" $label
-# make_sms_plots "t2tb_br0p3" "hybrid" $label
-# make_sms_plots "t2bw"       "hybrid" $label
+make_sms_plots "t2tt"       "hybrid" $label
+make_sms_plots "t2tb_br0p5" "hybrid" $label
+make_sms_plots "t2tb_br0p7" "hybrid" $label
+make_sms_plots "t2tb_br0p3" "hybrid" $label
+make_sms_plots "t2bw"       "hybrid" $label
 
 # BR indepedent 
+root -b -q -l "macros/CreateBRIndependentExcl.C+ (\"$label\", \"asymptotic\")"
+python $CMSSW_BASE/src/AnalysisTools/PlotsSMS/python/makeSMSplots.py pset/T2bri_SUS14125_ASYMPTOTIC.cfg plots/limits/${label}/asymptotic/t2bri/combined/T2bri_COMBINED_ASYMPTOTIC_ 
+
 root -b -q -l "macros/CreateBRIndependentExcl.C+ (\"$label\", \"hybrid\")"
 python $CMSSW_BASE/src/AnalysisTools/PlotsSMS/python/makeSMSplots.py pset/T2bri_SUS14125_HYBRID.cfg plots/limits/${label}/hybrid/t2bri/combined/T2bri_COMBINED_HYBRID_ 
-# root -b -q -l "macros/CreateBRIndependentExcl.C+ (\"$label\", \"asymptotic\")"
-# python $CMSSW_BASE/src/AnalysisTools/PlotsSMS/python/makeSMSplots.py pset/T2bri_SUS14125_ASYMPTOTIC.cfg plots/limits/${label}/asymptotic/t2bri/combined/T2bri_COMBINED_ASYMPTOTIC_ 
