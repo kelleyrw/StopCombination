@@ -42,17 +42,17 @@ function make_sms_plots
 
 label="v0"
 
-#make_sms_plots "t2tt"       "asymptotic" $label                                
-#make_sms_plots "t2tb_br0p5" "asymptotic" $label                                
-#make_sms_plots "t2tb_br0p7" "asymptotic" $label                                
-#make_sms_plots "t2tb_br0p3" "asymptotic" $label                                
-#make_sms_plots "t2bw"       "asymptotic" $label                                
-#                                                                               
-#make_sms_plots "t2tt"       "hybrid" $label                                    
-#make_sms_plots "t2tb_br0p5" "hybrid" $label                                    
-#make_sms_plots "t2tb_br0p7" "hybrid" $label                                    
-#make_sms_plots "t2tb_br0p3" "hybrid" $label                                    
-#make_sms_plots "t2bw"       "hybrid" $label                                    
+make_sms_plots "t2tt"       "asymptotic" $label                                
+make_sms_plots "t2tb_br0p5" "asymptotic" $label                                
+make_sms_plots "t2tb_br0p7" "asymptotic" $label                                
+make_sms_plots "t2tb_br0p3" "asymptotic" $label                                
+make_sms_plots "t2bw"       "asymptotic" $label                                
+                                                                               
+make_sms_plots "t2tt"       "hybrid" $label                                    
+make_sms_plots "t2tb_br0p5" "hybrid" $label                                    
+make_sms_plots "t2tb_br0p7" "hybrid" $label                                    
+make_sms_plots "t2tb_br0p3" "hybrid" $label                                    
+make_sms_plots "t2bw"       "hybrid" $label                                    
 
 # BR indepedent 
 root -b -q -l "macros/CreateBRIndependentExcl.C+ (\"$label\", \"asymptotic\")"
