@@ -1,6 +1,6 @@
 {
 //=========Macro generated from canvas: cCONT_/cCONT_
-//=========  (Mon Jun 30 07:32:49 2014) by ROOT version5.34/03
+//=========  (Wed Apr 22 17:44:56 2015) by ROOT version5.34/03
    TCanvas *cCONT_ = new TCanvas("cCONT_", "cCONT_",0,0,600,600);
    gStyle->SetOptFit(1);
    gStyle->SetOptStat(0);
@@ -39,14 +39,14 @@
    emptyHisto->GetYaxis()->SetTitleFont(42);
    emptyHisto->Draw("");
    
-   TH2D *h_ul_xsec_exp_smoothEMPTY = new TH2D("h_ul_xsec_exp_smoothEMPTY","Expected razor #sigma #times Branching Fraction (t2bw)EMPTY",31,137.5,912.5,29,-12.5,712.5);
+   TH2D *h_ul_xsec_obs_smoothEMPTY = new TH2D("h_ul_xsec_obs_smoothEMPTY","Observed razor #sigma #times Branching Fraction (t2bw)EMPTY",31,137.5,912.5,29,-12.5,712.5);
 
    ci = TColor::GetColor("#0000ff");
-   h_ul_xsec_exp_smoothEMPTY->SetLineColor(ci);
-   h_ul_xsec_exp_smoothEMPTY->GetXaxis()->SetLabelSize(0.035);
-   h_ul_xsec_exp_smoothEMPTY->GetYaxis()->SetLabelSize(0.035);
-   h_ul_xsec_exp_smoothEMPTY->GetYaxis()->SetTitleOffset(1.2);
-   h_ul_xsec_exp_smoothEMPTY->Draw("SAME");
+   h_ul_xsec_obs_smoothEMPTY->SetLineColor(ci);
+   h_ul_xsec_obs_smoothEMPTY->GetXaxis()->SetLabelSize(0.035);
+   h_ul_xsec_obs_smoothEMPTY->GetYaxis()->SetLabelSize(0.035);
+   h_ul_xsec_obs_smoothEMPTY->GetYaxis()->SetTitleOffset(1.2);
+   h_ul_xsec_obs_smoothEMPTY->Draw("SAME");
    
    TGraph *graph = new TGraph(3);
    graph->SetName("diagonal");

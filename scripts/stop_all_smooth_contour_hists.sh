@@ -7,7 +7,8 @@ function make_sms_plots
     label=$3
     method_upper=`echo $method | awk '{print toupper($0)}'` 
     sample_upper=$(echo `echo ${sample:0:1} | tr '[a-z]' '[A-Z]'`${sample:1})
-    result_dir="$HOME/Dropbox/Public/stop/plots/results/${sample}"
+    result_dir="plots/limits/obs_plots/${sample}"
+    #result_dir="$HOME/Dropbox/Public/stop/plots/results/${sample}"
     
     # test inputs
     echo "sample         = " $sample
@@ -17,9 +18,13 @@ function make_sms_plots
     echo "result_dir     = " $result_dir
     
     # create the histograms and TGraphs
-    python scripts/stop_create_contour_hists.py --sample $sample --analysis razor    --method $method
-    python scripts/stop_create_contour_hists.py --sample $sample --analysis onelep   --method $method
-    python scripts/stop_create_contour_hists.py --sample $sample --analysis combined --method $method
+    #python scripts/stop_create_contour_hists.py --sample $sample --analysis razor    --method $method
+    #python scripts/stop_create_contour_hists.py --sample $sample --analysis onelep   --method $method
+    #python scripts/stop_create_contour_hists.py --sample $sample --analysis combined --method $method
+    
+    mkdir -p plots/limits/${label}/${method}/${sample}/razor
+    mkdir -p plots/limits/${label}/${method}/${sample}/onelep
+    mkdir -p plots/limits/${label}/${method}/${sample}/combined
     
     # polished SMS plots
     python $CMSSW_BASE/src/AnalysisTools/PlotsSMS/python/makeSMSplots.py pset/${sample_upper}_SUS13004_${method_upper}.cfg plots/limits/${label}/${method}/${sample}/razor/${sample_upper}_RAZOR_${method_upper}_ 
@@ -37,21 +42,23 @@ function make_sms_plots
 
 label="v0"
 
-make_sms_plots "t2tt"       "asymptotic" $label
-make_sms_plots "t2tb_br0p5" "asymptotic" $label
-make_sms_plots "t2tb_br0p7" "asymptotic" $label
-make_sms_plots "t2tb_br0p3" "asymptotic" $label
-make_sms_plots "t2bw"       "asymptotic" $label
-
-make_sms_plots "t2tt"       "hybrid" $label
-make_sms_plots "t2tb_br0p5" "hybrid" $label
-make_sms_plots "t2tb_br0p7" "hybrid" $label
-make_sms_plots "t2tb_br0p3" "hybrid" $label
-make_sms_plots "t2bw"       "hybrid" $label
+#make_sms_plots "t2tt"       "asymptotic" $label                                
+#make_sms_plots "t2tb_br0p5" "asymptotic" $label                                
+#make_sms_plots "t2tb_br0p7" "asymptotic" $label                                
+#make_sms_plots "t2tb_br0p3" "asymptotic" $label                                
+#make_sms_plots "t2bw"       "asymptotic" $label                                
+#                                                                               
+#make_sms_plots "t2tt"       "hybrid" $label                                    
+#make_sms_plots "t2tb_br0p5" "hybrid" $label                                    
+#make_sms_plots "t2tb_br0p7" "hybrid" $label                                    
+#make_sms_plots "t2tb_br0p3" "hybrid" $label                                    
+#make_sms_plots "t2bw"       "hybrid" $label                                    
 
 # BR indepedent 
 root -b -q -l "macros/CreateBRIndependentExcl.C+ (\"$label\", \"asymptotic\")"
 python $CMSSW_BASE/src/AnalysisTools/PlotsSMS/python/makeSMSplots.py pset/T2bri_SUS14125_ASYMPTOTIC.cfg plots/limits/${label}/asymptotic/t2bri/combined/T2bri_COMBINED_ASYMPTOTIC_ 
+cp $CMSSW_BASE/src/AnalysisTools/RootTools/tools/index.php                                              plots/limits/${label}/asymptotic/t2bri/combined/.
 
 root -b -q -l "macros/CreateBRIndependentExcl.C+ (\"$label\", \"hybrid\")"
 python $CMSSW_BASE/src/AnalysisTools/PlotsSMS/python/makeSMSplots.py pset/T2bri_SUS14125_HYBRID.cfg plots/limits/${label}/hybrid/t2bri/combined/T2bri_COMBINED_HYBRID_ 
+cp $CMSSW_BASE/src/AnalysisTools/RootTools/tools/index.php                                          plots/limits/${label}/hybrid/t2bri/combined/.
